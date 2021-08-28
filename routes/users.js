@@ -6,7 +6,7 @@ const saltRounds = 10;
 router.put("/:id", async (req, res) => {
 	console.log(req.body.userId);
 	console.log(req.params.id);
-	if (req.params.id === req.body.userId) {
+	if (req.params.id === req.body.userId||req.body.isAdmin) {
 		try {
 			if (req.body.password) {
 				const salt = await bcrypt.genSalt(saltRounds);
@@ -25,7 +25,7 @@ router.put("/:id", async (req, res) => {
 // delete a user 
 
 router.delete("/:id", async (req, res) => {
-	if (req.params.id === req.body.userId) {
+	if (req.params.id === req.body.userId ||req.body.isAdmin ) {
 		try {
 			await User.findByIdAndDelete({ _id: req.params.id });
 			res.status(200).send("User is delete Sucessfully");
@@ -59,12 +59,12 @@ router.put("/:id/follow", async (req, res) => {
 			if (!user.follower.includes(req.body.userId)) {
 				await user.updateOne({ $push: { follower: req.body.userId } });
 				await currentUser.updateOne({ $push: { following: req.params.id } });
-				res.status(200).send("USER HAS BEEN FOLLOWED");
+				res.status(200).send("User has been followed");
 			} else {
 				res.status(200).send("alredy following this user");
 			}
 		} else {
-			res.status(400).send("cant follow yourself");
+			res.status(400).send("can't follow yourself");
 		}
 	} catch (err) {
 		res.status(404).send(err.message);
