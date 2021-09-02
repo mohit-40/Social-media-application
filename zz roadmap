@@ -6,8 +6,8 @@
 
 
 
-5) in src pages and component folder
+6) index - app - pages - component; 
+5) in src make pages and component folder
 	pages=> home, 
 	component=>  topbar(topbar.js topbar.css )  
-6) index - app - pages - component; 
-7)
+7) topbar => make for left, middle, right
