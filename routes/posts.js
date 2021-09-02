@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { findById } = require("../models/Post");
 const Post=require('../models/Post');
+const User=require('../models/User');
 
 // create a post 
 router.post("/",async (req,res)=>{
@@ -20,17 +21,8 @@ router.put("/:id",async (req,res)=>{
 			await post.updateOne({$set:req.body});
 			res.status(200).send(post);
 		}else {
-			res.status(403).send("can not update others post");
+			res.status(400).send("can not update others post");
 		}
-	} catch(error) {
-		res.status(500).send(error.message);
-	}
-})
-// get a post 
-router.get("/:id",async (req,res)=>{
-	try {
-		const post = await Post.findById({_id:req.params.id});
-		res.status(200).send(post);
 	} catch(error) {
 		res.status(500).send(error.message);
 	}
@@ -49,51 +41,50 @@ router.delete("/:id",async (req,res)=>{
 		res.status(500).send(error.message);
 	}
 })
-
-// get timeline post 
-router.get("/",async (req,res)=>{
-	try {
-		const posts=await Post.find({userId:req.body.userId});
-		res.status(200).send(posts);
-	} catch(error) {
-		res.status(500).send(error.message);
-	}
-})
-// like a  post 
+// like/unlike a  post 
 router.put("/:id/like",async (req,res)=>{
 	try {
 		const post= await Post.findById({_id:req.params.id});
 		if(!post.like.includes(req.body.userId)){
 			await post.update({$push:{like:req.body.userId}});
-
 			// TODO: add this post to user.likedPost
 			
 			res.status(200).send("you successfully like the post");
 		}else{
-			res.status(400).send("you alredy like the post");
-		}
-	} catch(error) {
-		res.status(500).send(error.message);
-	}
-})
-//unlike a  post 
-router.put("/:id/unlike",async (req,res)=>{
-	try {
-		const post= await Post.findById({_id:req.params.id});
-		if(post.like.includes(req.body.userId)){
 			await post.update({$pull:{like:req.body.userId}});
-
 			// TODO: remove this post to user.likedPost
 			
 			res.status(200).send("you successfully unlike the post");
-		}else{
-			res.status(400).send("you donot like this post");
 		}
 	} catch(error) {
 		res.status(500).send(error.message);
 	}
 })
 
+// get a post 
+router.get("/:id",async (req,res)=>{
+	try {
+		const post = await Post.findById({_id:req.params.id});
+		res.status(200).send(post);
+	} catch(error) {
+		res.status(500).send(error.message);
+	}
+})
+
+// get timeline post 
+router.get("/timeline/all",async (req,res)=>{
+	try {
+		const currentUser = await User.findById(req.body.userId);
+		const userPost= await Post.find({ userId: currentUser._id });
+		console.log(userPost);
+		const friendPost = await Promise.all(
+		  currentUser.following.map((friendId) => Post.find({ userId: friendId }))
+		)
+		res.status(200).json(userPost.concat(...friendPost));
+	  } catch (err) {
+		res.status(500).send(err.message);
+	  }
+})
 
 
 module.exports = router;
