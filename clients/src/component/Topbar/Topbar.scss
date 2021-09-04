@@ -1,0 +1,90 @@
+.topbar-container{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 50px;
+	background-color: rgb(87, 87, 245);
+	position: sticky;
+	top: 0%;
+	z-index: 999;
+
+	.topbar-left{
+		flex:3;
+		.topbar-logo{
+			margin-left: 20px;
+			color: white;
+			font-size: 24px;
+			font-weight: bold;
+			cursor: pointer;
+		}
+	}
+
+
+	.topbar-center{	
+		flex:5;
+		.topbar-search{
+			width: 100%;
+			height: 30px;
+			display: flex;
+			background-color: white;
+			border-radius: 30px;
+			.search-icon{
+				margin-left: 10px;
+			}
+			input{
+				width: 90%;
+				outline: none;
+				border: none;
+			}
+		}
+		
+	}
+
+
+	.topbar-right{
+		flex:4;
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
+		.topbar-link{
+			.topbar-link-item{
+				padding: 0 20px;
+				color: white;
+				font-size: 18px;
+				font-weight: bold;
+			}
+		}
+		.topbar-icon{
+			display: flex;
+			.topbar-icon-item{
+				margin: 0 8px;
+				color: white;
+				position: relative;
+
+				.topbar-icon-badge{
+					width: 15px;
+					height: 15px;
+					border-radius: 50%;
+					background-color: red;
+					color: white;
+  					position: absolute;
+					top: -5px;
+					right: -5px;
+
+					display: flex;
+					align-items: center;
+					justify-content: center;
+				}
+			}
+		}
+
+		img{
+			height: 50px;
+			width: 50px;
+			border-radius: 50%;
+			object-fit: cover;
+		}
+	}
+
+
+}
