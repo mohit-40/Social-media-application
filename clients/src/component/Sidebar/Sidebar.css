@@ -1,2 +1,56 @@
-
-/*# sourceMappingURL=Sidebar.css.map *//*# sourceMappingURL=Sidebar.css.map */
+.sidebar {
+  flex: 2.3;
+  height: calc(100vh - 50px);
+  overflow-y: scroll;
+  position: sticky;
+  top: 50px;
+}
+.sidebar::-webkit-scrollbar {
+  width: 5px;
+}
+.sidebar::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: #b3b3b3;
+}
+.sidebar .sidebar-wrapper {
+  margin: 30px;
+}
+.sidebar .menu-list {
+  list-style: none;
+  padding: 0%;
+}
+.sidebar .menu-list .menu-list-item {
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+}
+.sidebar .menu-list .menu-list-item:hover {
+  cursor: pointer;
+}
+.sidebar .menu-list .menu-list-item .menu-list-text {
+  font-size: 18px;
+  margin-left: 15px;
+}
+.sidebar button {
+  width: 100%;
+  font-size: 16px;
+  padding: 10px;
+}
+.sidebar .friend-list .friend-list-item {
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+}
+.sidebar .friend-list .friend-list-item img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.sidebar .friend-list .friend-list-item .friend-name {
+  font-size: 18px;
+  margin-left: 15px;
+}/*# sourceMappingURL=Sidebar.css.map */

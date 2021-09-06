@@ -1,0 +1,61 @@
+$item-my:15px;
+$text-font:18px;
+$text-ml:15px;
+
+.sidebar{
+	flex:2.3;
+	height: calc(100vh - 50px);
+	overflow-y: scroll;
+	position: sticky;
+	top: 50px;
+
+	&::-webkit-scrollbar {width: 5px;}
+	&::-webkit-scrollbar-track {background-color: #f1f1f1;}
+	&::-webkit-scrollbar-thumb {background-color: rgb(179, 179, 179);}
+
+	.sidebar-wrapper{
+		margin: 30px;
+		// all item are under wrapper but not written here under wrapper 
+	}
+	.menu-list{
+		list-style: none;
+		padding: 0%;
+		.menu-list-item{
+			display: flex;
+			align-items: center;
+			margin: $item-my 0;
+			&:hover{
+				cursor: pointer;
+			}
+			.menu-list-text{
+				font-size: $text-font;
+				margin-left: $text-ml;
+			}
+		}
+	}
+
+	button{
+		width: 100%;
+		font-size: 16px;
+		padding: 10px;
+		
+	}
+
+	.friend-list{
+		.friend-list-item{
+			display: flex;
+			align-items: center;
+			margin: $item-my 0;
+			img{
+				height: 50px;
+				width: 50px;
+				border-radius: 50px;
+				object-fit: cover;
+			}
+			.friend-name{
+				font-size: $text-font;
+				margin-left: $text-ml;
+			}
+		}
+	}
+}

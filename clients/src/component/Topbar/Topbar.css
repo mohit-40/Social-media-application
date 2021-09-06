@@ -1,67 +1,72 @@
-.topbar-container {
+.topbar {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  background-color: #264cca;
   height: 50px;
-  background-color: #5757f5;
   position: sticky;
-  top: 0%;
-  z-index: 999;
+  top: 0;
 }
-.topbar-container .topbar-left {
+.topbar .topbar-left {
   flex: 3;
 }
-.topbar-container .topbar-left .topbar-logo {
-  margin-left: 20px;
-  color: white;
+.topbar .topbar-left .topbar-logo {
+  margin-left: 30px;
   font-size: 24px;
   font-weight: bold;
-  cursor: pointer;
+  color: white;
 }
-.topbar-container .topbar-center {
+.topbar .topbar-center {
   flex: 5;
-}
-.topbar-container .topbar-center .topbar-search {
-  width: 100%;
-  height: 30px;
+  height: 50px;
   display: flex;
+  align-items: center;
+}
+.topbar .topbar-center .search {
   background-color: white;
-  border-radius: 30px;
+  width: 100%;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  height: 30px;
 }
-.topbar-container .topbar-center .topbar-search .search-icon {
-  margin-left: 10px;
-}
-.topbar-container .topbar-center .topbar-search input {
-  width: 90%;
-  outline: none;
+.topbar .topbar-center .search input {
+  width: 94%;
   border: none;
+  outline: none;
+  font-size: 16px;
 }
-.topbar-container .topbar-right {
-  flex: 4;
+.topbar .topbar-right {
+  flex: 5;
   display: flex;
   align-items: center;
   justify-content: space-around;
 }
-.topbar-container .topbar-right .topbar-link .topbar-link-item {
-  padding: 0 20px;
+.topbar .topbar-right .topbar-link-container .topbar-link {
   color: white;
+  margin: 0 20px;
   font-size: 18px;
-  font-weight: bold;
+  font-weight: 500;
 }
-.topbar-container .topbar-right .topbar-icon {
+.topbar .topbar-right .topbar-icon-container {
   display: flex;
+  align-items: center;
+  justify-items: center;
 }
-.topbar-container .topbar-right .topbar-icon .topbar-icon-item {
-  margin: 0 8px;
-  color: white;
+.topbar .topbar-right .topbar-icon-container .topbar-icon-item {
+  margin: 0 5px;
   position: relative;
 }
-.topbar-container .topbar-right .topbar-icon .topbar-icon-item .topbar-icon-badge {
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background-color: red;
+.topbar .topbar-right .topbar-icon-container .topbar-icon-item .topbar-icon {
   color: white;
+}
+.topbar .topbar-right .topbar-icon-container .topbar-icon-item .topbar-icon-badge {
+  color: white;
+  background-color: red;
+  border-radius: 50%;
+  height: 15px;
+  width: 15px;
+  font-size: 14px;
   position: absolute;
   top: -5px;
   right: -5px;
@@ -69,7 +74,7 @@
   align-items: center;
   justify-content: center;
 }
-.topbar-container .topbar-right img {
+.topbar .topbar-right img {
   height: 50px;
   width: 50px;
   border-radius: 50%;

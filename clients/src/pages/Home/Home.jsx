@@ -1,17 +1,21 @@
 import React from 'react'
 import Topbar from '../../component/Topbar/Topbar';
-// import Sidebar from '../../component/Sidebar/Sidebar';
-// import Rightbar from '../../component/Rightbar/Rightbar';
-// import Feed from '../../component/Middlebar/Feed';
+import Sidebar from '../../component/Sidebar/Sidebar';
+import Feed from '../../component/Feed/Feed';
+import Rightbar from '../../component/Rightbar/Rightbar';
+
+import "./Home.css"
 
 function Home() {
 	return (
-		<div>
+		<>
 			<Topbar />
-			{/* <Sidebar />
-			<Feed />
-			<Rightbar /> */}
-		</div>
+			<div className="hero-container">
+				<Sidebar />
+				<Feed />
+				<Rightbar />
+			</div>
+		</>
 	)
 }
 
