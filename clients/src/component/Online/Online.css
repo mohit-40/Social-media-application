@@ -1,0 +1,34 @@
+.online-friend {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin: 10px 0;
+}
+.online-friend:hover {
+  cursor: pointer;
+  color: #0518c9;
+  transform: scale(1.1);
+  font-weight: 500;
+}
+.online-friend img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin-right: 20px;
+}
+.online-friend .online-friend-badge {
+  background-color: green;
+  border: 3px solid white;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  top: 0;
+  left: 30px;
+}
+.online-friend .name {
+  font-size: 18px;
+  font-weight: 500;
+}/*# sourceMappingURL=Online.css.map */

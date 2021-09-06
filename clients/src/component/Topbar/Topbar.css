@@ -6,6 +6,7 @@
   height: 50px;
   position: sticky;
   top: 0;
+  z-index: 999;
 }
 .topbar .topbar-left {
   flex: 3;
@@ -60,6 +61,11 @@
 .topbar .topbar-right .topbar-icon-container .topbar-icon-item .topbar-icon {
   color: white;
 }
+.topbar .topbar-right .topbar-icon-container .topbar-icon-item .topbar-icon:hover {
+  cursor: pointer;
+  color: #b8dfee;
+  transform: scale(1.5);
+}
 .topbar .topbar-right .topbar-icon-container .topbar-icon-item .topbar-icon-badge {
   color: white;
   background-color: red;
@@ -80,4 +86,7 @@
   border-radius: 50%;
   -o-object-fit: cover;
      object-fit: cover;
+}
+.topbar .topbar-right img:hover {
+  cursor: pointer;
 }/*# sourceMappingURL=Topbar.css.map */

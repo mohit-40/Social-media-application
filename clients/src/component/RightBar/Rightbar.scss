@@ -1,4 +1,47 @@
 .rightbar{
 	flex:3;
-	background: #000;
+	height: calc(100vh - 50px);
+	overflow-y: scroll;
+	position: sticky;
+	top: 50px;
+	
+	&::-webkit-scrollbar {width: 5px;}
+	&::-webkit-scrollbar-track {background-color: #f1f1f1;}
+	&::-webkit-scrollbar-thumb {background-color: rgb(179, 179, 179);}
+
+
+	.rightbar-wrapper{
+		margin: 30px;	
+		.rightbar-top{
+			display: flex;
+			align-items: center;
+			.birthday-img{
+				height: 70px;
+			}
+			.birthday-text{
+
+			}
+		}
+
+		.rightbar-center{
+			.rightbar-ad{
+				width: 100%;
+				border-radius: 20px;
+				margin:30px 0;
+			}
+		}
+		
+		.rightbar-bottom{
+			.heading{
+				display: block;
+				font-size: 22px;
+				font-weight: 700;
+			}
+			.online-friend-list{
+				list-style: none;
+				padding: 0%;
+				
+			}
+		}
+	}
 }

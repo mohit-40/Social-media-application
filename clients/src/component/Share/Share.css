@@ -1,2 +1,67 @@
-
-/*# sourceMappingURL=Share.css.map *//*# sourceMappingURL=Share.css.map */
+.share {
+  min-height: 200px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+}
+.share .share-wrapper {
+  padding: 15px;
+}
+.share .share-wrapper .share-top {
+  display: flex;
+  align-items: center;
+}
+.share .share-wrapper .share-top img {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.share .share-wrapper .share-top input {
+  width: 90%;
+  border: none;
+  outline: none;
+  font-size: 20px;
+  margin-left: 18px;
+}
+.share .share-wrapper hr {
+  margin: 20px;
+}
+.share .share-wrapper .share-bottom .option-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.share .share-wrapper .share-bottom .option-container .option {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.share .share-wrapper .share-bottom .option-container .option .icon {
+  font-size: 25px !important;
+}
+.share .share-wrapper .share-bottom .option-container .option .option-text {
+  margin-left: 5px;
+  font-size: 18px;
+}
+.share .share-wrapper .share-bottom .option-container .option:hover {
+  color: #0518c9;
+  transform: scale(1.05);
+  font-weight: 500;
+}
+.share .share-wrapper .share-bottom button {
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: green;
+  font-weight: 500;
+  color: white;
+  cursor: pointer;
+}
+.share .share-wrapper .share-bottom button:hover {
+  background-color: #05aa05;
+  transform: scale(1.1);
+  font-weight: 500;
+}/*# sourceMappingURL=Share.css.map */

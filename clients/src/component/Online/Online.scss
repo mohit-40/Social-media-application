@@ -1,0 +1,33 @@
+.online-friend{
+	display: flex;
+	align-items: center;
+	position: relative;
+	margin: 10px 0;
+	&:hover{
+		cursor: pointer;
+		color: rgb(5, 24, 201);
+		transform: scale(1.1);
+		font-weight: 500;
+	}
+	img{
+		height: 50px;
+		width: 50px;
+		border-radius: 50%;
+		object-fit: cover;
+		margin-right: 20px;
+	}
+	.online-friend-badge{
+		background-color: green;
+		border: 3px solid white;
+		border-radius: 50%;
+		width: 15px;
+		height: 15px;
+		position: absolute;
+		top: 0;
+		left: 30px;
+	}
+	.name{
+		font-size: 18px;
+		font-weight: 500;
+	}
+}

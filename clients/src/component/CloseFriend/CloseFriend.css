@@ -1,0 +1,22 @@
+.friend-list-item {
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+}
+.friend-list-item img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.friend-list-item .friend-name {
+  font-size: 18px;
+  margin-left: 15px;
+}
+.friend-list-item:hover {
+  cursor: pointer;
+  color: #0518c9;
+  transform: scale(1.1);
+  font-weight: 500;
+}/*# sourceMappingURL=CloseFriend.css.map */

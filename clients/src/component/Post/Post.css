@@ -1,2 +1,72 @@
-
-/*# sourceMappingURL=Post.css.map *//*# sourceMappingURL=Post.css.map */
+.post {
+  margin-bottom: 20px;
+  border-radius: 20px;
+  border: none;
+  box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+}
+.post .post-wrapper {
+  padding: 20px;
+}
+.post .post-wrapper .post-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.post .post-wrapper .post-top .post-top-left {
+  display: flex;
+  align-items: center;
+}
+.post .post-wrapper .post-top .post-top-left .profile-img {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.post .post-wrapper .post-top .post-top-left .name {
+  color: blue;
+  font-size: 24px;
+  font-weight: 500;
+  margin: 0 10px;
+  cursor: pointer;
+}
+.post .post-wrapper .post-top .post-top-left .time {
+  font-size: 14px;
+}
+.post .post-wrapper .post-top .post-top-right .more-icon {
+  cursor: pointer;
+}
+.post .post-wrapper .post-middle .post-text {
+  font-size: 20px;
+  margin: 20px 0;
+}
+.post .post-wrapper .post-middle .post-img {
+  max-height: 80vh;
+  width: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.post .post-wrapper .post-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.post .post-wrapper .post-bottom .post-bottom-left {
+  display: flex;
+  align-items: center;
+}
+.post .post-wrapper .post-bottom .post-bottom-left img {
+  height: 24px;
+  width: 24px;
+  margin: 3px;
+  cursor: pointer;
+}
+.post .post-wrapper .post-bottom .post-bottom-left .like-counter {
+  margin-left: 15px;
+  font-size: 15px;
+}
+.post .post-wrapper .post-bottom .post-bottom-right .comment-counter {
+  font-size: 15px;
+  cursor: pointer;
+  border-bottom: 2px dashed gray;
+}/*# sourceMappingURL=Post.css.map */

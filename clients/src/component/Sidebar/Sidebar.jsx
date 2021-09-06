@@ -11,6 +11,8 @@ import {
 	Event,
 	School,
 } from "@material-ui/icons";
+import CloseFriend from "../CloseFriend/CloseFriend"
+import {Users} from "../../dummy-data"
 
 
 function Sidebar() {
@@ -65,26 +67,7 @@ function Sidebar() {
 
 
 				<div className="friend-list">
-					<div className="friend-list-item">
-						<img src="/asset/person/8.jpeg" alt="" />
-						<span className="friend-name">Angle</span>
-					</div>
-					<div className="friend-list-item">
-						<img src="/asset/person/10.jpeg" alt="" />
-						<span className="friend-name">Peter</span>
-					</div>
-					<div className="friend-list-item">
-						<img src="/asset/person/9.jpeg" alt="" />
-						<span className="friend-name">Rachel</span>
-					</div>
-					<div className="friend-list-item">
-						<img src="/asset/person/7.jpeg" alt="" />
-						<span className="friend-name">Monica</span>
-					</div>
-					<div className="friend-list-item">
-						<img src="/asset/person/6.jpeg" alt="" />
-						<span className="friend-name">Phebie</span>
-					</div>
+					{Users.map((user)=> <CloseFriend user={user} />)}
 				</div>
 
 

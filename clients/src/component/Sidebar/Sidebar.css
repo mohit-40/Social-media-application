@@ -28,6 +28,9 @@
 }
 .sidebar .menu-list .menu-list-item:hover {
   cursor: pointer;
+  color: #0518c9;
+  transform: scale(1.1);
+  font-weight: 500;
 }
 .sidebar .menu-list .menu-list-item .menu-list-text {
   font-size: 18px;
@@ -37,20 +40,4 @@
   width: 100%;
   font-size: 16px;
   padding: 10px;
-}
-.sidebar .friend-list .friend-list-item {
-  display: flex;
-  align-items: center;
-  margin: 15px 0;
-}
-.sidebar .friend-list .friend-list-item img {
-  height: 50px;
-  width: 50px;
-  border-radius: 50px;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-.sidebar .friend-list .friend-list-item .friend-name {
-  font-size: 18px;
-  margin-left: 15px;
 }/*# sourceMappingURL=Sidebar.css.map */

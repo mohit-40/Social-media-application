@@ -1,4 +1,40 @@
 .rightbar {
   flex: 3;
-  background: #000;
+  height: calc(100vh - 50px);
+  overflow-y: scroll;
+  position: sticky;
+  top: 50px;
+}
+.rightbar::-webkit-scrollbar {
+  width: 5px;
+}
+.rightbar::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+.rightbar::-webkit-scrollbar-thumb {
+  background-color: #b3b3b3;
+}
+.rightbar .rightbar-wrapper {
+  margin: 30px;
+}
+.rightbar .rightbar-wrapper .rightbar-top {
+  display: flex;
+  align-items: center;
+}
+.rightbar .rightbar-wrapper .rightbar-top .birthday-img {
+  height: 70px;
+}
+.rightbar .rightbar-wrapper .rightbar-center .rightbar-ad {
+  width: 100%;
+  border-radius: 20px;
+  margin: 30px 0;
+}
+.rightbar .rightbar-wrapper .rightbar-bottom .heading {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+}
+.rightbar .rightbar-wrapper .rightbar-bottom .online-friend-list {
+  list-style: none;
+  padding: 0%;
 }/*# sourceMappingURL=Rightbar.css.map */
