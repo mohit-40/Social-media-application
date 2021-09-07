@@ -67,7 +67,7 @@ function Sidebar() {
 
 
 				<div className="friend-list">
-					{Users.map((user)=> <CloseFriend user={user} />)}
+					{Users.map((user)=> <CloseFriend key={user.id} user={user} />)}
 				</div>
 
 

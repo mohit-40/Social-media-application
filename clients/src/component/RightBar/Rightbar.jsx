@@ -20,7 +20,7 @@ function Rightbar() {
 				<div className="rightbar-bottom">
 					<span className="heading">Online Friend</span>
 					<ul className="online-friend-list">
-						{Users.map((user) => <Online user={user}/>)}
+						{Users.map((user) => <Online key={user.id} user={user}/>)}
 					</ul>
 				</div>
 			</div>

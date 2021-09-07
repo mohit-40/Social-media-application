@@ -1,11 +1,20 @@
-import React from 'react'
+import React,{useState} from 'react'
 import "./Post.css"
-import { MoreVert , FavoriteBorder, ChatBubbleOutline} from "@material-ui/icons";
+import { MoreVert } from "@material-ui/icons";
 import {Users} from "../../dummy-data"
 
 function Post(props) {
 
 	const user=Users.find((user)=> user.id===props.post.userId);
+	const [like,setLike]=useState(props.post.like);
+	const [isLike,setIsLike]=useState(false);
+	const handleLike= ()=> {
+		if(isLike) {setLike(like-1);} 
+		else {setLike(like+1);}
+		setIsLike(!isLike);
+		
+	}
+
 
 	return (
 		<div className="post">
@@ -28,9 +37,9 @@ function Post(props) {
 				</div>
 				<div className="post-bottom">
 					<div className="post-bottom-left">
-						<img src="/asset/like.png" alt="" />
-						<img src="/asset/heart.png" alt="" />
-						<span className="like-counter">{props.post.like} people like it</span>
+						<img src="/asset/like.png" alt="" onClick={handleLike} />
+						<img src="/asset/heart.png" alt="" onClick={handleLike} />
+						<span className="like-counter">{like} people like it</span>
 					</div>
 					<div className="post-bottom-right">
 						<span className="comment-counter">{props.post.comment} comment</span>

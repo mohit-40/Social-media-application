@@ -1,0 +1,50 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.profile {
+  display: flex;
+}
+.profile .profile-right {
+  flex: 9;
+}
+.profile .profile-right .profile-right-top .profile-cover {
+  position: relative;
+}
+.profile .profile-right .profile-right-top .profile-cover .profile-cover-photo {
+  width: 100%;
+  height: 40vh;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.profile .profile-right .profile-right-top .profile-cover .profile-photo {
+  display: block;
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  align-items: center;
+  margin: auto;
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: -50px;
+  border: 5px solid white;
+}
+.profile .profile-right .profile-right-top .profile-info {
+  margin: 70px 0 0 0;
+  text-align: center;
+}
+.profile .profile-right .profile-right-top .profile-info .name {
+  font-size: 26px;
+}
+.profile .profile-right .profile-right-top .profile-info .desc {
+  padding: 20px;
+  font-weight: 400;
+}
+.profile .profile-right .profile-right-bottom {
+  display: flex;
+}/*# sourceMappingURL=Profile.css.map */
