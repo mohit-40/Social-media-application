@@ -2,11 +2,14 @@ import React from 'react'
 import { PermMedia, Label, Room, EmojiEmotions } from "@material-ui/icons"
 import "./Share.css"
 function Share() {
+	const PF=process.env.REACT_APP_PUBLIC_FOLDER;
+
+
 	return (
 		<div className="share">
 			<div className="share-wrapper">
 				<div className="share-top">
-					<img src="/asset/person/1.jpeg" alt="profileimg" />
+					<img src={PF+"person/1.jpeg"} alt="profileimg" />
 					<input type="text" placeholder="What in Your Mind Today??"/>
 				</div>
 				<hr />

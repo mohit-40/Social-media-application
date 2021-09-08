@@ -5,16 +5,17 @@ import { Users } from "../../dummy-data"
 
 
 function Rightbar() {
+	const PF=process.env.REACT_APP_PUBLIC_FOLDER;
 
 	return (
 		<div className="rightbar">
 			<div className="rightbar-wrapper">
 				<div className="rightbar-top">
-					<img src="/asset/gift.png" alt="birthdayImg" className="birthday-img" />
+					<img src={PF+"gift.png"} alt="birthdayImg" className="birthday-img" />
 					<span className="birthday-text"><b>Rachel</b> and <b>3 other</b> friend has birthday today.</span>
 				</div>
 				<div className="rightbar-center">
-					<img className="rightbar-ad" src="/asset/ad.png" alt="ad" />
+					<img className="rightbar-ad" src={PF+"ad.png"} alt="ad" />
 				</div>
 				<hr />
 				<div className="rightbar-bottom">

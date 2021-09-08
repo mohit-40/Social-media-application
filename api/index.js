@@ -1,4 +1,5 @@
 //jshint esversion:6 
+//!/* ---------------------------- include pakage --------------------------- */
 const express=require("express");
 const app=express();
 const mongoose=require('mongoose');
@@ -10,12 +11,11 @@ dotenv.config();
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/users");
 const postRoute = require("./routes/posts");
-const port=3000;
+const port= process.env.PORT || 8800;
 
 //! /* -------------------------------- mongoose -------------------------------- */
 mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true, useUnifiedTopology: true});
 const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDb connection error:'));
 db.once('open', function() {
 	console.log("we are connected to the MongoDb");
 });
@@ -25,7 +25,7 @@ app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));
 
-//! /* ---------------------------------- route --------------------------------- */
+//! /* ---------------------------------- api route --------------------------------- */
 
 
 
@@ -33,7 +33,7 @@ app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/posts", postRoute);
 
-//! /* --------------------------------- server --------------------------------- */
+//! /* --------------------------------- listen server --------------------------------- */
 app.listen(port,()=>{
 	console.log("server running on port "+port);
 });

@@ -11,3 +11,6 @@
 	pages=> home, 
 	component=>  topbar(topbar.js topbar.css )  
 7) topbar => make for left, middle, right
+
+
+

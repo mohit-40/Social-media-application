@@ -2,6 +2,8 @@ import React from 'react'
 import "./ProfileRightbar.css"
 
 function ProfileRightbar() {
+	const PF=process.env.REACT_APP_PUBLIC_FOLDER;
+
 	return (
 		<div className="profile-rightbar">
 			<div className="profile-rightbar-wrapper">
@@ -27,31 +29,31 @@ function ProfileRightbar() {
 				<div className="title">User friend</div>
 				<div className="user-friend-container">
 					<div className="user-friend-item">
-						<img src="/asset/person/6.jpeg" alt="img" />
+						<img src={PF+"person/6.jpeg"} alt="img" />
 						<div className="name">abc</div>
 					</div>
 					<div className="user-friend-item">
-						<img src="/asset/person/5.jpeg" alt="img" />
+						<img src={PF + "person/5.jpeg"} alt="img" />
 						<div className="name">abc</div>
 					</div>
 					<div className="user-friend-item">
-						<img src="/asset/person/4.jpeg" alt="img" />
+						<img src={PF + "person/4.jpeg"} alt="img" />
 						<div className="name">abc</div>
 					</div>
 					<div className="user-friend-item">
-						<img src="/asset/person/2.jpeg" alt="img" />
+						<img src={PF + "person/2.jpeg"} alt="img" />
 						<div className="name">abc</div>
 					</div>
 					<div className="user-friend-item">
-						<img src="/asset/person/3.jpeg" alt="img" />
+						<img src={PF + "person/3.jpeg"} alt="img" />
 						<div className="name">abc</div>
 					</div>
 					<div className="user-friend-item">
-						<img src="/asset/person/2.jpeg" alt="img" />
+						<img src={PF + "person/2.jpeg"} alt="img" />
 						<div className="name">abc</div>
 					</div>
 					<div className="user-friend-item">
-						<img src="/asset/person/3.jpeg" alt="img" />
+						<img src={PF + "person/3.jpeg"} alt="img" />
 						<div className="name">abc</div>
 					</div>
 				</div>

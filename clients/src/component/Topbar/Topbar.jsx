@@ -3,6 +3,8 @@ import { Search, Person, Chat, Notifications } from "@material-ui/icons";
 import "./Topbar.css"
 
 function Topbar() {
+	const PF=process.env.REACT_APP_PUBLIC_FOLDER;
+
 	return (
 		<div className="topbar">
 			<div className="topbar-left">
@@ -36,7 +38,7 @@ function Topbar() {
 					</div>
 				</div>
 
-				<img src="\asset\person\1.jpeg" alt="img" />
+				<img src={PF+"person/1.jpeg"} alt="img" />
 			</div>
 		</div>
 	)
