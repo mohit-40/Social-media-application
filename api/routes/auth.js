@@ -15,26 +15,28 @@ router.post("/register",async (req,res)=>{
 			password:hashPassword
 		});
 		const user=await newUser.save();
-		res.status(200).json(user);
+		res.status(200).json("User Registered");
 	} catch(err){
-		res.status(404).send(err.message);
+		res.status(404).json(err.message);
 	}
 })
 
 
 //! /* ------------------------------- login user ------------------------------- */
-router.post("/login",async (req,res)=>{
-	try{
-		const user=await User.findOne({email:req.body.email})
-		!user&&res.status(404).send("User not found");
-		const validPassword=await bcrypt.compare(req.body.password,user.password);
-		!validPassword&&res.status(404).json("Not a valid Password");
 
-		res.status(200).send(user);
-	} catch(err){
-		res.status(404).send(err.message);
+router.post("/login", async (req, res) => {
+	try {
+	  const user = await User.findOne({ email: req.body.email });
+	  !user && res.status(404).json("user not found");
+  
+	  const validPassword = await bcrypt.compare(req.body.password, user.password)
+	  !validPassword && res.status(400).json("NOT A VALID Password")
+  
+	  res.status(200).json(user)
+	} catch (err) {
+	  res.status(500).json(err)
 	}
-})
+  });
 
 
 //!/* --------------------------------- module export --------------------------------- */

@@ -1,7 +1,37 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import "./Register.css"
+import axios from "axios"
+import { useHistory } from "react-router";
 
-function register() {
+
+function Register() {
+
+	const username = useRef()
+	const email = useRef()
+	const password = useRef()
+	const comfirmPassword=useRef();
+	const history=useHistory();
+
+	const handleSubmit= async(e)=>{
+		e.preventDefault();
+		if(password.current.value!==comfirmPassword.current.value){
+			comfirmPassword.current.setCustomValidity("password do not match");
+		}
+		else {
+			const user={
+				username:username.current.value,
+				email:email.current.value,
+				password:password.current.value
+			}		
+			try {
+				await axios.post("/auth/register",user);
+				history.push("/login");
+			} catch(error) {
+				console.log(error.message);
+			}
+		}	
+	}
+
 	return (
 		<div className="register">
 			<div className="register-wrapper">
@@ -10,11 +40,12 @@ function register() {
 					<div className="desc">Connect to friend and the world around you on Socialify</div>
 				</div>
 				<div className="register-right">
-					<form action="/profile" method="get" className="register-form">
-						<input  type="text" placeholder="Username or email" />
-						<input  type="password" placeholder="Password" />
-						<input  type="password" placeholder="Comfirm Password" />
-						<button className="register-btn" >Sign Up</button>
+					<form onSubmit={handleSubmit} className="register-form">
+						<input  type="text" placeholder="Username" required ref={username} />
+						<input  type="email" placeholder="email" required ref={email} />
+						<input  type="password" placeholder="Password" required minLength="6" ref={password} />
+						<input  type="password" placeholder="Comfirm Password" required ref={comfirmPassword} />
+						<button type="submit" className="register-btn" >Sign Up</button>
 						<span className="forget-password">Forget Password</span>
 						<button className="login-btn">LogIn</button>
 					</form>
@@ -24,4 +55,4 @@ function register() {
 	)
 }
 
-export default register
+export default Register

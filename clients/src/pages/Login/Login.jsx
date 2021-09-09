@@ -1,19 +1,24 @@
-import React, { useRef, Link, useEffect } from 'react'
+import React, { useRef,useContext } from 'react'
 import "./Login.css"
-
+import { AuthContext } from "../../Context/AuthContext";
+import {loginCall} from "../../apiCall"
+import { CircularProgress } from "@material-ui/core";
+import {useHistory} from 'react-router';
+ 
 function Login() {
 
 	const email= useRef();
 	const password= useRef();
 
+
+	const {user, isFetching, error, dispatch} = useContext(AuthContext);
+	const history=useHistory();
 	const handleSubmit=(e)=>{
 		e.preventDefault();
-		LoginCall({email:email.current.value,password:password.current.value})
-	}	
-	useEffect(()=>{
-		
-	})
-
+		loginCall({email:email.current.value,password:password.current.value},dispatch);
+		history.push("/");
+	}
+	
 	return (
 		<div className="login">
 			<div className="login-wrapper">
@@ -25,11 +30,15 @@ function Login() {
 
 				<div className="login-right">
 					<form onSubmit={handleSubmit} className="login-form">
-						<input  type="text" placeholder="Username or email" ref={email} />
+						<input  type="text" placeholder="Email" ref={email} />
 						<input  type="password" placeholder="Password" ref={password} />
-						<button type="submit" className="login-btn">Login</button>
+						<button className="login-btn" type="submit" disabled={isFetching}>  
+						{isFetching ? ( <CircularProgress size="20px" /> ) : ( "Log In" )}
+						</button>
 						<span className="forget-password">Forget Password</span>
-						<button className="register-btn" >Sign Up</button>
+						<button className="register-btn" type="submit" disabled={isFetching}>  
+						{isFetching ? ( <CircularProgress size="20px" /> ) : ( "Sign Up" )}
+						</button>
 					</form>
 				</div>
 

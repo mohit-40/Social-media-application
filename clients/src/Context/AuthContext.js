@@ -23,5 +23,4 @@ function AuthContextProvider(props) {
 	)
 }
 
-export { AuthContext };
-export default AuthContextProvider;
+export { AuthContext ,AuthContextProvider};

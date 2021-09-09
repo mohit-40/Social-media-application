@@ -8,9 +8,9 @@ router.post("/",async (req,res)=>{
 	try {
 		const newPost=await new Post(req.body);
 		const post=await newPost.save()
-		res.status(200).send(post);
+		res.status(200).json(post);
 	} catch(error) {
-		res.status(404).send(error.message);
+		res.status(404).json(error.message);
 	}
 })
 // update a post 
@@ -19,12 +19,12 @@ router.put("/:id",async (req,res)=>{
 		const post =await Post.findById({_id: req.params.id});
 		if(req.body.userId==post.userId){
 			await post.updateOne({$set:req.body});
-			res.status(200).send(post);
+			res.status(200).json(post);
 		}else {
-			res.status(400).send("can not update others post");
+			res.status(400).json("can not update others post");
 		}
 	} catch(error) {
-		res.status(500).send(error.message);
+		res.status(500).json(error.message);
 	}
 })
 // delete a post 
@@ -33,12 +33,12 @@ router.delete("/:id",async (req,res)=>{
 		const post= await Post.findById({_id:req.params.id});
 		if(req.body.userId===post.userId){
 			await post.delete();
-			res.status(200).send("post deleted successfully");
+			res.status(200).json("post deleted successfully");
 		}else{
-			res.status(400).send("can't delete other user post ");
+			res.status(400).json("can't delete other user post ");
 		}
 	} catch(error) {
-		res.status(500).send(error.message);
+		res.status(500).json(error.message);
 	}
 })
 // like/unlike a  post 
@@ -49,15 +49,15 @@ router.put("/:id/like",async (req,res)=>{
 			await post.update({$push:{like:req.body.userId}});
 			// TODO: add this post to user.likedPost
 			
-			res.status(200).send("you successfully like the post");
+			res.status(200).json("you successfully like the post");
 		}else{
 			await post.update({$pull:{like:req.body.userId}});
 			// TODO: remove this post to user.likedPost
 			
-			res.status(200).send("you successfully unlike the post");
+			res.status(200).json("you successfully unlike the post");
 		}
 	} catch(error) {
-		res.status(500).send(error.message); 
+		res.status(500).json(error.message); 
 	}
 })
 
@@ -65,9 +65,9 @@ router.put("/:id/like",async (req,res)=>{
 router.get("/:id",async (req,res)=>{
 	try {
 		const post = await Post.findById({_id:req.params.id});
-		res.status(200).send(post);
+		res.status(200).json(post);
 	} catch(error) {
-		res.status(500).send(error.message);
+		res.status(500).json(error.message);
 	}
 })
 
@@ -81,7 +81,7 @@ router.get("/timeline/:userId",async (req,res)=>{
 		)
 		res.status(200).json(userPost.concat(...friendPost));
 	  } catch (err) {
-		res.status(500).send(err.message);
+		res.status(500).json(err.message);
 	  }
 })
 
