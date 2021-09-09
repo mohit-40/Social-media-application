@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./Profile.css"
 
 import Topbar from '../../component/Topbar/Topbar';
@@ -19,7 +19,7 @@ function Profile() {
 					<div className="profile-right-top">
 						<div className="profile-cover">
 							<img src={ PF + "post/3.jpeg" } alt="profileCoverPhoto" className="profile-cover-photo" />
-							<img src={PF + "/person/8.jpeg"} alt="profilePhoto" className="profile-photo" />
+							<img src={PF + "person/8.jpeg"} alt="profilePhoto" className="profile-photo" />
 						</div>
 						<div className="profile-info">
 							<h4 className="name">Rachel green</h4>
@@ -29,7 +29,7 @@ function Profile() {
 
 
 					<div className="profile-right-bottom">
-						<Feed />
+						<Feed username="Joey" />
 						<ProfileRightbar />
 					</div>
 

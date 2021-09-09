@@ -57,7 +57,7 @@ router.put("/:id/like",async (req,res)=>{
 			res.status(200).send("you successfully unlike the post");
 		}
 	} catch(error) {
-		res.status(500).send(error.message);
+		res.status(500).send(error.message); 
 	}
 })
 
@@ -72,11 +72,10 @@ router.get("/:id",async (req,res)=>{
 })
 
 // get timeline post 
-router.get("/timeline/all",async (req,res)=>{
+router.get("/timeline/:userId",async (req,res)=>{
 	try {
-		const currentUser = await User.findById(req.body.userId);
+		const currentUser = await User.findById(req.params.userId);
 		const userPost= await Post.find({ userId: currentUser._id });
-		console.log(userPost);
 		const friendPost = await Promise.all(
 		  currentUser.following.map((friendId) => Post.find({ userId: friendId }))
 		)
