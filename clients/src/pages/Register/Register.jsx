@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import "./Register.css"
 import axios from "axios"
 import { useHistory } from "react-router";
+import {Link} from "react-router-dom";
 
 
 function Register() {
@@ -47,7 +48,7 @@ function Register() {
 						<input  type="password" placeholder="Comfirm Password" required ref={comfirmPassword} />
 						<button type="submit" className="register-btn" >Sign Up</button>
 						<span className="forget-password">Forget Password</span>
-						<button className="login-btn">LogIn</button>
+						<Link to="/login"><button className="login-btn">LogIn</button></Link>
 					</form>
 				</div>
 			</div>

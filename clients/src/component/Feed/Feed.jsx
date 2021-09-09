@@ -7,7 +7,6 @@ import axios from "axios"
 
 function Feed() {
 	const PF=process.env.REACT_APP_PUBLIC_FOLDER;
-
 	return (
 		<div className="feed">
 			<div className="feed-wrapper">
