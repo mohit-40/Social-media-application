@@ -7,11 +7,11 @@ function CloseFriend(props) {
 	const [user, setUser] = useState({});
 	useEffect(() => {
 		const fetchUser = async () => {
-			const res = await axios.get("/users/" + props.user);
+			const res = await axios.get(`/users?userId=${props.userId}`);
 			setUser(res.data);
 		}
 		fetchUser()
-	}, [props.user])
+	}, [props.userId])
 	return (
 		<div className={props.className} >
 			<img src={user.profilePicture? PF + user.profilePicture : PF + "person/noAvatar.png"} alt="img" />

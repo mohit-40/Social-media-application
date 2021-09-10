@@ -7,7 +7,6 @@ import {AuthContext} from "../../Context/AuthContext"
 function Sidebar() {
 	const {user:currentUser} = useContext(AuthContext);
 
-
 	return (
 		<div className="sidebar">
 			<div className="sidebar-wrapper">
@@ -32,7 +31,7 @@ function Sidebar() {
 
 				<div className="friend-list">
 					<h1 className="heading">My Friend</h1>
-					{currentUser.following.map((user)=> <CloseFriend key={user} user={user} className="friend-list-item" />)}
+					{currentUser.following ? currentUser.following.map((userId)=> <CloseFriend key={userId} userId={userId} className="friend-list-item" />) : '' }
 				</div>
 
 

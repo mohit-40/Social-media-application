@@ -8,16 +8,16 @@ import { AuthContext } from '../../Context/AuthContext';
 
 function Feed({ username }) {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-	const { user } = useContext(AuthContext);
+	const { user:currentUser } = useContext(AuthContext);
 	const [posts, setPosts] = useState([]);
 
 	useEffect(() => {
 		const fetchPosts = async () => {
-			const res = username ? await axios.get("/posts/profile/" + username) : await axios.get("/posts/timeline/" + user._id)
+			const res = username ? await axios.get("/posts/profile/" + username) : await axios.get("/posts/timeline/" + currentUser._id)
 			setPosts(res.data);
 		}
 		fetchPosts();
-	}, [username, user._id]);
+	}, [username, currentUser._id]);
 
 
 	return (

@@ -45,7 +45,7 @@ function Profile() {
 
 						<div className="profile-right-bottom">
 							<Feed username={user.username} />
-							<ProfileRightbar />
+							<ProfileRightbar user={user}/>
 						</div>
 
 					</div>

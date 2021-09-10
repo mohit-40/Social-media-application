@@ -1,19 +1,16 @@
 import React, { useContext, useState } from 'react'
 import "./ProfileRightbar.css"
-import { AuthContext } from '../../Context/AuthContext';
 import CloseFriend from '../CloseFriend/CloseFriend';
 
-function ProfileRightbar() {
+function ProfileRightbar({user}) {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-	const { user } = useContext(AuthContext);
-
 
 
 	return (
 		<div className="profile-rightbar">
 			<div className="profile-rightbar-wrapper">
 				<div className="user-info">
-					<div className="title">User Infomation</div>
+					<div className="title">About {user.username}</div>
 					{!user.work&&!user.school&&!user.from&&!user.live&&!user.relationship  && <div>This User Information not available</div>}
 					<div className="info">
 						{user.work ? <span >Work at <b>{user.work}</b> </span> : ''}
@@ -34,9 +31,9 @@ function ProfileRightbar() {
 				<hr />
 
 
-				<div className="title">User friend</div>
+				<div className="title">{user.username} friend</div>
 				<div className="user-friend-container">
-					{user.following.map((friend) =>	<CloseFriend  className="user-friend-item" user={friend}/> )}
+					{user.following ? user.following.map((friendId) =>	<CloseFriend  key="friendId" className="user-friend-item" userId={friendId}/> ) : ''}
 				</div>
 
 				<hr />
