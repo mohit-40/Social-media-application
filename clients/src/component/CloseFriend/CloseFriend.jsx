@@ -14,8 +14,8 @@ function CloseFriend(props) {
 		fetchUser()
 	}, [props.userId])
 	return (
-		<Link className="text-link">
-			<div className='text-link' to={`/profile/${user.username}`} className={props.className} >
+		<Link to={`/profile/${user.username}`} className="text-link">
+			<div  className={props.className} >
 				<img src={user.profilePicture ? PF + user.profilePicture : PF + "person/noAvatar.png"} alt="img" />
 				<div className="name">{user.username}</div>
 			</div>
