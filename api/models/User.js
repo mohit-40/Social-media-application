@@ -44,13 +44,21 @@ const UserSchema = new mongoose.Schema({
 		type:String,
 		max:50
 	},
-	city:{
+	live:{
 		type:String,
 		max:50
 	},
 	from:{
 		type:String,
 		max:50
+	},
+	work:{
+		type:String,
+		max:15
+	},
+	school:{
+		type:String,
+		max:15
 	},
 	relationship:{
 		type:Number,
