@@ -6,8 +6,8 @@ import Profile from './pages/Profile/Profile'
 import Login from './pages/Login/Login'
 import Register from './pages/Register/Register'
 import Chat from './pages/Chat/Chat'
+import Error from './pages/Error/Error';
 import { AuthContext } from './Context/AuthContext';
-
 
 
 
@@ -23,6 +23,7 @@ function App() {
           <Route path="/login" exact >{user? <Home /> : <Login /> }</Route>
           <Route path="/register" exact > {user? <Home /> : <Register />}</Route>
           <Route path="/chat" exact > {user? <Chat /> : <Register />}</Route>
+          <Route path="/error" exact > <Error/> </Route>
       </Switch>
     </Router>
   )

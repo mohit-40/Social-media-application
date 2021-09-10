@@ -7,23 +7,27 @@ import Feed from '../../component/Feed/Feed';
 import ProfileRightbar from '../../component/ProfileRightbar/ProfileRightbar';
 import { useParams } from 'react-router';
 import axios from 'axios';
-
+import {useHistory} from 'react-router-dom';
 
 function Profile() {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-	
+	const history=useHistory();	
 	const params=useParams();
 	const username=params.username;
 	const [user,setUser] =useState({});
 
 	useEffect(()=>{
 		const fetchUser= async()=>{
-			const res= await axios.get(`/users?username=${username}`);
-			setUser(res.data); 
+			try {
+				const res= await axios.get(`/users?username=${username}`);
+				setUser(res.data); 	
+			} 
+			catch (error) {
+				history.push("/error");
+			}
 		}
 		fetchUser();
 	},[username]);
-	console.log(user);
 
 	return (
 		<>

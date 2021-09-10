@@ -1,0 +1,14 @@
+.error-page{
+	background: url('http://localhost:3000/asset/error.svg') no-repeat center center;
+	height: calc(100vh - 50px);
+	width: 100vw ;
+	object-fit: contain;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	.error-message{
+		font-size: 2rem;
+		color: red;
+		font-weight: 600;
+	}
+}

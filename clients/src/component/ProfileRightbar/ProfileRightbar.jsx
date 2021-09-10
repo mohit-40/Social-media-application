@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react'
+import {Link} from 'react-router-dom';
 import "./ProfileRightbar.css"
 import CloseFriend from '../CloseFriend/CloseFriend';
 
@@ -33,7 +34,10 @@ function ProfileRightbar({user}) {
 
 				<div className="title">{user.username} friend</div>
 				<div className="user-friend-container">
-					{user.following ? user.following.map((friendId) =>	<CloseFriend  key="friendId" className="user-friend-item" userId={friendId}/> ) : ''}
+						{	user.following ?
+							user.following.map((friendId) =>	<CloseFriend  key="friendId" className="user-friend-item" userId={friendId}/> ) :
+							'you currently have no friend'
+						}
 				</div>
 
 				<hr />

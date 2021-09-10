@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react'
+import {Link } from "react-router-dom"
 import "./Sidebar.css"
 import {RssFeed,Chat} from "@material-ui/icons";
 import CloseFriend from "../CloseFriend/CloseFriend"
@@ -13,12 +14,16 @@ function Sidebar() {
 
 				<ul className="menu-list">
 					<li className="menu-list-item">
-						<RssFeed className="menu-list-icon" />
-						<span className="menu-list-text">Feed</span>
+						<Link to="/">
+							<RssFeed className="menu-list-icon" />
+							<span className="menu-list-text">Feed</span>
+						</Link>
 					</li>
 					<li className="menu-list-item">
-						<Chat className="menu-list-icon" />
-						<span className="menu-list-text">Chats</span>
+						<Link to="/chat">
+							<Chat className="menu-list-icon" />
+							<span className="menu-list-text">Chats</span>
+						</Link>
 					</li>
 				</ul>
 
@@ -31,7 +36,10 @@ function Sidebar() {
 
 				<div className="friend-list">
 					<h1 className="heading">My Friend</h1>
-					{currentUser.following ? currentUser.following.map((userId)=> <CloseFriend key={userId} userId={userId} className="friend-list-item" />) : '' }
+					{	currentUser.following  ?  
+						currentUser.following.map((userId)=> <CloseFriend key={userId} userId={userId} className="friend-list-item" />)
+						:'you currently have no friend'
+					}
 				</div>
 
 
