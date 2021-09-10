@@ -1,14 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import {Link} from "react-router-dom"
 import { Search, Person, Chat, Notifications } from "@material-ui/icons";
 import "./Topbar.css"
+import {AuthContext} from "../../Context/AuthContext"
+
 
 function Topbar() {
 	const PF=process.env.REACT_APP_PUBLIC_FOLDER;
+	const {user}= useContext(AuthContext);
 
 	return (
 		<div className="topbar">
 			<div className="topbar-left">
-				<span className="topbar-logo">Socialify</span>
+			<Link to="/"><span className="topbar-logo">Socialify</span></Link>
 			</div>
 
 			<div className="topbar-center">
@@ -29,8 +33,10 @@ function Topbar() {
 						<span className="topbar-icon-badge">1</span>
 					</div>
 					<div className="topbar-icon-item">
+					<Link to="/chat">
 						<Chat className="topbar-icon"/>
 						<span className="topbar-icon-badge">1</span>
+					</Link>
 					</div>
 					<div className="topbar-icon-item">
 						<Notifications className="topbar-icon" />
@@ -38,7 +44,7 @@ function Topbar() {
 					</div>
 				</div>
 
-				<img src={PF+"person/1.jpeg"} alt="img" />
+				<Link to={`/profile/${user.username}`} ><img src={PF+"person/1.jpeg"} alt="img" /></Link>
 			</div>
 		</div>
 	)

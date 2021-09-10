@@ -1,20 +1,40 @@
-import React,{useState} from 'react'
+import React,{useContext, useEffect, useState} from 'react'
+import {Link} from "react-router-dom"
 import "./Post.css"
 import { MoreVert } from "@material-ui/icons";
-import {Users} from "../../dummy-data"
+import axios from 'axios';
+import {format} from "timeago.js"
+import { AuthContext } from '../../Context/AuthContext';
 
 function Post(props) {
+	
+	const PF=process.env.REACT_APP_PUBLIC_FOLDER;
+	const {user:currentUser}=useContext(AuthContext);
+	const [user, setUser] = useState({});
 
-	const user=Users.find((user)=> user.id===props.post.userId);
-	const [like,setLike]=useState(props.post.like);
+	const [like,setLike]=useState(props.post.like.length);
 	const [isLike,setIsLike]=useState(false);
-	const handleLike= ()=> {
-		if(isLike) {setLike(like-1);} 
+
+
+	useEffect(() => {
+		setIsLike( props.post.like.includes(currentUser._id) );
+	}, [currentUser,props.post.like]);
+
+	
+	const handleLike= async ()=> {
+		await axios.put("/posts/"+props.post._id+"/like",{userId : currentUser._id});
+		if(isLike){setLike(like-1);}
 		else {setLike(like+1);}
 		setIsLike(!isLike);
 	}
-	const PF=process.env.REACT_APP_PUBLIC_FOLDER;
 
+	useEffect(() => {
+		const fetchUser= async ()=>{
+			const res=await axios.get("users/"+props.post.userId);
+			setUser(res.data);
+		}
+		fetchUser();
+	}, [props.post.userId])
 
 	return (
 		<div className="post">
@@ -22,9 +42,11 @@ function Post(props) {
 
 				<div className="post-top">
 					<div className="post-top-left">
-						<img className="profile-img" src={PF + user.profilePicture} alt="img" />
-						<div className="name">{user.username}</div>
-						<div className="time">{props.post.date}</div>
+						<img className="profile-img" src={ user.profilePicture ? PF + user.profilePicture : PF + "person/noAvatar.png"} alt="img" />
+						<Link to={`/profile/${user.username}`}>
+							<div className="name">{user.username}</div>
+						</Link>
+						<div className="time">{format(props.post.createdAt)}</div>
 					</div>
 					<div className="post-top-right">
 						<MoreVert className="more-icon" />
@@ -33,7 +55,7 @@ function Post(props) {
 				<hr />
 				<div className="post-middle">
 					<div className="post-text">{props.post.desc}</div>
-					{props.post.photo&&<img src={PF + props.post.photo} className="post-img" alt="post-img" />}
+					{props.post.img&&<img src={PF + props.post.img} className="post-img" alt="post-img" />}
 				</div>
 				<div className="post-bottom">
 					<div className="post-bottom-left">

@@ -40,4 +40,8 @@
   width: 100%;
   font-size: 16px;
   padding: 10px;
+}
+.sidebar .friend-list .heading {
+  text-align: center;
+  margin: 10px;
 }/*# sourceMappingURL=Sidebar.css.map */

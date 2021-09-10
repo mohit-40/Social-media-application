@@ -22,22 +22,7 @@
 			justify-content: center;
 			align-items: center;
 			.user-friend-item{
-				margin: 10px;
-				cursor: pointer;
-
-				img{
-					height: 100px;
-					width: 100px;
-					object-fit: cover;
-					border-radius: 10px;
-					border: 2px solid black;
-					box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
-				}
-				.name{
-					text-align: center;
-					font-size: 18px;
-					font-weight: 500;
-				}
+				// in the CloseFriend component 
 			}
 		}
 

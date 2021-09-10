@@ -1,5 +1,6 @@
 @import "../variables scss/variable";
 
+// of the rightbar friend-list 
 .friend-list-item{
 	display: flex;
 	align-items: center;
@@ -10,7 +11,7 @@
 		border-radius: 50px;
 		object-fit: cover;
 	}
-	.friend-name{
+	.name{
 		font-size: $text-font;
 		margin-left: $text-ml;
 	}
@@ -18,6 +19,27 @@
 		cursor: pointer;
 		color: rgb(5, 24, 201);
 		transform: scale(1.1);
+		font-weight: 500;
+	}
+}
+
+
+// of the ProfileRightbar user-friend-item
+.user-friend-item{
+	margin: 10px;
+	cursor: pointer;
+
+	img{
+		height: 100px;
+		width: 100px;
+		object-fit: cover;
+		border-radius: 10px;
+		border: 2px solid black;
+		box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+	}
+	.name{
+		text-align: center;
+		font-size: 18px;
 		font-weight: 500;
 	}
 }

@@ -1,13 +1,29 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Profile.css"
 
 import Topbar from '../../component/Topbar/Topbar';
 import Sidebar from '../../component/Sidebar/Sidebar';
 import Feed from '../../component/Feed/Feed';
 import ProfileRightbar from '../../component/ProfileRightbar/ProfileRightbar';
+import { useParams } from 'react-router';
+import axios from 'axios';
+
 
 function Profile() {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+	
+	const params=useParams();
+	const username=params.username;
+	const [user,setUser] =useState({});
+
+	useEffect(()=>{
+		const fetchUser= async()=>{
+			const res= await axios.get(`/users?username=${username}`);
+			setUser(res.data); 
+		}
+		fetchUser();
+	},[username]);
+	console.log(user);
 
 	return (
 		<>
@@ -18,22 +34,23 @@ function Profile() {
 
 					<div className="profile-right-top">
 						<div className="profile-cover">
-							<img src={ PF + "post/3.jpeg" } alt="profileCoverPhoto" className="profile-cover-photo" />
-							<img src={PF + "person/8.jpeg"} alt="profilePhoto" className="profile-photo" />
+							<img src={user.coverPicture ? PF + user.coverPicture : PF + "/person/noCover.png"} alt="profileCoverPhoto" className="profile-cover-photo" />
+							<img src={user.profilePicture ? PF + user.profilePicture : PF + "/person/noAvatar.png"} alt="profilePhoto" className="profile-photo" />
 						</div>
 						<div className="profile-info">
-							<h4 className="name">Rachel green</h4>
-							<p className="desc">Hello My friend !! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio odit aliquid dolorum deleniti mollitia. Sit accusantium quibusdam necessitatibus esse consequatur.</p>
+							<h4 className="name">{user.username}</h4>
+							<div className="desc">{user.desc}</div>
 						</div>
+
+
+						<div className="profile-right-bottom">
+							<Feed username={user.username} />
+							<ProfileRightbar />
+						</div>
+
 					</div>
 
-
-					<div className="profile-right-bottom">
-						<Feed username="Joey" />
-						<ProfileRightbar />
-					</div>
-
-
+					
 				</div>
 			</div>
 		</>

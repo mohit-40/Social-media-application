@@ -10,7 +10,7 @@
   -o-object-fit: cover;
      object-fit: cover;
 }
-.friend-list-item .friend-name {
+.friend-list-item .name {
   font-size: 18px;
   margin-left: 15px;
 }
@@ -18,5 +18,24 @@
   cursor: pointer;
   color: #0518c9;
   transform: scale(1.1);
+  font-weight: 500;
+}
+
+.user-friend-item {
+  margin: 10px;
+  cursor: pointer;
+}
+.user-friend-item img {
+  height: 100px;
+  width: 100px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid black;
+  box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+}
+.user-friend-item .name {
+  text-align: center;
+  font-size: 18px;
   font-weight: 500;
 }/*# sourceMappingURL=CloseFriend.css.map */

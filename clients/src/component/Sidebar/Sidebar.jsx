@@ -1,21 +1,13 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import "./Sidebar.css"
-import {
-	RssFeed,
-	Chat,
-	PlayCircleFilledOutlined,
-	Group,
-	Bookmark,
-	HelpOutline,
-	WorkOutline,
-	Event,
-	School,
-} from "@material-ui/icons";
+import {RssFeed,Chat} from "@material-ui/icons";
 import CloseFriend from "../CloseFriend/CloseFriend"
-import {Users} from "../../dummy-data"
-
+import {AuthContext} from "../../Context/AuthContext"
 
 function Sidebar() {
+	const {user:currentUser} = useContext(AuthContext);
+
+
 	return (
 		<div className="sidebar">
 			<div className="sidebar-wrapper">
@@ -29,34 +21,6 @@ function Sidebar() {
 						<Chat className="menu-list-icon" />
 						<span className="menu-list-text">Chats</span>
 					</li>
-					<li className="menu-list-item">
-						<PlayCircleFilledOutlined className="menu-list-icon" />
-						<span className="menu-list-text">Videos</span>
-					</li>
-					<li className="menu-list-item">
-						<Group className="menu-list-icon" />
-						<span className="menu-list-text">Group</span>
-					</li>
-					<li className="menu-list-item">
-						<Bookmark className="menu-list-icon" />
-						<span className="menu-list-text">Bookmark</span>
-					</li>
-					<li className="menu-list-item">
-						<HelpOutline className="menu-list-icon" />
-						<span className="menu-list-text">Question</span>
-					</li>
-					<li className="menu-list-item">
-						<WorkOutline className="menu-list-icon" />
-						<span className="menu-list-text">Job</span>
-					</li>
-					<li className="menu-list-item">
-						<Event className="menu-list-icon" />
-						<span className="menu-list-text">Calender</span>
-					</li>
-					<li className="menu-list-item">
-						<School className="menu-list-icon" />
-						<span className="menu-list-text">Education</span>
-					</li>
 				</ul>
 
 
@@ -64,10 +28,11 @@ function Sidebar() {
 				<hr />
 
 
-
+				
 
 				<div className="friend-list">
-					{Users.map((user)=> <CloseFriend key={user.id} user={user} />)}
+					<h1 className="heading">My Friend</h1>
+					{currentUser.following.map((user)=> <CloseFriend key={user} user={user} className="friend-list-item" />)}
 				</div>
 
 

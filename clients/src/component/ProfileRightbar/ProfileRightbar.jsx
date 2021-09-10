@@ -1,66 +1,47 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import "./ProfileRightbar.css"
+import { AuthContext } from '../../Context/AuthContext';
+import CloseFriend from '../CloseFriend/CloseFriend';
 
 function ProfileRightbar() {
-	const PF=process.env.REACT_APP_PUBLIC_FOLDER;
+	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+	const { user } = useContext(AuthContext);
+
+
 
 	return (
 		<div className="profile-rightbar">
 			<div className="profile-rightbar-wrapper">
 				<div className="user-info">
 					<div className="title">User Infomation</div>
+					{!user.work&&!user.school&&!user.from&&!user.live&&!user.relationship  && <div>This User Information not available</div>}
 					<div className="info">
-						<span >Work at <b>letina coorporation</b> </span>
+						{user.work ? <span >Work at <b>{user.work}</b> </span> : ''}
 					</div>
 					<div className="info">
-						<span >Studied at <b>Harward University</b> </span>
+						{user.school ? <span >Studied at <b>{user.school}</b> </span> : ''}
 					</div>
 					<div className="info">
-						<span >From <b>California ,USA</b> </span>
+						{user.from ? <span >From <b>{user.from}</b> </span> : ''}
 					</div>
 					<div className="info">
-						<span >Live in <b>New York ,USA</b> </span>
+						{user.live ? <span >Live in <b>{user.live}</b> </span> : ''}
 					</div>
 					<div className="info">
-						<span >Relationship Status <b>Single</b> </span>
+						{user.relationship ? <span >Relationship Status <b>{user.relationship}</b> </span> : ''}
 					</div>
 				</div>
 				<hr />
+
+
 				<div className="title">User friend</div>
 				<div className="user-friend-container">
-					<div className="user-friend-item">
-						<img src={PF+"person/6.jpeg"} alt="img" />
-						<div className="name">abc</div>
-					</div>
-					<div className="user-friend-item">
-						<img src={PF + "person/5.jpeg"} alt="img" />
-						<div className="name">abc</div>
-					</div>
-					<div className="user-friend-item">
-						<img src={PF + "person/4.jpeg"} alt="img" />
-						<div className="name">abc</div>
-					</div>
-					<div className="user-friend-item">
-						<img src={PF + "person/2.jpeg"} alt="img" />
-						<div className="name">abc</div>
-					</div>
-					<div className="user-friend-item">
-						<img src={PF + "person/3.jpeg"} alt="img" />
-						<div className="name">abc</div>
-					</div>
-					<div className="user-friend-item">
-						<img src={PF + "person/2.jpeg"} alt="img" />
-						<div className="name">abc</div>
-					</div>
-					<div className="user-friend-item">
-						<img src={PF + "person/3.jpeg"} alt="img" />
-						<div className="name">abc</div>
-					</div>
+					{user.following.map((friend) =>	<CloseFriend  className="user-friend-item" user={friend}/> )}
 				</div>
 
 				<hr />
 			</div>
-		</div>
+		</div >
 	)
 }
 
