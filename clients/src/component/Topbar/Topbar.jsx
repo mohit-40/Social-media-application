@@ -18,7 +18,7 @@ function Topbar() {
 			<div className="topbar-center">
 				<div className="search">
 					<Search className="search-icon" />
-					<input type="text" name="" id="" placeholder="Search for Person, Post or Images" />
+					<input type="text" name="" id="" placeholder="Search for Person or friend" />
 				</div>
 			</div>
 
