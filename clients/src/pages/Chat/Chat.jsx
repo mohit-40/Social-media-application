@@ -3,7 +3,7 @@ import React from 'react'
 function Chat() {
 	return (
 		<div>
-			chat appliction currently in development!!
+			facing some issue in chat application <br /> will be availble soon in a day. 
 		</div>
 	)
 }
