@@ -48,7 +48,7 @@ function Register() {
 						<input  type="password" placeholder="Comfirm Password" required ref={comfirmPassword} />
 						<button type="submit" className="register-btn" >Sign Up</button>
 						<span className="forget-password">Forget Password</span>
-						<Link to="/login"><button className="login-btn">LogIn</button></Link>
+						<Link className='text-link' to="/login"><button className="login-btn">LogIn</button></Link>
 					</form>
 				</div>
 			</div>

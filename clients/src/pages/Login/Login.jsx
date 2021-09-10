@@ -37,7 +37,7 @@ function Login() {
 						{isFetching ? ( <CircularProgress size="20px" /> ) : ( "Log In" )}
 						</button>
 						<span className="forget-password">Forget Password</span>
-						<Link to="/register">
+						<Link className='text-link' to="/register">
 							<button className="register-btn" type="submit" disabled={isFetching}>
 							{isFetching ? ( <CircularProgress size="20px" /> ) : ( "Sign Up" )}
 							</button>

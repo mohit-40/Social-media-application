@@ -14,13 +14,13 @@ function Sidebar() {
 
 				<ul className="menu-list">
 					<li className="menu-list-item">
-						<Link to="/">
+						<Link className='text-link' to="/">
 							<RssFeed className="menu-list-icon" />
 							<span className="menu-list-text">Feed</span>
 						</Link>
 					</li>
 					<li className="menu-list-item">
-						<Link to="/chat">
+						<Link className='text-link' to="/chat">
 							<Chat className="menu-list-icon" />
 							<span className="menu-list-text">Chats</span>
 						</Link>

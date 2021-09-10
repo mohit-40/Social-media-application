@@ -12,7 +12,7 @@ function Topbar() {
 	return (
 		<div className="topbar">
 			<div className="topbar-left">
-			<Link to="/"><span className="topbar-logo">Socialify</span></Link>
+			<Link className='text-link' to="/"><span className="topbar-logo">Socialify</span></Link>
 			</div>
 
 			<div className="topbar-center">
@@ -33,7 +33,7 @@ function Topbar() {
 						<span className="topbar-icon-badge">1</span>
 					</div>
 					<div className="topbar-icon-item">
-					<Link to="/chat">
+					<Link className='text-link' to="/chat">
 						<Chat className="topbar-icon"/>
 						<span className="topbar-icon-badge">1</span>
 					</Link>
@@ -44,7 +44,7 @@ function Topbar() {
 					</div>
 				</div>
 
-				<Link to={`/profile/${user.username}`} ><img src={PF+"person/1.jpeg"} alt="img" /></Link>
+				<Link className='text-link' to={`/profile/${user.username}`} ><img src={PF+"person/1.jpeg"} alt="img" /></Link>
 			</div>
 		</div>
 	)

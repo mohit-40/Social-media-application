@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {Link} from  "react-router-dom"
+import { Link } from "react-router-dom"
 import "./CloseFriend.css"
 import axios from "axios"
 
@@ -14,9 +14,11 @@ function CloseFriend(props) {
 		fetchUser()
 	}, [props.userId])
 	return (
-		<Link to={`/profile/${user.username}`} className={props.className} >
-			<img src={user.profilePicture? PF + user.profilePicture : PF + "person/noAvatar.png"} alt="img" />
-			<div className="name">{user.username}</div>
+		<Link className="text-link">
+			<div className='text-link' to={`/profile/${user.username}`} className={props.className} >
+				<img src={user.profilePicture ? PF + user.profilePicture : PF + "person/noAvatar.png"} alt="img" />
+				<div className="name">{user.username}</div>
+			</div>
 		</Link>
 	)
 }
