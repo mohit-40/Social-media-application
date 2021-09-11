@@ -29,6 +29,23 @@
 .share .share-wrapper hr {
   margin: 20px;
 }
+.share .share-wrapper .img-upload {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.share .share-wrapper .img-upload .uploaded-img {
+  max-height: 150px;
+  max-width: 150px;
+}
+.share .share-wrapper .img-upload .remove-uploaded-img {
+  margin: 10px;
+}
+.share .share-wrapper .img-upload .upload-complete {
+  color: #05aa05;
+  font-weight: 600;
+}
 .share .share-wrapper .share-bottom .option-container {
   display: flex;
   justify-content: space-around;

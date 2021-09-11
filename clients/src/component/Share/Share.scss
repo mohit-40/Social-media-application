@@ -22,11 +22,27 @@
 				outline: none;
 				font-size: 20px;
 				margin-left: 18px;
-				// padding: 5px;
 			}
 		}
 		hr{
 			margin: 20px;
+		}
+		.img-upload{
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+			.uploaded-img{
+				max-height: 150px;
+				max-width: 150px;
+			}
+			.remove-uploaded-img{
+				margin: 10px;
+			}
+			.upload-complete{
+				color: rgb(5, 170, 5);
+				font-weight: 600;
+			}
 		}
 		.share-bottom{ 
 			.option-container{

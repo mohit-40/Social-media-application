@@ -3,6 +3,8 @@ import { AuthContext } from '../../Context/AuthContext';
 import { PermMedia, Label, Room, EmojiEmotions } from "@material-ui/icons"
 import "./Share.css"
 import { storage } from "../../firebase/firebase";
+import { colors } from '@material-ui/core';
+import { green } from '@material-ui/core/colors';
 
 function Share() {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -12,23 +14,21 @@ function Share() {
 	const [progress, setProgress] = useState(0)
 	const [url, setUrl] = useState('')
 
-	const [preview,setPreview] = useState('')
+	const [preview, setPreview] = useState(null)
 
 
 	const handleFilechange = (e) => {
-		if (e.target.files) {
+		if (e.target.files[0]) {
 			setFile(e.target.files[0])
 			const reader = new FileReader();
 			reader.onloadend = () => {
-				setPreview(reader.result) ;
+				setPreview(reader.result);
 			};
-			reader.readAsDataURL(file);
+			reader.readAsDataURL(e.target.files[0]);
 		}
-		else { 
+		else {
 			setFile(null)
 		}
-
-
 	}
 
 	const handleSubmit = (e) => {
@@ -58,6 +58,12 @@ function Share() {
 		console.log(file);
 	};
 
+
+	const handleRemoveImg=()=>{
+		setFile(null);
+		setPreview(null);
+	}
+
 	return (
 		<div className="share">
 			<div className="share-wrapper">
@@ -66,7 +72,16 @@ function Share() {
 					<input type="text" ref={desc} placeholder={"What in Your Mind Today " + user.username + " ??"} />
 				</div>
 				<hr />
-				<img src={preview} alt="No Image Selected" />
+				{ preview ?
+						<div className="img-upload">
+							<img src={preview} className="uploaded-img" alt="No Image Selected" />
+							<button className="remove-uploaded-img" onClick={handleRemoveImg}>Remove</button>
+							<progress className="upload-progress" value={progress}/>
+							{progress===100 ? <div className="upload-complete"> Upload completed</div> : '' } 
+						</div>
+						:
+						'' 
+				}
 				<div className="share-bottom">
 
 					<form onSubmit={handleSubmit} className="option-container">
