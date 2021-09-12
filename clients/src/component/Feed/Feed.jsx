@@ -6,7 +6,7 @@ import axios from "axios"
 import { AuthContext } from '../../Context/AuthContext';
 
 
-function Feed({ username }) {
+function Feed({ username , timeline}) {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 	const { user:currentUser } = useContext(AuthContext);
 	const [posts, setPosts] = useState([]);
@@ -25,7 +25,7 @@ function Feed({ username }) {
 	return (
 		<div className="feed">
 			<div className="feed-wrapper">
-				<Share />
+				{username===currentUser.username|| timeline  ? <Share /> : ''}
 				{posts.map((post) => <Post key={post._id} post={post} />)}
 			</div>
 		</div>

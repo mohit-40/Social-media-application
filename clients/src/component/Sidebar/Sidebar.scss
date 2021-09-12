@@ -41,11 +41,15 @@
 		padding: 10px;
 		
 	}
+	hr{
+		margin: 10px;
+	}
 
 	.friend-list{
 		.heading{
 			text-align: center;
 			margin: 10px;
+			color: blue;
 		}
 		.friend-list-item{
 			// css in CloseFriend another component
