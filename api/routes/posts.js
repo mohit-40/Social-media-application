@@ -8,7 +8,7 @@ router.post("/", async (req, res) => {
 	try {
 		const newPost = await new Post(req.body);
 		const post = await newPost.save()
-		res.status(200).json(post);
+		res.status(200).json("Post uploaded successfully");
 	} catch (error) {
 		res.status(404).json(error.message);
 	}
@@ -35,7 +35,7 @@ router.delete("/:id", async (req, res) => {
 			await post.delete();
 			res.status(200).json("post deleted successfully");
 		} else {
-			res.status(400).json("can't delete other user post ");
+			res.status(400).json("can't delete other user post");
 		}
 	} catch (error) {
 		res.status(500).json(error.message);
