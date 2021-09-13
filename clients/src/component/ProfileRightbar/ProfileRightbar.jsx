@@ -9,7 +9,7 @@ import axios from 'axios';
 function ProfileRightbar({ user }) {
 	const { user: currentUser } = useContext(AuthContext)
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-	const [followed, setFollowed] = useState(user.follower.includes(currentUser._id));
+	const [followed, setFollowed] = useState(user.followers.includes(currentUser._id));
 
 	const handleFollow= async ()=>{
 		try {
@@ -56,8 +56,8 @@ function ProfileRightbar({ user }) {
 
 				<div className="title">{user.username} friend</div>
 				<div className="user-friend-container">
-					{user.following ?
-						user.following.map((friendId) => <CloseFriend key={friendId} className="user-friend-item" userId={friendId} />) :
+					{user.followings ?
+						user.followings.map((friendId) => <CloseFriend key={friendId} className="user-friend-item" userId={friendId} />) :
 						'you currently have no friend'
 					}
 				</div>

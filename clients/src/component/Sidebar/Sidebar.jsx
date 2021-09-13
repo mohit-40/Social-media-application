@@ -42,8 +42,8 @@ function Sidebar() {
 
 				<div className="friend-list">
 					<h1 className="heading">My Friend</h1>
-					{currentUser.following  ?  
-						currentUser.following.map((userId)=> <CloseFriend key={userId} userId={userId} className="friend-list-item" />)
+					{currentUser.followings  ?  
+						currentUser.followings.map((userId)=> <CloseFriend key={userId} userId={userId} className="friend-list-item" />)
 						:'you currently have no friend'
 					}
 				</div>
