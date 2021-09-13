@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import "./ProfileRightbar.css"
 import { Add, Remove } from "@material-ui/icons";
@@ -6,10 +6,14 @@ import CloseFriend from '../CloseFriend/CloseFriend';
 import { AuthContext } from '../../Context/AuthContext';
 import axios from 'axios';
 
+
 function ProfileRightbar({ user }) {
 	const { user: currentUser } = useContext(AuthContext)
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 	const [followed, setFollowed] = useState(user.followers.includes(currentUser._id));
+	const [loaded,setLoaded] =useState(false)
+	const [followings,setFollowings]=useState([])
+
 
 	const handleFollow= async ()=>{
 		try {
@@ -21,7 +25,17 @@ function ProfileRightbar({ user }) {
 	}
 
 
-	return (
+	useEffect(() => {
+		const fetchFollowing=async ()=>{
+			const res = await axios.get("/users/followings/"+currentUser._id)
+			setFollowings(res.data) 
+			setLoaded(true)
+		}
+		fetchFollowing()
+	}, [currentUser]);
+
+
+	return loaded &&(
 		<div className="profile-rightbar">
 			<div className="profile-rightbar-wrapper">
 			{user._id !== currentUser._id ?
@@ -56,8 +70,8 @@ function ProfileRightbar({ user }) {
 
 				<div className="title">{user.username} friend</div>
 				<div className="user-friend-container">
-					{user.followings ?
-						user.followings.map((friendId) => <CloseFriend key={friendId} className="user-friend-item" userId={friendId} />) :
+					{followings ?
+						followings.map((following) => <CloseFriend key={following} className="user-friend-item" user={following} />) :
 						'you currently have no friend'
 					}
 				</div>
