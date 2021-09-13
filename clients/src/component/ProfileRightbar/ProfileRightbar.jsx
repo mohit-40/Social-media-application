@@ -27,12 +27,12 @@ function ProfileRightbar({ user }) {
 
 	useEffect(() => {
 		const fetchFollowing=async ()=>{
-			const res = await axios.get("/users/followings/"+currentUser._id)
+			const res = await axios.get("/users/followings/"+user._id)
 			setFollowings(res.data) 
 			setLoaded(true)
 		}
 		fetchFollowing()
-	}, [currentUser]);
+	}, [user]);
 
 
 	return loaded &&(
