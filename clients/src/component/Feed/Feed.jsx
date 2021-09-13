@@ -6,7 +6,8 @@ import axios from "axios"
 import { AuthContext } from '../../Context/AuthContext';
 
 
-function Feed({ username , timeline}) {
+function Feed({ username }) {
+	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 	const { user:currentUser } = useContext(AuthContext);
 	const [posts, setPosts] = useState([]);
 
