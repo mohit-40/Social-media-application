@@ -38,8 +38,8 @@ function Profile() {
 
 					<div className="profile-right-top">
 						<div className="profile-cover">
-							<img src={user.coverPicture ? PF + user.coverPicture : PF + "/person/noCover.png"} alt="profileCoverPhoto" className="profile-cover-photo" />
-							<img src={user.profilePicture ? PF + user.profilePicture : PF + "/person/noAvatar.png"} alt="profilePhoto" className="profile-photo" />
+							<img src={user.coverPicture ? user.coverPicture : PF + "/person/noCover.png"} alt="profileCoverPhoto" className="profile-cover-photo" />
+							<img src={user.profilePicture ? user.profilePicture : PF + "/person/noAvatar.png"} alt="profilePhoto" className="profile-photo" />
 						</div>
 						<div className="profile-info">
 							<h4 className="name">{user.username}</h4>
