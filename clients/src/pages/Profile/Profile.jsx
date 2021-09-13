@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import "./Profile.css"
 
 import Topbar from '../../component/Topbar/Topbar';
@@ -8,6 +8,8 @@ import ProfileRightbar from '../../component/ProfileRightbar/ProfileRightbar';
 import { useParams } from 'react-router';
 import axios from 'axios';
 import {useHistory} from 'react-router-dom';
+import { AuthContext } from '../../Context/AuthContext';
+import {storage} from "../../firebase/firebase"
 
 function Profile() {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
