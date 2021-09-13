@@ -31,11 +31,14 @@ function Sidebar() {
 				<button className="sidebar-btn">Show More</button>
 				<hr />
 
+
+				
+
 				<div className="friend-list">
-					<h2 className="heading">My Friend</h2>
-					{currentUser.following ?
-						currentUser.following.map((userId) => <CloseFriend key={userId} userId={userId} className="friend-list-item" />)
-						: 'you currently have no friend'
+					<h1 className="heading">My Friend</h1>
+					{	currentUser.following  ?  
+						currentUser.following.map((userId)=> <CloseFriend key={userId} userId={userId} className="friend-list-item" />)
+						:'you currently have no friend'
 					}
 				</div>
 

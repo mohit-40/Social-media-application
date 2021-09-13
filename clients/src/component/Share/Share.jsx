@@ -53,7 +53,7 @@ function Share() {
 					},
 					error => { console.log(error); },
 					async () => {
-						await storage.ref(`${currentUser.username}/posts/`).child(fileName).getDownloadURL().then((imgurl )=> { setUrl(imgurl); newPost.img = imgurl})
+						await storage.ref("images").child(fileName).getDownloadURL().then((imgurl )=> { setUrl(imgurl); newPost.img = imgurl})
 						await axios.post("/posts", newPost);
 						setMakePost(true);
 						setTimeout(() => {
@@ -101,7 +101,7 @@ function Share() {
 		<div className="share">
 			<div className="share-wrapper">
 				<div className="share-top">
-					<img src={currentUser.profilePicture ? currentUser.profilePicture : PF + "person/noAvatar.png"} alt="profileimg" />
+					<img src={currentUser.profilePicture ? PF + currentUser.profilePicture : PF + "person/noAvatar.png"} alt="profileimg" />
 					<input type="text" ref={desc} placeholder={"What in Your Mind Today " + currentUser.username + " ??"} />
 				</div>
 				<hr />
