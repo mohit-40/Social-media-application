@@ -11,6 +11,7 @@ import { useHistory } from 'react-router-dom';
 import { storage } from "../../firebase/firebase";
 import { AuthContext } from '../../Context/AuthContext';
 
+
 function Profile() {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 	const history = useHistory();
@@ -18,26 +19,28 @@ function Profile() {
 	const username = params.username;
 	const [user, setUser] = useState({});
 	const {user:currentUser}=useContext(AuthContext)
-
+	const [profilePic,setProfilePic] =  useState(null);
+	const [coverPic,setCoverPic] =  useState(null);
+	const [loaded,setLoaded]=useState(false)
+	
 	useEffect(() => {
 		const fetchUser = async () => {
 			try {
 				const res = await axios.get(`/users?username=${username}`);
 				setUser(res.data);
+				setLoaded(true)
 			}
 			catch (error) {
 				history.push("/error");
+				setLoaded(true)
 			}
 		}
 		fetchUser();
 	}, [username]);
 	
-	const [profilePic,setProfilePic] =  useState(null);
-	const [coverPic,setCoverPic] =  useState(null);
 
 	useEffect(() => {
 		const call=async ()=>{
-			console.log(profilePic)
 			const updatedUser={ 
 				userId: currentUser._id ,
 			}
@@ -81,7 +84,8 @@ function Profile() {
 		call();
 	}, [coverPic,profilePic]);
 
-	return (
+
+	return loaded&&(
 		<>
 			<Topbar />
 			<div className="profile">

@@ -2,15 +2,15 @@
 	flex: 3.5;
 	.profile-rightbar-wrapper{
 		padding: 20px;
+		.follow-btn{
+			padding: 5px;
+			background-color: blue;
+			border: none;
+			font-size: 1.1rem;
+			color: white;
+			cursor: pointer;
+		}
 		.user-info{
-			.follow-btn{
-				padding: 5px;
-				background-color: blue;
-				border: none;
-				font-size: 1.1rem;
-				color: white;
-				cursor: pointer;
-			}
 			.info{
 				margin: 10px;
 				font-size: 18px;

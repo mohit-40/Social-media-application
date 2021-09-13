@@ -12,17 +12,17 @@ import { AuthContext } from './Context/AuthContext';
 
 
 function App() {
-  const {user, isFetching, error, dispatch}= useContext(AuthContext);
+  const {user:currentUser, isFetching, error, dispatch}= useContext(AuthContext);
   const history=useHistory();
 
   return (
     <Router>
       <Switch>
-          <Route path="/" exact > {user? <Home /> : <Register />}</Route>
+          <Route path="/" exact > {currentUser? <Home /> : <Register />}</Route>
           <Route path="/profile/:username" exact > <Profile /> </Route>
-          <Route path="/login" exact >{user? <Home /> : <Login /> }</Route>
-          <Route path="/register" exact > {user? <Home /> : <Register />}</Route>
-          <Route path="/chat" exact > {user? <Chat /> : <Register />}</Route>
+          <Route path="/login" exact >{currentUser? <Home /> : <Login /> }</Route>
+          <Route path="/register" exact > {currentUser? <Home /> : <Register />}</Route>
+          <Route path="/chat" exact > {currentUser? <Chat /> : <Register />}</Route>
           <Route path="/error" exact > <Error/> </Route>
       </Switch>
     </Router>

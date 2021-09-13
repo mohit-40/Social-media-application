@@ -100,7 +100,7 @@ function Share() {
 		<div className="share">
 			<div className="share-wrapper">
 				<div className="share-top">
-					<img src={currentUser.profilePicture ? PF + currentUser.profilePicture : PF + "person/noAvatar.png"} alt="profileimg" />
+					<img src={currentUser.profilePicture ? currentUser.profilePicture : PF + "person/noAvatar.png"} alt="profileimg" />
 					<input type="text" ref={desc} placeholder={"What in Your Mind Today " + currentUser.username + " ??"} />
 				</div>
 				<hr />
