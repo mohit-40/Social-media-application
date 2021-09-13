@@ -41,7 +41,11 @@
   font-size: 16px;
   padding: 10px;
 }
+.sidebar hr {
+  margin: 10px;
+}
 .sidebar .friend-list .heading {
   text-align: center;
   margin: 10px;
+  color: blue;
 }/*# sourceMappingURL=Sidebar.css.map */

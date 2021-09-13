@@ -13,6 +13,19 @@
 		.profile-right-top{
 			.profile-cover{
 				position: relative;
+				
+				.change-profile-label{
+					background: green;
+					color: white;
+					margin: 3px;
+					padding: 3px;
+				}
+				.change-cover-label{
+					background: green;
+					color: white;
+					margin: 3px;
+					padding: 3px;
+				}
 				.profile-cover-photo{
 					width: 100%;
 					height: 40vh;

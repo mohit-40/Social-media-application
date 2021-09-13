@@ -54,7 +54,7 @@ function Post(props) {
 
 				<div className="post-top">
 					<div className="post-top-left">
-						<img className="profile-img" src={user.profilePicture ? PF + user.profilePicture : PF + "person/noAvatar.png"} alt="img" />
+						<img className="profile-img" src={user.profilePicture ?  user.profilePicture : PF + "person/noAvatar.png"} alt="img" />
 						<Link className='text-link' to={`/profile/${user.username}`}>
 							<div className="name">{user.username}</div>
 						</Link>

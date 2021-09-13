@@ -3,9 +3,8 @@ const User = require("../models/User");
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 // update a user 
-router.put("/:id", async (req, res) => {
-	console.log(req.body.userId);
-	console.log(req.params.id);
+router.patch("/:id", async (req, res) => {
+
 	if (req.params.id === req.body.userId||req.body.isAdmin) {
 		try {
 			if (req.body.password) {

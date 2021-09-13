@@ -36,7 +36,6 @@ function Share() {
 	
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		e.target.value=''
 		const newPost = {
 			"userId": currentUser._id,
 			"desc": desc.current.value,
@@ -44,7 +43,7 @@ function Share() {
 		if (file) {
 			try {
 				const fileName = Date.now() + file.name
-				const uploadTask = storage.ref(`images/${fileName}`).put(file);
+				const uploadTask = storage.ref(`${currentUser.username}/posts/${fileName}`).put(file);
 				await uploadTask.on(
 					"state_changed",
 					snapshot => {
@@ -53,7 +52,7 @@ function Share() {
 					},
 					error => { console.log(error); },
 					async () => {
-						await storage.ref("images").child(fileName).getDownloadURL().then((imgurl )=> { setUrl(imgurl); newPost.img = imgurl})
+						await storage.ref(`${currentUser.username}/posts/`).child(fileName).getDownloadURL().then((imgurl )=> { setUrl(imgurl); newPost.img = imgurl})
 						await axios.post("/posts", newPost);
 						setMakePost(true);
 						setTimeout(() => {
