@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Profile.css"
-import { Link } from "react-router-dom"
+
 import Topbar from '../../component/Topbar/Topbar';
 import Sidebar from '../../component/Sidebar/Sidebar';
 import Feed from '../../component/Feed/Feed';
@@ -8,8 +8,6 @@ import ProfileRightbar from '../../component/ProfileRightbar/ProfileRightbar';
 import { useParams } from 'react-router';
 import axios from 'axios';
 import {useHistory} from 'react-router-dom';
-import { storage } from "../../firebase/firebase";
-import { AuthContext } from '../../Context/AuthContext';
 
 function Profile() {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -94,25 +92,8 @@ function Profile() {
 
 					<div className="profile-right-top">
 						<div className="profile-cover">
-							<img src={user.coverPicture ? user.coverPicture : PF + "/person/noCover.png"} alt="profileCoverPhoto" className="profile-cover-photo" />
-							<img src={user.profilePicture ? user.profilePicture : PF + "/person/noAvatar.png"} alt="profilePhoto" className="profile-photo" />
-							{currentUser._id===user._id ?
-							<>
-							<label htmlFor="cover-pic" className="change-cover-label">
-								Change Cover
-								<input type="file" name="cover-pic" id="cover-pic" style={{display:"none"}} className="change-cover"  onChange={(e)=> setCoverPic(e.target.files[0]) } />
-							</label>
-							<label htmlFor="profile-pic" className="change-profile-label">
-								Change Profile
-								<input type="file" name="profile-pic" id="profile-pic" style={{display:"none"}} className="profile-cover" onChange={ (e)=> setProfilePic(e.target.files[0])  } />
-							</label>
-							<Link to="/user-info">
-								<button className="update-info cover-pic">Update Info</button>
-							</Link>
-							</>
-							:
-							''
-							}
+							<img src={user.coverPicture ? PF + user.coverPicture : PF + "/person/noCover.png"} alt="profileCoverPhoto" className="profile-cover-photo" />
+							<img src={user.profilePicture ? PF + user.profilePicture : PF + "/person/noAvatar.png"} alt="profilePhoto" className="profile-photo" />
 						</div>
 						<div className="profile-info">
 							<h4 className="name">{user.username}</h4>

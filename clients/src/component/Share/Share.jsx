@@ -35,6 +35,7 @@ function Share() {
 	
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		e.target.value=''
 		const newPost = {
 			"userId": currentUser._id,
 			"desc": desc.current.value,
@@ -42,7 +43,7 @@ function Share() {
 		if (file) {
 			try {
 				const fileName = Date.now() + file.name
-				const uploadTask = storage.ref(`${currentUser.username}/posts/${fileName}`).put(file);
+				const uploadTask = storage.ref(`images/${fileName}`).put(file);
 				await uploadTask.on(
 					"state_changed",
 					snapshot => {
@@ -94,11 +95,12 @@ function Share() {
 		setFile(null);
 		setPreview(null);
 	}
+
 	return (
 		<div className="share">
 			<div className="share-wrapper">
 				<div className="share-top">
-					<img src={currentUser.profilePicture ?  currentUser.profilePicture : PF + "person/noAvatar.png"} alt="profileimg" />
+					<img src={currentUser.profilePicture ? PF + currentUser.profilePicture : PF + "person/noAvatar.png"} alt="profileimg" />
 					<input type="text" ref={desc} placeholder={"What in Your Mind Today " + currentUser.username + " ??"} />
 				</div>
 				<hr />

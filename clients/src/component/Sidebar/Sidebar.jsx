@@ -1,12 +1,12 @@
 import React, { useContext, useEffect } from 'react'
-import { Link } from "react-router-dom"
+import {Link } from "react-router-dom"
 import "./Sidebar.css"
-import { RssFeed, Chat ,PersonAdd } from "@material-ui/icons";
+import {RssFeed,Chat} from "@material-ui/icons";
 import CloseFriend from "../CloseFriend/CloseFriend"
-import { AuthContext } from "../../Context/AuthContext"
+import {AuthContext} from "../../Context/AuthContext"
 
 function Sidebar() {
-	const { user: currentUser } = useContext(AuthContext);
+	const {user:currentUser} = useContext(AuthContext);
 
 	return (
 		<div className="sidebar">
@@ -25,22 +25,20 @@ function Sidebar() {
 							<span className="menu-list-text">Chats</span>
 						</Link>
 					</li>
-					<li className="menu-list-item">
-						<Link className='text-link' to="/find-friend">
-							<PersonAdd className="menu-list-icon" />
-							<span className="menu-list-text">Find Friend</span>
-						</Link>
-					</li>
 				</ul>
 
 
 				<button className="sidebar-btn">Show More</button>
 				<hr />
+
+
+				
+
 				<div className="friend-list">
 					<h1 className="heading">My Friend</h1>
-					{currentUser.following ?
-						currentUser.following.map((userId) => <CloseFriend key={userId} userId={userId} className="friend-list-item" />)
-						: 'you currently have no friend'
+					{	currentUser.following  ?  
+						currentUser.following.map((userId)=> <CloseFriend key={userId} userId={userId} className="friend-list-item" />)
+						:'you currently have no friend'
 					}
 				</div>
 

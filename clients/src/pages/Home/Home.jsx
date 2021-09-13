@@ -12,7 +12,7 @@ function Home() {
 			<Topbar />
 			<div className="hero-container">
 				<Sidebar />
-				<Feed timeline={true} />
+				<Feed />
 				<Rightbar />
 			</div>
 		</>

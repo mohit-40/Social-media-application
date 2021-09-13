@@ -7,7 +7,7 @@ import {AuthContext} from "../../Context/AuthContext"
 
 function Topbar() {
 	const PF=process.env.REACT_APP_PUBLIC_FOLDER;
-	const {user:currentUser}= useContext(AuthContext);
+	const {user}= useContext(AuthContext);
 
 	return (
 		<div className="topbar">
@@ -44,7 +44,7 @@ function Topbar() {
 					</div>
 				</div>
 
-				<Link className='text-link' to={`/profile/${currentUser.username}`} ><img src={currentUser.profilePicture ? currentUser.profilePicture : PF + "/person/noAvatar.png"}  alt="img" /></Link>
+				<Link className='text-link' to={`/profile/${user.username}`} ><img src={user.profilePicture ? PF+ user.profilePicture : PF + "/person/noAvatar.png"}  alt="img" /></Link>
 			</div>
 		</div>
 	)

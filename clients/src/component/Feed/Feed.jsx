@@ -24,7 +24,7 @@ function Feed({ username , timeline}) {
 	return (
 		<div className="feed">
 			<div className="feed-wrapper">
-				{username===currentUser.username|| timeline  ? <Share /> : ''}
+				<Share />
 				{posts.map((post) => <Post key={post._id} post={post} />)}
 			</div>
 		</div>
