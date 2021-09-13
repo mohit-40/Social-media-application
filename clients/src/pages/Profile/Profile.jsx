@@ -66,7 +66,7 @@ function Profile() {
 					await uploadTask.on( "state_changed", snapshot => { }, error => { console.log(error); },
 						async () => {
 							await storage.ref(`${user.username}/profilePic`).child(profilePicName).getDownloadURL().then((imgurl )=> { updatedUser.profilePicture=imgurl})
-							await axios.patch("/users/"+ user._id,updatedUser);
+							await axios.put("/users/"+ user._id,updatedUser);
 							setProfilePic(null)
 							window.location.reload();
 						}

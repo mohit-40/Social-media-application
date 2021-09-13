@@ -34,7 +34,7 @@ function Sidebar() {
 				</ul>
 
 
-				<button className="sidebar-btn">Show More</button>
+				{/* <button className="sidebar-btn">Show More</button> */}
 				<hr />
 
 
