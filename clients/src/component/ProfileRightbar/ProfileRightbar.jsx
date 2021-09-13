@@ -4,20 +4,28 @@ import "./ProfileRightbar.css"
 import { Add, Remove } from "@material-ui/icons";
 import CloseFriend from '../CloseFriend/CloseFriend';
 import { AuthContext } from '../../Context/AuthContext';
+import axios from 'axios';
 
 function ProfileRightbar({ user }) {
 	const { user: currentUser } = useContext(AuthContext)
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-	const [followed, setFollowed] = useState(currentUser.follower.includes(user._id));
+	const [followed, setFollowed] = useState(user.follower.includes(currentUser._id));
 
-
+	const handleFollow= async ()=>{
+		try {
+			followed? await axios.put("/users/"+user._id+"/unfollow",{userId:currentUser._id}) : await axios.put("/users/"+user._id+"/follow",{userId:currentUser._id})
+			setFollowed(!followed);
+		} catch (error) {
+			console.log(error.message);
+		}
+	}
 
 
 	return (
 		<div className="profile-rightbar">
 			<div className="profile-rightbar-wrapper">
 			{user._id !== currentUser._id ?
-					<button className="follow-btn" >
+					<button className="follow-btn" onClick={handleFollow}>
 						{followed ? "UnFollow" : "Follow"}
 						{followed ? <Remove /> : <Add />}
 					</button>
