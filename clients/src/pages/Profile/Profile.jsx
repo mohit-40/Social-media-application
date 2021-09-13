@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import "./Profile.css"
 
 import Topbar from '../../component/Topbar/Topbar';
@@ -16,9 +16,8 @@ function Profile() {
 	const history=useHistory();	
 	const params=useParams();
 	const username=params.username;
-	const {user:currentUser}=useContext(AuthContext)
-	
 	const [user,setUser] =useState({});
+	const {user:currentUser}=useContext(AuthContext)
 
 	useEffect(()=>{
 		const fetchUser= async()=>{
@@ -33,7 +32,7 @@ function Profile() {
 		fetchUser();
 	},[username]);
 
-	// console.log(user)
+
 	const [profilePic,setProfilePic] =  useState(null);
 	const [coverPic,setCoverPic] =  useState(null);
 

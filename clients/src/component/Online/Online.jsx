@@ -1,6 +1,7 @@
 import React from 'react'
 import "./Online.css"
 function Online(props) {
+	const PF=process.env.REACT_APP_PUBLIC_FOLDER;
 
 	return (
 		<li className="online-friend">

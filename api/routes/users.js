@@ -52,26 +52,6 @@ router.get("/", async (req, res) => {
 	}
 })
 
-//get friend 
-router.get("/friends/:userId", async (req, res) => {
-	try {
-		const user = await User.findById(req.params.userId);
-		const friends = await Promise.all(
-		user.following.map((friendId) => {
-		  return User.findById(friendId);
-		})
-	  );
-	  let friendList = [];
-	  friends.map((friend) => {
-		const { _id, username, profilePicture } = friend;
-		friendList.push({ _id, username, profilePicture });
-	  });
-	  res.status(200).json(friendList)
-	} catch (err) {
-	  res.status(500).json(err);
-	}
-  });
-
 // follow a user 
 router.put("/:id/follow", async (req, res) => {
 	try {
@@ -82,8 +62,7 @@ router.put("/:id/follow", async (req, res) => {
 				await user.updateOne({ $push: { follower: req.body.userId } });
 				await currentUser.updateOne({ $push: { following: req.params.id } });
 				res.status(200).json("User has been followed");
-			}
-			else {
+			} else {
 				res.status(200).json("alredy following this user");
 			}
 		} else {

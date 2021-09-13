@@ -3,7 +3,14 @@
 	.profile-rightbar-wrapper{
 		padding: 20px;
 		.user-info{
-			
+			.follow-btn{
+				padding: 5px;
+				background-color: blue;
+				border: none;
+				font-size: 1.1rem;
+				color: white;
+				cursor: pointer;
+			}
 			.info{
 				margin: 10px;
 				font-size: 18px;
@@ -22,26 +29,7 @@
 			justify-content: center;
 			align-items: center;
 			.user-friend-item{
-				margin: 10px;
-				cursor: pointer;
-				.link{
-					display: flex;
-					align-items: center;
-					flex-direction: column;
-					img{
-						height: 100px;
-						width: 100px;
-						object-fit: cover;
-						border-radius: 10px;
-						border: 2px solid black;
-						box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
-					}
-					.name{
-						text-align: center;
-						font-size: 18px;
-						font-weight: 500;
-					}
-				}
+				// in the CloseFriend component 
 			}
 		}
 

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
-// import {useHistory} from 'react-router';
-import { BrowserRouter as Router,Switch, Route} from "react-router-dom";
+import {useHistory} from 'react-router';
+import { BrowserRouter as Router,Switch, Route, Link } from "react-router-dom";
 import Home from './pages/Home/Home'
 import Profile from './pages/Profile/Profile'
 import Login from './pages/Login/Login'
@@ -12,8 +12,8 @@ import { AuthContext } from './Context/AuthContext';
 
 
 function App() {
-  const {user}= useContext(AuthContext);
-  // const history=useHistory();
+  const {user, isFetching, error, dispatch}= useContext(AuthContext);
+  const history=useHistory();
 
   return (
     <Router>
