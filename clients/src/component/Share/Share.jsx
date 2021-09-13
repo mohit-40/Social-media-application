@@ -14,7 +14,6 @@ function Share() {
 	const desc = useRef('');
 	const [file, setFile] = useState({})
 	const [progress, setProgress] = useState(0)
-	const [url, setUrl] = useState('')
 
 	const [preview, setPreview] = useState(null)
 	const [makePost, setMakePost] = useState(false)
@@ -52,7 +51,7 @@ function Share() {
 					},
 					error => { console.log(error); },
 					async () => {
-						await storage.ref(`${currentUser.username}/posts/`).child(fileName).getDownloadURL().then((imgurl )=> { setUrl(imgurl); newPost.img = imgurl})
+						await storage.ref(`${currentUser.username}/posts/`).child(fileName).getDownloadURL().then((imgurl )=> { newPost.img = imgurl})
 						await axios.post("/posts", newPost);
 						setMakePost(true);
 						setTimeout(() => {
