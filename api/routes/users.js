@@ -114,6 +114,26 @@ router.get("/followings/:userId",async (req,res)=>{
 		res.status(404).json(error.message)
 	}
 })
+// get the followers
+router.get("/followers/:userId",async (req,res)=>{
+	try {
+		const user= await User.findById(req.params.userId)
+		const followers= await Promise.all(
+			user.followers.map((followingId)=>{
+				return ( User.findById(followingId) )
+			})
+		)
+
+		const followerList=[]
+		followers.map((follower)=>{
+			const { _id, username, profilePicture } = follower
+			followerList.push({ _id, username, profilePicture })
+		})
+		res.status(200).json(followerList)
+	} catch (error) {
+		res.status(404).json(error.message)
+	}
+})
 
 
 module.exports = router;

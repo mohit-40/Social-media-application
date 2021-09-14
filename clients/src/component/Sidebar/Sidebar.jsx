@@ -53,7 +53,7 @@ function Sidebar() {
 				
 
 				<div className="friend-list">
-					<h1 className="heading">My Friend</h1>
+					<h1 className="heading">My Friend <span className="follower-following-counter">({followings.length})</span></h1>
 					{followings.length!==0  ?  
 						followings.map((user)=> <CloseFriend key={user._id} user={user} className="friend-list-item" />)
 						:'you currently have no friend'

@@ -13,6 +13,7 @@ function ProfileRightbar({ user }) {
 	const [followed, setFollowed] = useState(user.followers.includes(currentUser._id));
 	const [loaded,setLoaded] =useState(false)
 	const [followings,setFollowings]=useState([])
+	const [followers,setFollowers]=useState([])
 
 
 	const handleFollow= async ()=>{
@@ -26,12 +27,14 @@ function ProfileRightbar({ user }) {
 
 
 	useEffect(() => {
-		const fetchFollowing=async ()=>{
-			const res = await axios.get("/users/followings/"+user._id)
-			setFollowings(res.data) 
+		const fetchFollowings=async ()=>{
+			const res1 = await axios.get("/users/followings/"+user._id)
+			const res2 = await axios.get("/users/followers/"+user._id)
+			setFollowings(res1.data) 
+			setFollowers(res2.data) 
 			setLoaded(true)
 		}
-		fetchFollowing()
+		fetchFollowings()
 	}, [user]);
 
 
@@ -68,15 +71,24 @@ function ProfileRightbar({ user }) {
 				<hr />
 
 
-				<div className="title">{user.username} friend</div>
+				<div className="title">{user.username} following <span className="follower-following-counter">({followings.length})</span></div>
 				<div className="user-friend-container">
 					{followings.length!==0  ?
-						followings.map((following) => <CloseFriend key={following} className="user-friend-item" user={following} />) :
-						'No Friend'
+						followings.map((following) => <CloseFriend key={following._id} className="user-friend-item" user={following} />) :
+						'No Following'
 					}
 				</div>
 
 				<hr />
+
+				<div className="title">{user.username} follower <span className="follower-following-counter">({followers.length})</span></div>
+				<div className="user-friend-container">
+					{followers.length!==0  ?
+						followers.map((follower) => <CloseFriend key={follower._id} className="user-friend-item" user={follower} />) :
+						'No Follower'
+					}
+				</div>
+
 			</div>
 		</div >
 	)
