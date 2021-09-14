@@ -7,7 +7,7 @@ const MessageSchema = new mongoose.Schema({
 	senderId:{
 		type:String
 	},
-	messageText:{
+	textMessage:{
 		type:String
 	},
 },{timestamps:true});
