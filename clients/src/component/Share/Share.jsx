@@ -1,6 +1,6 @@
 import React, { useContext, useRef, useState } from 'react'
 import { AuthContext } from '../../Context/AuthContext';
-import { PermMedia, Label, Room, EmojiEmotions } from "@material-ui/icons"
+import { PermMedia, Label, Room, EmojiEmotions ,Cancel} from "@material-ui/icons"
 import "./Share.css"
 import { storage } from "../../firebase/firebase";
 import axios from "axios"
@@ -107,7 +107,7 @@ function Share() {
 				{preview ?
 					<div className="img-upload">
 						<img src={preview} className="uploaded-img" alt="No Image Selected" />
-						<button className="remove-uploaded-img" onClick={handleRemoveImg}>Remove</button>
+						<div className="remove-uploaded-img" onClick={handleRemoveImg}><Cancel/></div>
 						<progress className="upload-progress" value={progress} />
 						{progress === 100 ? <div className="upload-complete"> Image Upload completed</div> : ''}
 					</div>

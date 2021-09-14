@@ -28,8 +28,6 @@
 .profile .profile-right .profile-right-top .profile-cover .profile-cover-photo {
   width: 100%;
   height: 40vh;
-  -o-object-fit: cover;
-     object-fit: cover;
 }
 .profile .profile-right .profile-right-top .profile-cover .profile-photo {
   display: block;
