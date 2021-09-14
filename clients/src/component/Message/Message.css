@@ -1,0 +1,37 @@
+.message {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+.message .message-top {
+  display: flex;
+  margin-top: 20px;
+}
+.message .message-top .message-img {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin-right: 20px;
+}
+.message .message-top .message-text {
+  justify-self: end;
+  background: #6565eb;
+  padding: 10px 10px;
+  max-width: 250px;
+  border-radius: 22px;
+}
+.message .message-bottom {
+  font-size: 13px;
+  font-weight: 300;
+  margin-top: 10px;
+}
+
+.message.own {
+  align-items: flex-end;
+  margin-right: 5px;
+}
+.message.own .message-text {
+  background-color: #adaaaa;
+}/*# sourceMappingURL=Message.css.map */

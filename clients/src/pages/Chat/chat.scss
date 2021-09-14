@@ -1,0 +1,103 @@
+
+.messenger{
+	display: flex;
+	justify-content: center;
+	height: calc(100vh - 50px);
+	// background: rgb(142, 227, 241);
+
+	.messenger-wrapper{
+		width: 100%;
+		display: flex;
+		max-width: 1400px;
+		margin-top: 10px;
+		.chat-left{
+			flex: 3.25;
+			overflow-y: scroll;
+			&::-webkit-scrollbar {width: 5px;}
+			&::-webkit-scrollbar-track {background-color: #f1f1f1;}
+			&::-webkit-scrollbar-thumb {background-color: rgb(179, 179, 179);}
+
+			.chat-left-wrapper{
+				.search-friend{
+					width: 100%;
+					height: 30px;
+					outline: none;			
+					border:none;
+					border-bottom: 2px solid black;
+					font-size: 16px;
+					padding-left: 10px;
+				}
+			}
+		}
+		.chat-center{
+			flex: 5.5;
+			background-color: rgb(255, 255, 255);
+			overflow-y: scroll;
+			
+			&::-webkit-scrollbar {width: 5px;}
+			&::-webkit-scrollbar-track {background-color: #f1f1f1;}
+			&::-webkit-scrollbar-thumb {background-color: rgb(179, 179, 179);}
+			
+			.chat-center-wrapper{
+				padding: 10px;
+				.chat-center-bottom{
+					position: relative;
+					textarea{
+						resize: none;
+						width: 90%;
+						max-height: 10%;
+						outline: none;
+						border-radius: 20px;
+						padding: 20px;
+						margin: 20px 0;
+						font-size: 18px;
+						
+					}	
+					.send-btn{
+						position: absolute;
+						bottom: 50%;
+						right:10px;
+						cursor: pointer;
+					}
+					.sending-process{
+						position: absolute;
+						bottom: 0;
+						right :0;
+					}	
+				}
+				
+			}
+			
+		}	
+		.chat-right{
+			flex: 3.25;
+			overflow-y: scroll;
+			&::-webkit-scrollbar {width: 5px;}
+			&::-webkit-scrollbar-track {background-color: #f1f1f1;}
+			&::-webkit-scrollbar-thumb {background-color: rgb(179, 179, 179);}
+			
+			.chat-right-wrapper {
+				padding: 10px;
+				li{
+					cursor: pointer;
+					&:hover{
+						background-color: rgb(245, 243, 243);
+						transform:none;
+						font-weight: 500;
+					}
+					
+				}
+				
+			}
+		}
+	}
+}
+
+@media screen and (max-width :768px ) {
+	.chat-left .chat-left-wrapper .conversation-name {
+		display: none;
+	}
+	.chat-right .chat-right-wrapper li .name {
+		display: none;
+	}
+ }
