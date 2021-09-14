@@ -70,9 +70,9 @@ function ProfileRightbar({ user }) {
 
 				<div className="title">{user.username} friend</div>
 				<div className="user-friend-container">
-					{followings ?
+					{followings.length!==0  ?
 						followings.map((following) => <CloseFriend key={following} className="user-friend-item" user={following} />) :
-						'you currently have no friend'
+						'No Friend'
 					}
 				</div>
 

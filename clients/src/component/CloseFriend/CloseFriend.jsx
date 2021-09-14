@@ -5,7 +5,6 @@ import "./CloseFriend.css"
 
 function CloseFriend(props) {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-	console.log(props)
 
 	return (
 		<Link to={`/profile/${props.user.username}`} className="text-link">
