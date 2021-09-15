@@ -27,7 +27,7 @@ function Feed({ username, timeline }) {
 		<div className="feed">
 			<div className="feed-wrapper">
 				{username === currentUser.username || timeline ? <Share /> : ''}
-				{posts.length!=0 ? posts.map((post) => <Post key={post._id} post={post} />) : "No Post Currently."}
+				{posts.length!==0 ? posts.map((post) => <Post key={post._id} post={post} />) : "No Post Currently."}
 			</div>
 		</div>
 	)

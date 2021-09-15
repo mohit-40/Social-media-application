@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import { useHistory } from 'react-router';
+import React, { useContext, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { AuthContext } from './Context/AuthContext';
 import Chat from './pages/Chat/Chat';
@@ -8,12 +7,18 @@ import Home from './pages/Home/Home';
 import Login from './pages/Login/Login';
 import Profile from './pages/Profile/Profile';
 import Register from './pages/Register/Register';
-
-
+import { io } from "socket.io-client";
 
 function App() {
-  const {user:currentUser, isFetching, error, dispatch}= useContext(AuthContext);
-  const history=useHistory();
+	// const socket = useRef();
+  const {user:currentUser }= useContext(AuthContext);
+  
+  // useEffect(() => {
+  //     if(currentUser){
+  //       socket.current = io("ws://localhost:8900");
+  //     }
+  //   }, []);
+
 
   return (
     <Router>

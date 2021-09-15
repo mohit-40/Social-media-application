@@ -12,7 +12,7 @@ function Login() {
 	const password= useRef();
 
 
-	const {user:currentUser, isFetching, error, dispatch} = useContext(AuthContext);
+	const {user:currentUser, isFetching,  dispatch} = useContext(AuthContext);
 	const history=useHistory();
 	const handleSubmit=(e)=>{
 		e.preventDefault();

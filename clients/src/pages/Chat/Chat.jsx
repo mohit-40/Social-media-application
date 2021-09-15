@@ -8,15 +8,44 @@ import Topbar from "../../component/Topbar/Topbar"
 import { AuthContext } from '../../Context/AuthContext'
 import { Users } from "../../dummy-data"
 import "./chat.css"
+import { io } from "socket.io-client";
 
 
 function Chat() {
 	const { user: currentUser } = useContext(AuthContext)
 	const [conversations, setConversations] = useState(null)
 	const [currConversation, setCurrConversation] = useState(null)
-	const [messages, setMessages] = useState()
-	const [newMessage,setNewMessage]= useState()
-	const scrollRef=useRef()
+	const [messages, setMessages] = useState([])
+	const [newMessage, setNewMessage] = useState()
+	const scrollRef = useRef()
+	const socket = useRef();
+	const [onlineFriend, setOnlineFriend] = useState([]);
+	const [dynamicMessage, setDynamicMessage] = useState();
+
+	// connection to socket io
+	useEffect(() => {
+		socket.current = io("ws://localhost:8900");
+		socket.current.on("getMessage",({senderId,receiverId,text})=>{
+			setDynamicMessage({
+				senderId:senderId,
+				textMessage:text,
+				createdAt:Date.now(),
+			})
+		})
+	}, []);
+
+	useEffect(() => {
+		dynamicMessage && currConversation?.members.includes(dynamicMessage.senderId) && setMessages((prev) => [...prev, dynamicMessage]);
+	  }, [dynamicMessage, currConversation]);
+
+	useEffect(() => {
+		socket.current.emit("addUser", currentUser._id);
+		socket.current.on("getUsers", (users) => {
+			// console.log(users);
+		})
+	}, [currentUser]);
+
+
 
 	// fetch conversation
 	useEffect(() => {
@@ -35,7 +64,7 @@ function Chat() {
 	useEffect(() => {
 		const fetchMessages = async () => {
 			try {
-				if(currConversation){
+				if (currConversation) {
 					const res = await axios.get("/messages/" + currConversation._id)
 					setMessages(res.data)
 				}
@@ -47,16 +76,21 @@ function Chat() {
 	}, [currConversation])
 
 	// send message
-	const handleSend= async (e)=>{
+	const handleSend = async (e) => {
 		e.preventDefault()
+		socket.current.emit("sendMessage", {
+			senderId: currentUser._id,
+			receiverId: currConversation.members.find((member) => member !== currentUser._id),
+			text: newMessage
+		})
+		const body = {
+			conversationId: currConversation,
+			senderId: currentUser._id,
+			textMessage: newMessage
+		}
 		try {
-			const body={
-				conversationId:currConversation,
-				senderId: currentUser._id,
-				textMessage:newMessage
-			}
-			const res=await axios.post("/messages/",body);
-			setMessages([...messages,res.data]);
+			const res = await axios.post("/messages/", body);
+			setMessages([...messages, res.data]);
 			setNewMessage("")
 		} catch (error) {
 			console.log(error)
@@ -66,7 +100,7 @@ function Chat() {
 	//scroll automatically on new messages 
 	useEffect(() => {
 		scrollRef.current?.scrollIntoView({ behavior: "smooth" });
-	  }, [messages]);
+	}, [messages]);
 
 	return (
 
@@ -91,22 +125,22 @@ function Chat() {
 						{currConversation ?
 							<div className="chat-center-wrapper">
 								<div className="chat-center-top">
-										{ messages?.map((message) =>(
-											<div ref={scrollRef}>
-												<Message key={message._id} message={message} own={message.senderId===currentUser._id ? true :false}/>
-											</div>
-										))}
+									{messages?.map((message) => (
+										<div ref={scrollRef}>
+											<Message key={message._id} message={message} own={message.senderId === currentUser._id ? true : false} />
+										</div>
+									))}
 
 								</div>
 								<div className="chat-center-bottom">
 									<form className="box" onSubmit={handleSend}>
-										<textarea onChange={(e)=>setNewMessage(e.target.value)} name="" id="message" cols="30" rows="3" placeholder="Write something here ...." value={newMessage} />
+										<textarea onChange={(e) => setNewMessage(e.target.value)} name="" id="message" cols="30" rows="3" placeholder="Write something here ...." value={newMessage} />
 										<Refresh className="sending-process" />
 										<button type="submit" className="send-btn">Send</button>
 									</form>
 								</div>
 							</div>
-							: 
+							:
 							<div className="no-chat-selected">Select Conversation To Start the Chat</div>
 						}
 					</div>

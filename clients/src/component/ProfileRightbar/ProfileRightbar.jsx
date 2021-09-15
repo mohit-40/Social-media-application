@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
 import "./ProfileRightbar.css"
 import { Add, Remove } from "@material-ui/icons";
 import CloseFriend from '../CloseFriend/CloseFriend';
@@ -9,7 +8,6 @@ import axios from 'axios';
 
 function ProfileRightbar({ user }) {
 	const { user: currentUser } = useContext(AuthContext)
-	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 	const [followed, setFollowed] = useState(user.followers.includes(currentUser._id));
 	const [loaded, setLoaded] = useState(false)
 	const [followings, setFollowings] = useState([])
