@@ -1,13 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react'
-import Topbar from "../../component/Topbar/Topbar"
-import "./chat.css"
+import { Refresh } from '@material-ui/icons'
+import axios from "axios"
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import Conversation from "../../component/Conversation/Conversation"
 import Message from "../../component/Message/Message"
 import Online from "../../component/Online/Online"
-import { Send, Refresh } from '@material-ui/icons';
-import { Users } from "../../dummy-data"
-import axios from "axios"
+import Topbar from "../../component/Topbar/Topbar"
 import { AuthContext } from '../../Context/AuthContext'
+import { Users } from "../../dummy-data"
+import "./chat.css"
 
 
 function Chat() {
@@ -15,6 +15,8 @@ function Chat() {
 	const [conversations, setConversations] = useState(null)
 	const [currConversation, setCurrConversation] = useState(null)
 	const [messages, setMessages] = useState()
+	const [newMessage,setNewMessage]= useState()
+	const scrollRef=useRef()
 
 	// fetch conversation
 	useEffect(() => {
@@ -33,8 +35,10 @@ function Chat() {
 	useEffect(() => {
 		const fetchMessages = async () => {
 			try {
-				const res = await axios.get("/messages/" + currConversation._id)
-				setMessages(res.data)
+				if(currConversation){
+					const res = await axios.get("/messages/" + currConversation._id)
+					setMessages(res.data)
+				}
 			} catch (error) {
 				console.log(error)
 			}
@@ -43,10 +47,26 @@ function Chat() {
 	}, [currConversation])
 
 	// send message
-	const handleSend=()=>{
-
+	const handleSend= async (e)=>{
+		e.preventDefault()
+		try {
+			const body={
+				conversationId:currConversation,
+				senderId: currentUser._id,
+				textMessage:newMessage
+			}
+			const res=await axios.post("/messages/",body);
+			setMessages([...messages,res.data]);
+			setNewMessage("")
+		} catch (error) {
+			console.log(error)
+		}
 	}
 
+	//scroll automatically on new messages 
+	useEffect(() => {
+		scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+	  }, [messages]);
 
 	return (
 
@@ -59,7 +79,7 @@ function Chat() {
 						<div className="chat-left-wrapper">
 							<input type="text" className="search-friend" placeholder="Search friend for Chat" />
 							{conversations?.map((conversation) => (
-								<div onClick={() => setCurrConversation(conversation)}>
+								<div key={conversation._id} onClick={() => setCurrConversation(conversation)}>
 									<Conversation key={conversation._id} conversation={conversation} />
 								</div>
 							))}
@@ -71,14 +91,18 @@ function Chat() {
 						{currConversation ?
 							<div className="chat-center-wrapper">
 								<div className="chat-center-top">
-									{messages?.map((message) => <Message key={message._id} message={message} />)}
+										{ messages?.map((message) =>(
+											<div ref={scrollRef}>
+												<Message key={message._id} message={message} own={message.senderId===currentUser._id ? true :false}/>
+											</div>
+										))}
 
 								</div>
 								<div className="chat-center-bottom">
-									<form className="box">
-										<textarea name="" id="message" cols="30" rows="3" placeholder="Write something here ...." />
+									<form className="box" onSubmit={handleSend}>
+										<textarea onChange={(e)=>setNewMessage(e.target.value)} name="" id="message" cols="30" rows="3" placeholder="Write something here ...." value={newMessage} />
 										<Refresh className="sending-process" />
-										<button type="submit" className="send-btn" onClick={handleSend}>Send</button>
+										<button type="submit" className="send-btn">Send</button>
 									</form>
 								</div>
 							</div>
@@ -90,7 +114,7 @@ function Chat() {
 						<div className="chat-right-wrapper">
 							<h2 className="heading">Online Friend</h2>
 							<ul className="online-friend-list">
-								{Users.map((user) => <Online key={user._id} user={user} />)}
+								{Users.map((user) => <Online key={user.id} user={user} />)}
 							</ul>
 						</div>
 					</div>

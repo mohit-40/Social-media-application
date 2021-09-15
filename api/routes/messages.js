@@ -6,7 +6,7 @@ router.post("/",async (req,res)=>{
 	try {
 		const newMessage= await new Message(req.body)
 		const savedMessage=await newMessage.save()
-		res.status(200).send("savedMessage")
+		res.status(200).send(savedMessage)
 	} catch (error) {
 		res.status(500).json(error)
 	}

@@ -118,7 +118,7 @@
     display: none;
   }
 
-  .chat-right .chat-right-wrapper {
+  .chat-right .chat-right-wrapper li .name {
     display: none;
   }
 }/*# sourceMappingURL=chat.css.map */

@@ -1,12 +1,14 @@
+
 import axios from 'axios'
 import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../Context/AuthContext'
 import "./Message.css"
+import { format } from "timeago.js"
 
-function Message({message}) {
+function Message({message,own}) {
 
 	const {user:currentUser}=useContext(AuthContext)
-	const own = message.senderId===currentUser._id ? true :false
+	
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 	const [user, setUser] = useState();
 
@@ -22,7 +24,6 @@ function Message({message}) {
 		fetchUser();		
 	},[message])
 
-	console.log(user)
 
 	return ( 
 		<div className={own ? "message own" : "message"}>
@@ -31,7 +32,7 @@ function Message({message}) {
 				<p className="message-text">{message.textMessage}</p>
 			</div>
 			<div className="message-bottom">
-				  1 hour ago
+				{format(message.createdAt)}
 			</div>
 		</div>
 	)
