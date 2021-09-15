@@ -6,7 +6,6 @@ import Message from "../../component/Message/Message"
 import Online from "../../component/Online/Online"
 import Topbar from "../../component/Topbar/Topbar"
 import { AuthContext } from '../../Context/AuthContext'
-import { Users } from "../../dummy-data"
 import "./chat.css"
 import { io } from "socket.io-client";
 
@@ -25,23 +24,22 @@ function Chat() {
 	// connection to socket io
 	useEffect(() => {
 		socket.current = io("ws://localhost:8900");
-		socket.current.on("getMessage",(body)=>{
+		socket.current.on("getMessage", (body) => {
 			setDynamicMessage(body)
 		})
 	}, []);
 
 	useEffect(() => {
 		dynamicMessage && currConversation?.members.includes(dynamicMessage.senderId) && setMessages((prev) => [...prev, dynamicMessage]);
-	  }, [dynamicMessage, currConversation]);
+	}, [dynamicMessage, currConversation]);
 
 	useEffect(() => {
 		socket.current.emit("addUser", currentUser._id);
 		socket.current.on("getUsers", (users) => {
-			// console.log(users);
+			setOnlineFriend(currentUser.followings.filter( (f)=> users.some((u)=> u.userId === f)))
 		})
 	}, [currentUser]);
-
-
+	
 
 	// fetch conversation
 	useEffect(() => {
@@ -80,7 +78,7 @@ function Chat() {
 			textMessage: newMessage
 		}
 		socket.current.emit("sendMessage", {
-			body:body,
+			body: body,
 			receiverId: currConversation.members.find((member) => member !== currentUser._id),
 		})
 		try {
@@ -96,6 +94,7 @@ function Chat() {
 	useEffect(() => {
 		scrollRef.current?.scrollIntoView({ behavior: "smooth" });
 	}, [messages]);
+
 
 	return (
 
@@ -143,7 +142,9 @@ function Chat() {
 						<div className="chat-right-wrapper">
 							<h2 className="heading">Online Friend</h2>
 							<ul className="online-friend-list">
-								{Users.map((user) => <Online key={user.id} user={user} />)}
+								{onlineFriend?.map((userId) =>(
+										<Online key={userId} userId={userId} />
+								))}
 							</ul>
 						</div>
 					</div>
