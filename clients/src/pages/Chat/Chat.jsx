@@ -53,7 +53,6 @@ function Chat() {
 		}
 		fetchConversations()
 	}, [currentUser._id]);
-
 	//fetch message
 	useEffect(() => {
 		const fetchMessages = async () => {
@@ -143,7 +142,7 @@ function Chat() {
 							<h2 className="heading">Online Friend</h2>
 							<ul className="online-friend-list">
 								{onlineFriend?.map((userId) =>(
-										<Online key={userId} userId={userId} />
+										<Online key={userId} userId={userId} setCurrConversation={setCurrConversation}/>
 								))}
 							</ul>
 						</div>

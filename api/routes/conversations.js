@@ -1,20 +1,24 @@
 const router=require('express').Router()
+const { find } = require('../models/Conversation');
 const Conversation = require('../models/Conversation');
 
 
 //start conversation
 router.post("/",async (req,res)=>{
 	try{
-		
-		// const cc = await Conversation.find((c)=>{
-		// 	if((c[0]==req.body.senderId && c[1]==req.body.receiverId)||(c[1]==req.body.senderId && c[0]==req.body.receiverId)) { return true}
-		// 	else { return false}
-		// })
-		const newConversation= await new Conversation({
-			members:[req.body.senderId, req.body.receiverId],
+		const findConv=await Conversation.find({
+			members: { $all: [req.body.senderId, req.body.receiverId] },
 		})
-		const savedConversation=await newConversation.save()
-		res.status(200).json(savedConversation)
+		if(findConv.length===0){
+			const newConversation= await new Conversation({
+				members:[req.body.senderId, req.body.receiverId],
+			})
+			const savedConversation=await newConversation.save()
+			res.status(200).json(savedConversation)
+		}
+		else{
+			res.status(200).json(findConv)
+		}
 	}
 	catch(error){
 		res.status(500),json(error)
