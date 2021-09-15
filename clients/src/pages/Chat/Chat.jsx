@@ -25,12 +25,8 @@ function Chat() {
 	// connection to socket io
 	useEffect(() => {
 		socket.current = io("ws://localhost:8900");
-		socket.current.on("getMessage",({senderId,receiverId,text})=>{
-			setDynamicMessage({
-				senderId:senderId,
-				textMessage:text,
-				createdAt:Date.now(),
-			})
+		socket.current.on("getMessage",(body)=>{
+			setDynamicMessage(body)
 		})
 	}, []);
 
@@ -78,16 +74,15 @@ function Chat() {
 	// send message
 	const handleSend = async (e) => {
 		e.preventDefault()
-		socket.current.emit("sendMessage", {
-			senderId: currentUser._id,
-			receiverId: currConversation.members.find((member) => member !== currentUser._id),
-			text: newMessage
-		})
 		const body = {
 			conversationId: currConversation,
 			senderId: currentUser._id,
 			textMessage: newMessage
 		}
+		socket.current.emit("sendMessage", {
+			body:body,
+			receiverId: currConversation.members.find((member) => member !== currentUser._id),
+		})
 		try {
 			const res = await axios.post("/messages/", body);
 			setMessages([...messages, res.data]);
