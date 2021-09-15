@@ -31,41 +31,58 @@
 		}
 		.chat-center{
 			flex: 5.5;
-			background-color: rgb(255, 255, 255);
-			overflow-y: scroll;
+			position: relative;
 			
-			&::-webkit-scrollbar {width: 5px;}
-			&::-webkit-scrollbar-track {background-color: #f1f1f1;}
-			&::-webkit-scrollbar-thumb {background-color: rgb(179, 179, 179);}
-			
+			.no-chat-selected{
+				font-size: 2rem;
+				font-weight: 600;
+				color:lightgrey;
+				text-align: center;
+				margin-top: 10%;
+			}
 			.chat-center-wrapper{
-				padding: 10px;
-				.chat-center-bottom{
-					position: relative;
-					textarea{
-						resize: none;
-						width: 90%;
-						max-height: 10%;
-						outline: none;
-						border-radius: 20px;
-						padding: 20px;
-						margin: 20px 0;
-						font-size: 18px;
-						
-					}	
-					.send-btn{
-						position: absolute;
-						bottom: 50%;
-						right:10px;
-						cursor: pointer;
-					}
-					.sending-process{
-						position: absolute;
-						bottom: 0;
-						right :0;
-					}	
+				display: flex;
+				flex-direction: column;
+
+				.chat-center-top{
+					height: calc(70vh);
+					overflow-y: scroll;
+					&::-webkit-scrollbar {width: 5px;}
+					&::-webkit-scrollbar-track {background-color: #f1f1f1;}
+					&::-webkit-scrollbar-thumb {background-color: rgb(179, 179, 179);}
 				}
-				
+				.chat-center-bottom{
+					form{
+						
+						position: relative;
+						textarea{
+							resize: none;
+							width: 90%;
+							max-height: 20vh;
+							outline: none;
+							border-radius: 20px;
+							padding: 20px;
+							margin: 20px 0;
+							font-size: 18px;
+						}	
+						.sending-process{
+							position: absolute;
+							bottom: 0;
+							right :0;
+						}	
+						.send-btn{
+							position: absolute;
+							bottom: 50%;
+							right: 0;
+							margin-left: 10px;
+							cursor: pointer;
+							padding: 8px;
+							color: white;
+							background-color: rgb(17, 128, 219);
+							border: none;
+						}
+					}
+				}	
 			}
 			
 		}	
@@ -97,7 +114,8 @@
 	.chat-left .chat-left-wrapper .conversation-name {
 		display: none;
 	}
-	.chat-right .chat-right-wrapper li .name {
+	.chat-right .chat-right-wrapper{
 		display: none;
 	}
  }
+

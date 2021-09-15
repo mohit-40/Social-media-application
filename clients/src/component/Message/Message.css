@@ -5,7 +5,7 @@
 }
 .message .message-top {
   display: flex;
-  margin-top: 20px;
+  margin-top: 10 px;
 }
 .message .message-top .message-img {
   height: 30px;
