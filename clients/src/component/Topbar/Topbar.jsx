@@ -1,13 +1,32 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {Link} from "react-router-dom"
 import { Search, Person, Chat, Notifications } from "@material-ui/icons";
 import "./Topbar.css"
 import {AuthContext} from "../../Context/AuthContext"
-
+import axios from "axios"
 
 function Topbar() {
 	const PF=process.env.REACT_APP_PUBLIC_FOLDER;
 	const {user:currentUser}= useContext(AuthContext);
+	const [allUsers,setAllUsers]=useState([])
+	const [search,setSearch]=useState('')
+
+	useEffect(()=>{
+		const fetchAllUsers= async ()=>{
+			try {
+				const res=await axios.get("/users/allUsers")
+				setAllUsers(res.data);
+			} catch (error) {
+				console.log(error)
+			}
+		}
+		fetchAllUsers()
+	},[])
+
+	const handleSearch=(e)=>{
+		setSearch(e.target.value);
+	}
+
 
 	return (
 		<div className="topbar">
@@ -18,7 +37,7 @@ function Topbar() {
 			<div className="topbar-center">
 				<div className="search">
 					<Search className="search-icon" />
-					<input type="text" name="" id="" placeholder="Search for Person or friend" />
+					<input type="text" name="" id="" placeholder="Search for Person or friend" onChange={handleSearch} />
 				</div>
 			</div>
 

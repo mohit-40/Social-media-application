@@ -36,6 +36,7 @@ function ProfileRightbar({ user }) {
 		fetchFollowings()
 	}, [user]);
 
+
 	return loaded && (
 		<div className="profile-rightbar">
 			<div className="profile-rightbar-wrapper">

@@ -103,13 +103,7 @@ router.get("/followings/:userId",async (req,res)=>{
 				return ( User.findById(followingId) )
 			})
 		)
-
-		const followingList=[]
-		followings.map((following)=>{
-			const { _id, username, profilePicture } = following
-			followingList.push({ _id, username, profilePicture })
-		})
-		res.status(200).json(followingList)
+		res.status(200).json(followings)
 	} catch (error) {
 		res.status(404).json(error.message)
 	}
@@ -123,13 +117,7 @@ router.get("/followers/:userId",async (req,res)=>{
 				return ( User.findById(followingId) )
 			})
 		)
-
-		const followerList=[]
-		followers.map((follower)=>{
-			const { _id, username, profilePicture } = follower
-			followerList.push({ _id, username, profilePicture })
-		})
-		res.status(200).json(followerList)
+		res.status(200).json(followers)
 	} catch (error) {
 		res.status(404).json(error.message)
 	}

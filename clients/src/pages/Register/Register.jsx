@@ -26,7 +26,7 @@ function Register() {
 			}		
 			try {
 				await axios.post("/auth/register",user);
-				history.push("/updateInfo");
+				history.push("/login");
 			} catch(error) {
 				console.log(error.message);
 			}

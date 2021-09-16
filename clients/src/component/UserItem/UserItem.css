@@ -1,8 +1,4 @@
-.friend-menu {
-  display: flex;
-  flex-wrap: wrap;
-}
-.friend-menu .friend-menu-item {
+.friend-menu-item {
   display: flex;
   flex-wrap: wrap;
   background-color: #5e4fdd;
@@ -12,29 +8,29 @@
   margin: 10px 10px;
   padding: 10px 10px;
 }
-.friend-menu .friend-menu-item img {
+.friend-menu-item img {
   height: 150px;
   width: 150px;
   border-radius: 20px;
   margin-right: 20px;
 }
-.friend-menu .friend-menu-item .info {
+.friend-menu-item .info {
   display: flex;
   flex-direction: column;
   font-size: 17px;
 }
-.friend-menu .friend-menu-item .info .info-item {
+.friend-menu-item .info .info-item {
   margin-top: 3px;
 }
-.friend-menu .friend-menu-item .info .name {
+.friend-menu-item .info .name {
   font-size: 22px;
   font-weight: 600;
 }
-.friend-menu .friend-menu-item .info .btn-container {
+.friend-menu-item .info .btn-container {
   display: flex;
 }
-.friend-menu .friend-menu-item .info .btn-container button {
+.friend-menu-item .info .btn-container button {
   font-size: 16px;
   padding: 5px;
   margin-right: 10px;
-}/*# sourceMappingURL=FriendMenu.css.map */
+}/*# sourceMappingURL=UserItem.css.map */
