@@ -15,7 +15,7 @@ function Rightbar() {
 					{/* <span className="birthday-text"><b>Rachel</b> and <b>3 other</b> friend has birthday today.</span> */}
 				</div>
 				<div className="rightbar-center">
-					<img className="rightbar-ad" src={PF+"ad.png"} alt="ad" />
+					<img className="rightbar-ad" src={PF+"ad.jpg"} alt="ad" />
 				</div>
 				<hr />
 				<div className="rightbar-bottom">

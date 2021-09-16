@@ -50,11 +50,11 @@ function UpdateInfo() {
 				{updated ? "the profile Infomation is now updated" : ''}
 
 				<form className="profile-update-form" onSubmit={handleSubmit}>
-					<input type="text" ref={name} placeholder="Name" defaultValue={currentUser.name}/>
-					<input type="text" ref={from} placeholder="From" defaultValue={currentUser.from}/>
-					<input type="text" ref={live} placeholder="Live" defaultValue={currentUser.live}/>
-					<input type="text" ref={work} placeholder="Work" defaultValue={currentUser.work}/>
-					<input type="text" ref={school} placeholder="School" defaultValue={currentUser.school}/>
+					<input type="text" ref={name} placeholder="Name" defaultValue={currentUser.name} required/>
+					<input type="text" ref={from} placeholder="From" defaultValue={currentUser.from} required />
+					<input type="text" ref={live} placeholder="Live" defaultValue={currentUser.live} required />
+					<input type="text" ref={work} placeholder="Work" defaultValue={currentUser.work} required />
+					<input type="text" ref={school} placeholder="School" defaultValue={currentUser.school} required />
 
 					<h3>Relationship Status</h3>
 					<div className="relationshipStatus">
@@ -63,7 +63,7 @@ function UpdateInfo() {
 						<label htmlFor="complicated"> Complicated <input type="radio" name="relationship" id="complicated" value="3" onChange={(e)=>relationship.current=e.target.value } /> </label>
 					</div>
 
-					<textarea name="" id="" cols="30" rows="5" ref={desc} placeholder="Write Something About You Here" defaultValue={currentUser.desc} ></textarea>
+					<textarea name="" id="" cols="30" rows="5" ref={desc} placeholder="Write Something About You Here" defaultValue={currentUser.desc} required ></textarea>
 					<button type="submit">Save</button>
 				</form>
 			</div>

@@ -36,9 +36,9 @@ function FriendMenu(props) {
 					<div className="friend-menu-item">
 						<img src={user.profilePicture ? user.profilePicture : PF + "/person/noAvatar.png"} alt="" />
 						<div className="info">
-							<div className="name info-item">Mohit</div>
-							<div className="from info-item">Kota</div>
-							<div className="work info-item">ABC Pvt Limited</div>
+							<div className="name info-item">{user.name}</div>
+							<div className="from info-item">{user.from}</div>
+							<div className="work info-item">{user.work}</div>
 							<div className="btn-container info-item">
 								<button >
 								{currentUser.followings.includes(user._id) ? "UnFollow": "Follow"}
