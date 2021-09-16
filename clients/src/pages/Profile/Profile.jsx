@@ -115,7 +115,7 @@ function Profile() {
 							}
 						</div>
 						<div className="profile-info">
-							<h4 className="name">{user.username}</h4>
+							<h4 className="name">{user.name}</h4>
 							<div className="desc">{user.desc}</div>
 						</div>
 

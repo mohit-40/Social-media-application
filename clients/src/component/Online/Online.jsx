@@ -43,7 +43,7 @@ function Online({ userId, setCurrConversation }) {
 			<li className="online-friend">
 				<img src={user?.profilePicture ? user.profilePicture : PF + "/person/noAvatar.png"} alt="" />
 				<span className="online-friend-badge"></span>
-				<span className="name">{user?.username}</span>
+				<span className="name">{user?.name}</span>
 			</li>
 		</div>
 	)

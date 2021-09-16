@@ -31,7 +31,7 @@ function Conversation({ conversation }) {
 	return (
 		<div className="conversation">
 			<img src={user?.profilePicture ? user?.profilePicture : PF + "/person/noAvatar.png"} alt="img" className="conversation-img" />
-			<span className="conversation-name">{user?.username}</span>
+			<span className="conversation-name">{user?.name}</span>
 		</div>
 	)
 }

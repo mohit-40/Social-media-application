@@ -10,7 +10,7 @@ function CloseFriend(props) {
 		<Link to={`/profile/${props.user.username}`} className="text-link">
 			<div  className={props.className} >
 				<img src={props.user.profilePicture ? props.user.profilePicture : PF + "person/noAvatar.png"} alt="img" />
-				<div className="name">{props.user.username}</div>
+				<div className="name">{props.user.name}</div>
 			</div>
 		</Link>
 	)
