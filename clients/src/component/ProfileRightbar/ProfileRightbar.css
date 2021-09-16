@@ -4,6 +4,11 @@
 .profile-rightbar .profile-rightbar-wrapper {
   padding: 20px;
 }
+.profile-rightbar .profile-rightbar-wrapper .show-all {
+  width: 100%;
+  font-size: 0.9rem;
+  padding: 10px;
+}
 .profile-rightbar .profile-rightbar-wrapper .follow-btn {
   padding: 5px;
   background-color: blue;

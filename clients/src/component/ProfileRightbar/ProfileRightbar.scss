@@ -2,6 +2,12 @@
 	flex: 3.5;
 	.profile-rightbar-wrapper{
 		padding: 20px;
+		.show-all{
+			width: 100%;
+			font-size: 0.9rem;
+			padding: 10px;
+		}
+
 		.follow-btn{
 			padding: 5px;
 			background-color: blue;

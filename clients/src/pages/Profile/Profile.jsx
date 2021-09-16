@@ -107,7 +107,7 @@ function Profile() {
 										<input type="file" name="profile-pic" id="profile-pic" style={{ display: "none" }} className="profile-cover" onChange={(e) => setProfilePic(e.target.files[0])} />
 									</label>
 									<Link to="/user-info">
-										<button className="update-info cover-pic">Update Info</button>
+										<button className="update-info-btn cover-pic">Update Info</button>
 									</Link>
 								</>
 								:

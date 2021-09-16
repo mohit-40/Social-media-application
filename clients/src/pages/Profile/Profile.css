@@ -13,6 +13,12 @@
 .profile .profile-right .profile-right-top .profile-cover {
   position: relative;
 }
+.profile .profile-right .profile-right-top .profile-cover .update-info-btn {
+  background: green;
+  color: white;
+  margin: 3px;
+  padding: 3px;
+}
 .profile .profile-right .profile-right-top .profile-cover .change-profile-label {
   background: green;
   color: white;

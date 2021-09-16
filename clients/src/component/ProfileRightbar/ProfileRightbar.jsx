@@ -73,7 +73,7 @@ function ProfileRightbar({ user }) {
 				<div className="title">{user.username} following <span className="follower-following-counter">({followings.length})</span></div>
 				<div className="user-friend-container">
 					{followings.length !== 0 ?
-						followings.map((following) => <CloseFriend key={following._id} className="user-friend-item" user={following} />) :
+						followings.slice(0,3).map((following) => <CloseFriend key={following._id} className="user-friend-item" user={following} />) :
 						'No Following'
 					}
 				</div>
@@ -86,7 +86,7 @@ function ProfileRightbar({ user }) {
 				<div className="title">{user.username} follower <span className="follower-following-counter">({followers.length})</span></div>
 				<div className="user-friend-container">
 					{followers.length !== 0 ?
-						followers.map((follower) => <CloseFriend key={follower._id} className="user-friend-item" user={follower} />) :
+						followers.slice(0,3).map((follower) => <CloseFriend key={follower._id} className="user-friend-item" user={follower} />) :
 						'No Follower'
 					}
 				</div>
