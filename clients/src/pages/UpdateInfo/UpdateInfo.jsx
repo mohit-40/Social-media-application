@@ -28,7 +28,7 @@ function UpdateInfo() {
 
 					<h3>Relationship Status</h3>
 					<div className="relationshipStatus">
-						<label htmlFor="sigle"><span> Single </span><input type="radio" name="relationship" id="single" value="1" /> </label>
+						<label htmlFor="single"><span> Single </span><input type="radio" name="relationship" id="single" value="1" /> </label>
 						<label htmlFor="inRelationship"> In a relationship <input type="radio" name="relationship" id="inRelationship" value="2" />  </label>
 						<label htmlFor="complicated"> Complicated <input type="radio" name="relationship" id="complicated" value="3" /> </label>
 					</div>
