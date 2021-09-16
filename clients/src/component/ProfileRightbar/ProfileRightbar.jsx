@@ -36,7 +36,6 @@ function ProfileRightbar({ user }) {
 		fetchFollowings()
 	}, [user]);
 
-
 	return loaded && (
 		<div className="profile-rightbar">
 			<div className="profile-rightbar-wrapper">
@@ -46,7 +45,6 @@ function ProfileRightbar({ user }) {
 						{followed ? <Remove /> : <Add />}
 					</button>
 					: ''}
-
 
 				<div className="user-info">
 					<div className="title">About {user.username}</div>
@@ -64,7 +62,7 @@ function ProfileRightbar({ user }) {
 						{user.live ? <span >Live in <b>{user.live}</b> </span> : ''}
 					</div>
 					<div className="info">
-						{user.relationship ? <span >Relationship Status <b>{user.relationship}</b> </span> : ''}
+						{user.relationship ? <span >Relationship Status <b>{user.relationship===1? "Single (😃)" : user.relationship===2 ? "In RelationShip (😞)" : "Complicated (😉)"}</b> </span> : ''}
 					</div>
 				</div>
 				<hr />

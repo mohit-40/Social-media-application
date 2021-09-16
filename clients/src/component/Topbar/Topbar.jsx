@@ -24,8 +24,8 @@ function Topbar() {
 
 			<div className="topbar-right">
 				<div className="topbar-link-container">
-					<span className="topbar-link">Home</span>
-					<span className="topbar-link">Timeline</span>
+					<Link className='text-link' to={`/profile/${currentUser.username}`}><span className="topbar-link">Home</span></Link>
+					<Link className='text-link' to="/"><span className="topbar-link">Timeline</span></Link>
 				</div>
 				<div className="topbar-icon-container">
 					<div className="topbar-icon-item">
