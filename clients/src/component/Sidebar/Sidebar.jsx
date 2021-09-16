@@ -38,7 +38,7 @@ function Sidebar() {
 						</Link>
 					</li>
 					<li className="menu-list-item">
-						<Link className='text-link' to="/find-friend">
+					<Link className='text-link' to={{ pathname: `/friendPage`, state: { users: [] ,all:true}  }} >
 							<PersonAdd className="menu-list-icon" />
 							<span className="menu-list-text">Find Friend</span>
 						</Link>

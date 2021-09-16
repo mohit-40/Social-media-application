@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { Link } from "react-router-dom"
 import "./ProfileRightbar.css"
 import { Add, Remove } from "@material-ui/icons";
 import CloseFriend from '../CloseFriend/CloseFriend';
@@ -76,7 +77,9 @@ function ProfileRightbar({ user }) {
 						'No Following'
 					}
 				</div>
-				<button className="show-all">Show All</button>
+				<Link className='text-link' to={{ pathname: `/friendPage`, state: { users: followings} }} >
+					<button className="show-all">Show All</button>
+				</Link>
 
 				<hr />
 
@@ -87,7 +90,9 @@ function ProfileRightbar({ user }) {
 						'No Follower'
 					}
 				</div>
-				<button className="show-all">Show All</button>
+				<Link className='text-link' to={{ pathname: `/friendPage`, state: { users: followers } }} >
+					<button className="show-all">Show All</button>
+				</Link>
 
 			</div>
 		</div >
