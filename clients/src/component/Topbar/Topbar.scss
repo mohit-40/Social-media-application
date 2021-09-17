@@ -29,14 +29,31 @@
 			display: flex;
 			align-items: center;
 			height: 30px;
+			display: flex;
+			flex-direction: column;
 			.search-icon{
-				
+				display: none;
 			}
 			input{
 				width: 94%;
 				border: none;
 				outline: none;
 				font-size: 16px;
+			}
+			.search-result{
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				width: 100%;
+				.search-result-item{
+					background-color: cornsilk;
+					color: black;
+					width: 100%;
+					text-align: center;
+					padding: 5px;
+					border: 2px solid black;
+				}
+				
 			}
 		}
 	}

@@ -24,6 +24,8 @@ router.post("/",async (req,res)=>{
 		res.status(500),json(error)
 	}
 })
+
+
 //get conversation
 router.get("/:userId",async(req,res)=>{
 	try {

@@ -30,12 +30,31 @@
   display: flex;
   align-items: center;
   height: 30px;
+  display: flex;
+  flex-direction: column;
+}
+.topbar .topbar-center .search .search-icon {
+  display: none;
 }
 .topbar .topbar-center .search input {
   width: 94%;
   border: none;
   outline: none;
   font-size: 16px;
+}
+.topbar .topbar-center .search .search-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.topbar .topbar-center .search .search-result .search-result-item {
+  background-color: cornsilk;
+  color: black;
+  width: 100%;
+  text-align: center;
+  padding: 5px;
+  border: 2px solid black;
 }
 .topbar .topbar-right {
   flex: 5;

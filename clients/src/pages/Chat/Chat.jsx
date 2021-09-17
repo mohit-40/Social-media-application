@@ -12,7 +12,7 @@ import { io } from "socket.io-client";
 
 function Chat() {
 	const { user: currentUser } = useContext(AuthContext)
-	const [conversations, setConversations] = useState(null)
+	const [conversations, setConversations] = useState([])
 	const [currConversation, setCurrConversation] = useState(null)
 	const [messages, setMessages] = useState([])
 	const [newMessage, setNewMessage] = useState()
@@ -20,6 +20,29 @@ function Chat() {
 	const socket = useRef();
 	const [onlineFriend, setOnlineFriend] = useState([]);
 	const [dynamicMessage, setDynamicMessage] = useState();
+	const [chatSearch, setChatSearch] = useState('')
+	const [followings, setFollowings] = useState([])
+	//fetch followings
+	useEffect(() => {
+		const fetchFollowings = async () => {
+			const res = await axios.get("/users/followings/" + currentUser._id)
+			setFollowings(res.data)
+		}
+		fetchFollowings()
+	}, [currentUser]);
+
+	//create the conversation
+	async function handleClick(userId) {
+		try {
+			const res = await axios.post("/conversations/", { senderId: currentUser._id, receiverId: userId })
+			setCurrConversation(res.data[0])
+
+			!conversations.some((conversation)=> conversation._id===res.data[0]._id) && setConversations([...conversations,res.data[0]])
+		} catch (error) {
+			console.log(error)
+
+		}
+	}
 
 	// connection to socket io
 	useEffect(() => {
@@ -29,23 +52,26 @@ function Chat() {
 		})
 	}, []);
 
+	//updating the message after receiving
 	useEffect(() => {
 		dynamicMessage && currConversation?.members.includes(dynamicMessage.senderId) && setMessages((prev) => [...prev, dynamicMessage]);
 	}, [dynamicMessage, currConversation]);
 
+	//whenever new user connect add that user to socket server
 	useEffect(() => {
 		socket.current.emit("addUser", currentUser._id);
 		socket.current.on("getUsers", (users) => {
-			setOnlineFriend(currentUser.followings.filter( (f)=> users.some((u)=> u.userId === f)))
+			setOnlineFriend(currentUser.followings.filter((f) => users.some((u) => u.userId === f)))
 		})
 	}, [currentUser]);
 	
-
+	
 	// fetch conversation
 	useEffect(() => {
 		const fetchConversations = async () => {
 			try {
 				const res = await axios.get("/conversations/" + currentUser._id)
+				 
 				setConversations(res.data)
 			} catch (error) {
 				console.log(error.message)
@@ -53,6 +79,8 @@ function Chat() {
 		}
 		fetchConversations()
 	}, [currentUser._id]);
+
+
 	//fetch message
 	useEffect(() => {
 		const fetchMessages = async () => {
@@ -94,7 +122,6 @@ function Chat() {
 		scrollRef.current?.scrollIntoView({ behavior: "smooth" });
 	}, [messages]);
 
-
 	return (
 
 		<>
@@ -104,10 +131,22 @@ function Chat() {
 
 					<div className="chat-left">
 						<div className="chat-left-wrapper">
-							<input type="text" className="search-friend" placeholder="Search friend for Chat" />
+							<input type="text" className="search-friend" placeholder="Search friend for Chat" onChange={(e) => { setChatSearch(e.target.value) }} />
+
+							{followings.filter((user) => chatSearch !== "" && user.name.toLowerCase().includes(chatSearch.toLowerCase())).slice(0,5).map((user) => {
+								return (
+									<div onClick={() => handleClick(user._id)} className="search-result-item" >{user.name}</div>
+								)
+							})
+							}
+
+
+
 							{conversations?.map((conversation) => (
-								<div key={conversation._id} onClick={() => setCurrConversation(conversation)}>
-									<Conversation key={conversation._id} conversation={conversation} />
+								<div key={conversation._id} onClick={() => setCurrConversation(conversation) } >
+									<div className={currConversation?._id===conversation._id ? "selected" : ''}>
+										<Conversation key={conversation._id} conversation={conversation} />
+									</div>
 								</div>
 							))}
 						</div>
@@ -134,15 +173,16 @@ function Chat() {
 								</div>
 							</div>
 							:
-							<div className="no-chat-selected">Select Conversation To Start the Chat</div>
+							<div className="no-chat-selected">Search friend and Select Conversation To Start the Chat</div>
 						}
 					</div>
 					<div className="chat-right">
 						<div className="chat-right-wrapper">
 							<h2 className="heading">Online Friend</h2>
 							<ul className="online-friend-list">
-								{onlineFriend?.map((userId) =>(
-										<Online key={userId} userId={userId} setCurrConversation={setCurrConversation}/>
+								{onlineFriend.length===0? "No friend Online" : ''}
+								{onlineFriend?.map((userId) => (
+									<Online key={userId} userId={userId} setCurrConversation={setCurrConversation} />
 								))}
 							</ul>
 						</div>

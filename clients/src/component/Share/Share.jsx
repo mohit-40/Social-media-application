@@ -125,17 +125,17 @@ function Share() {
 						</label>
 						<label htmlFor="label" className="option">
 							<Label htmlColor="blue" className="icon" />
-							<span className="option-text">Label</span>
+							<span className="option-text" style={{textDecorationLine: 'line-through'}} >Label</span>
 							<input type="label" name="label" id="label" style={{ display: "none" }} onChange={(e) => { }} />
 						</label>
 						<label htmlFor="location" className="option">
 							<Room htmlColor="green" className="icon" />
-							<span className="option-text">Location</span>
+							<span className="option-text" style={{textDecorationLine: 'line-through'} } >Location</span>
 							<input type="location" name="location" id="location" style={{ display: "none" }} onChange={(e) => { }} />
 						</label>
 						<label htmlFor="feeling" className="option">
 							<EmojiEmotions htmlColor="yellow" className="icon" />
-							<span className="option-text">Feeling</span>
+							<span className="option-text" style={{textDecorationLine: 'line-through'}}>Feeling</span>
 							<input type="feeling" name="feeling" id="feeling" style={{ display: "none" }} onChange={(e) => { }} />
 						</label>
 						<button type="submit"> Share </button>

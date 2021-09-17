@@ -1,29 +1,29 @@
 import React, { useContext, useEffect, useState } from 'react'
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 import { Search, Person, Chat, Notifications } from "@material-ui/icons";
 import "./Topbar.css"
-import {AuthContext} from "../../Context/AuthContext"
+import { AuthContext } from "../../Context/AuthContext"
 import axios from "axios"
 
 function Topbar() {
-	const PF=process.env.REACT_APP_PUBLIC_FOLDER;
-	const {user:currentUser}= useContext(AuthContext);
-	const [allUsers,setAllUsers]=useState([])
-	const [search,setSearch]=useState('')
+	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+	const { user: currentUser } = useContext(AuthContext);
+	const [allUsers, setAllUsers] = useState([])
+	const [search, setSearch] = useState('')
 
-	useEffect(()=>{
-		const fetchAllUsers= async ()=>{
+	useEffect(() => {
+		const fetchAllUsers = async () => {
 			try {
-				const res=await axios.get("/users/allUsers")
+				const res = await axios.get("/users/allUsers")
 				setAllUsers(res.data);
 			} catch (error) {
 				console.log(error)
 			}
 		}
 		fetchAllUsers()
-	},[])
+	}, [])
 
-	const handleSearch=(e)=>{
+	const handleSearch = (e) => {
 		setSearch(e.target.value);
 	}
 
@@ -31,13 +31,24 @@ function Topbar() {
 	return (
 		<div className="topbar">
 			<div className="topbar-left">
-			<Link className='text-link' to="/"><span className="topbar-logo">Socialify</span></Link>
+				<Link className='text-link' to="/"><span className="topbar-logo">Socialify</span></Link>
 			</div>
 
 			<div className="topbar-center">
 				<div className="search">
 					<Search className="search-icon" />
 					<input type="text" name="" id="" placeholder="Search for Person or friend" onChange={handleSearch} />
+					<div className="search-result">
+						{allUsers.filter((user) => search !== "" && user.name.toLowerCase().includes(search.toLowerCase())).slice(0, 5).map((user) => {
+							return (
+								<Link className="search-result-item" to={`/profile/${user.username}`}>
+									<div >{user.name}</div>
+								</Link>
+							)
+						})
+						}
+					</div>
+
 				</div>
 			</div>
 
@@ -52,10 +63,10 @@ function Topbar() {
 						<span className="topbar-icon-badge">1</span>
 					</div>
 					<div className="topbar-icon-item">
-					<Link className='text-link' to="/chat">
-						<Chat className="topbar-icon"/>
-						<span className="topbar-icon-badge">1</span>
-					</Link>
+						<Link className='text-link' to="/chat">
+							<Chat className="topbar-icon" />
+							<span className="topbar-icon-badge">1</span>
+						</Link>
 					</div>
 					<div className="topbar-icon-item">
 						<Notifications className="topbar-icon" />
@@ -63,7 +74,7 @@ function Topbar() {
 					</div>
 				</div>
 
-				<Link className='text-link' to={`/profile/${currentUser.username}`} ><img src={currentUser.profilePicture ? currentUser.profilePicture : PF + "/person/noAvatar.png"}  alt="img" /></Link>
+				<Link className='text-link' to={`/profile/${currentUser.username}`} ><img src={currentUser.profilePicture ? currentUser.profilePicture : PF + "/person/noAvatar.png"} alt="img" /></Link>
 			</div>
 		</div>
 	)

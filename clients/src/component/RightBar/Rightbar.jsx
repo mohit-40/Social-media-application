@@ -21,6 +21,7 @@ function Rightbar() {
 				<div className="rightbar-bottom">
 					<span className="heading">Online Friend</span>
 					<ul className="online-friend-list">
+						No Friend Online Currently 😞
 						{/* {Users.map((user) => <Online key={user.id} user={user}/>)} */}
 					</ul>
 				</div>

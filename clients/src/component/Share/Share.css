@@ -90,4 +90,8 @@
   background-color: #05aa05;
   transform: scale(1.1);
   font-weight: 500;
+}
+
+.selected {
+  background-color: blanchedalmond;
 }/*# sourceMappingURL=Share.css.map */

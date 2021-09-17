@@ -9,7 +9,6 @@ function Conversation({ conversation }) {
 	const [user, setUser] = useState()
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
-
 	// friend of conversation eith
 	useEffect(() => {
 		const friendId = conversation.members.find((m) => m !== currentUser._id);
