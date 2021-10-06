@@ -5,7 +5,7 @@ const INITIAL_STATE = {
 	user:JSON.parse(localStorage.getItem("user")) || null,
 	isFetching: false,
 	error: false,
-  };
+};
 const AuthContext = createContext(INITIAL_STATE);
 function AuthContextProvider(props) {
 
