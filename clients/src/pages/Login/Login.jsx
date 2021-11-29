@@ -19,7 +19,7 @@ function Login() {
 		loginCall({email:email.current.value,password:password.current.value},dispatch);
 		history.push("/");
 	}
-	
+	 
 	return (
 		<div className="login">
 			<div className="login-wrapper">

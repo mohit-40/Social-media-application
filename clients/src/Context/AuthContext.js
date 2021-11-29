@@ -6,6 +6,8 @@ const INITIAL_STATE = {
 	isFetching: false,
 	error: false,
 };
+
+
 const AuthContext = createContext(INITIAL_STATE);
 function AuthContextProvider(props) {
 
@@ -28,3 +30,4 @@ function AuthContextProvider(props) {
 }
 
 export { AuthContext ,AuthContextProvider};
+
