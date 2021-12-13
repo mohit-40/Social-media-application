@@ -22,10 +22,14 @@ function Post(props) {
 
 
 	const handleLike = async () => {
-		await axios.put("/posts/" + props.post._id + "/like", { userId: currentUser._id });
-		if (isLike) { setLike(like - 1); }
-		else { setLike(like + 1); }
-		setIsLike(!isLike);
+		try {
+			await axios.put("/posts/" + props.post._id + "/like", { userId: currentUser._id });
+			if (isLike) { setLike(like - 1); }
+			else { setLike(like + 1); }
+			setIsLike(!isLike);
+		} catch(error) {
+			console.log(error.message)
+		}
 	}
 
 	useEffect(() => {
@@ -40,7 +44,7 @@ function Post(props) {
 	const handleDelete = async () => {
 		try {
 			await axios.delete("/posts/" + props.post._id, { data: { userId: currentUser._id } });
-			window.location.reload();
+			
 			setIsDeleted(true)
 		} catch (error) {
 			console.log(props.post._id,currentUser._id)
