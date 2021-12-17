@@ -16,18 +16,16 @@ io.on("connection",(socket)=>{
 
 	socket.on("addUser",(userId)=>{
 		addUser(userId,socket.id)
-		console.log(users.length)
 		io.emit("getUsers",users)
 	})
 	socket.on("disconnect",()=>{
 		console.log("user disconnected")
 		removeUser(socket.id);
-		console.log(users.length)
 		io.emit("getUsers",users)
 	})
 	socket.on("sendMessage",({body,receiverId})=>{
-		console.log(users)
-		const receiver = getUser(receiverId);
+		console.log(body);
+		const receiver = getUser(receiverId); 
 		io.to(receiver?.socketId).emit('getMessage',body)
 	})
 

@@ -5,13 +5,15 @@ import "./Conversation.css"
 
 
 function Conversation({ conversation }) {
+
+
 	const { user: currentUser } = useContext(AuthContext)
 	const [user, setUser] = useState()
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
-	// friend of conversation eith
+	// friend of conversation With
 	useEffect(() => {
-		const friendId = conversation.members.find((m) => m !== currentUser._id);
+		const friendId = conversation.members.find( m => m !== currentUser._id);
 		const getUser = async () => {
 			try {
 				const res = await axios("/users?userId=" + friendId);
@@ -22,8 +24,6 @@ function Conversation({ conversation }) {
 		};
 		getUser();
 	}, [currentUser, conversation]);
-
-
 
 
 

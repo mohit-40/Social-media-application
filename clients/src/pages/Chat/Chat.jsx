@@ -40,7 +40,6 @@ function Chat() {
 			!conversations.some((conversation)=> conversation._id===res.data[0]._id) && setConversations([...conversations,res.data[0]])
 		} catch (error) {
 			console.log(error)
-
 		}
 	}
 
@@ -56,11 +55,12 @@ function Chat() {
 	useEffect(() => {
 		dynamicMessage && currConversation?.members.includes(dynamicMessage.senderId) && setMessages((prev) => [...prev, dynamicMessage]);
 	}, [dynamicMessage, currConversation]);
-
+	
 	//whenever new user connect add that user to socket server
 	useEffect(() => {
 		socket.current.emit("addUser", currentUser._id);
 		socket.current.on("getUsers", (users) => {
+			console.log("hello")
 			setOnlineFriend(currentUser.followings.filter((f) => users.some((u) => u.userId === f)))
 		})
 	}, [currentUser]);
@@ -71,7 +71,6 @@ function Chat() {
 		const fetchConversations = async () => {
 			try {
 				const res = await axios.get("/conversations/" + currentUser._id)
-				 
 				setConversations(res.data)
 			} catch (error) {
 				console.log(error.message)
@@ -106,7 +105,7 @@ function Chat() {
 		}
 		socket.current.emit("sendMessage", {
 			body: body,
-			receiverId: currConversation.members.find((member) => member !== currentUser._id),
+			receiverId: currConversation.members.find((member) => member != currentUser._id),
 		})
 		try {
 			const res = await axios.post("/messages/", body);
@@ -133,7 +132,7 @@ function Chat() {
 						<div className="chat-left-wrapper">
 							<input type="text" className="search-friend" placeholder="Search friend for Chat" onChange={(e) => { setChatSearch(e.target.value) }} />
 
-							{followings.filter((user) => chatSearch !== "" && user.name.toLowerCase().includes(chatSearch.toLowerCase())).slice(0,5).map((user) => {
+							{followings.filter((user) => chatSearch !== "" && user.name && user.name.toLowerCase().includes(chatSearch.toLowerCase())).slice(0,5).map((user) => {
 								return (
 									<div onClick={() => handleClick(user._id)} className="search-result-item" >{user.name}</div>
 								)
@@ -144,8 +143,8 @@ function Chat() {
 
 							{conversations?.map((conversation) => (
 								<div key={conversation._id} onClick={() => setCurrConversation(conversation) } >
-									<div className={currConversation?._id===conversation._id ? "selected" : ''}>
-										<Conversation key={conversation._id} conversation={conversation} />
+									<div className={currConversation?._id===conversation?._id ? "selected" : ''}>
+										<Conversation key={conversation?._id} conversation={conversation} />
 									</div>
 								</div>
 							))}
