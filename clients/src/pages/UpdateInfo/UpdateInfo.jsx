@@ -1,9 +1,13 @@
-import React, { useContext,useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import Topbar from "../../component/Topbar/Topbar"
 import { AuthContext } from '../../Context/AuthContext';
 import "./UpdateInfo.css"
 import axios from "axios"
 import { useHistory } from 'react-router';
+
+import { useContext,useEffect } from "react";
+import { io } from "socket.io-client"; 
+
 
 function UpdateInfo() {
 	const {user:currentUser} =useContext(AuthContext)
@@ -16,6 +20,14 @@ function UpdateInfo() {
 	const relationship = useRef();
 	const desc = useRef();
 	const history=useHistory();
+
+	
+	//connecting to socket server 
+	useEffect(()=>{
+		const socket = io.connect("ws://localhost:8900"); 
+		socket.emit("addUser", currentUser._id);
+	},[currentUser]);
+
 
 	const handleSubmit=async (e)=>{
 		e.preventDefault()

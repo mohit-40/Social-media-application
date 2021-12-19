@@ -11,6 +11,7 @@ import { useHistory } from 'react-router-dom';
 import { storage } from "../../firebase/firebase";
 import { AuthContext } from '../../Context/AuthContext';
 
+import { io } from "socket.io-client";
 
 function Profile() {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -22,6 +23,14 @@ function Profile() {
 	const [profilePic,setProfilePic] =  useState(null);
 	const [coverPic,setCoverPic] =  useState(null);
 	const [loaded,setLoaded]=useState(false)
+
+
+	//connecting to socket server 
+	useEffect(()=>{
+		const socket = io.connect("ws://localhost:8900"); 
+		socket.emit("addUser", currentUser._id);
+	},[currentUser]);
+
 	
 	useEffect(() => {
 		const fetchUser = async () => {

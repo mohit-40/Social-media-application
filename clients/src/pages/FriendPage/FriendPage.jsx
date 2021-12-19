@@ -5,7 +5,8 @@ import Topbar from "../../component/Topbar/Topbar"
 import axios from "axios"
 import { AuthContext } from '../../Context/AuthContext'
 import UserItem from "../../component/UserItem/UserItem"
-
+ 
+import { io } from "socket.io-client";
 
 function FriendPage() {
 
@@ -13,6 +14,13 @@ function FriendPage() {
 	const [disUsers, setDisUsers] = useState([])
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 	const { user: currentUser } = useContext(AuthContext)
+
+ 
+	//connecting to socket server 
+	useEffect(()=>{
+		const socket = io.connect("ws://localhost:8900"); 
+		socket.emit("addUser", currentUser._id);
+	},[currentUser]);
 
 
 	useEffect(() => {

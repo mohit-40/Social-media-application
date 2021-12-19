@@ -3,9 +3,26 @@ import "./Rightbar.css"
 import Online from "../Online/Online"
 import { Users } from "../../dummy-data"
 
+import { useContext,useEffect } from "react";
+import { io } from "socket.io-client";
+import { AuthContext } from '../../Context/AuthContext'
+import { useState } from 'react';
 
 function Rightbar() {
 	const PF=process.env.REACT_APP_PUBLIC_FOLDER;
+	const [onlineFriend, setOnlineFriend] = useState([]);	
+	
+	const { user: currentUser } = useContext(AuthContext)
+	//connecting to socket server 
+	useEffect(()=>{
+		const socket = io.connect("ws://localhost:8900"); 
+		socket.emit("addUser", currentUser._id);
+		socket.on("getUsers" , users=>{ 
+			setOnlineFriend(currentUser.followings.filter((f) => users.some((u) => u.userId === f)))  
+		})
+	},[currentUser]);
+
+
 
 	return (
 		<div className="rightbar">
@@ -21,8 +38,12 @@ function Rightbar() {
 				<div className="rightbar-bottom">
 					<span className="heading">Online Friend</span>
 					<ul className="online-friend-list">
-						No Friend Online Currently 😞
-						{/* {Users.map((user) => <Online key={user.id} user={user}/>)} */}
+						{	onlineFriend.lenght===0
+							?
+							"No Friend Online Currently 😞"
+							:
+							onlineFriend.map((userId) => <Online key={userId} userId={userId}/>)
+						}
 					</ul>
 				</div>
 			</div>
