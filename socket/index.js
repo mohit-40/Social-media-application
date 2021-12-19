@@ -15,11 +15,12 @@ io.on("connection",(socket)=>{
 
 
 	socket.on("addUser",(userId)=>{
+		console.log("userAdded");
 		addUser(userId,socket.id)
 		io.emit("getUsers",users)
 	})
 	socket.on("disconnect",()=>{
-		console.log("user disconnected")
+		console.log("disconnected and user removed")
 		removeUser(socket.id);
 		io.emit("getUsers",users)
 	})
