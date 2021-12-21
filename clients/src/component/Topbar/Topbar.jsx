@@ -2,16 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { Link } from "react-router-dom"
 import { Search, Person, Chat, Notifications } from "@material-ui/icons";
 import "./Topbar.css"
-import {useSelector} from "react-redux"
+import {useSelector ,useDispatch} from "react-redux"
 import axios from "axios"
+import {logout } from "../../redux/exportAllAction"
 
 function Topbar() {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 	const userState = useSelector(state => state.user)
 	const currentUser = userState.currentUser;
-	
 	const [allUsers, setAllUsers] = useState([])
 	const [search, setSearch] = useState('')
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		const fetchAllUsers = async () => {
@@ -27,6 +28,9 @@ function Topbar() {
 
 	const handleSearch = (e) => {
 		setSearch(e.target.value);
+	}
+	const handleLogout = ()=>{
+		dispatch(logout(currentUser._id));
 	}
 
 
@@ -58,6 +62,7 @@ function Topbar() {
 				<div className="topbar-link-container">
 					<Link className='text-link' to={`/profile/${currentUser.username}`}><span className="topbar-link">Home</span></Link>
 					<Link className='text-link' to="/"><span className="topbar-link">Timeline</span></Link>
+					<span className="topbar-link" onClick={handleLogout}>Logout</span>
 				</div>
 				<div className="topbar-icon-container">
 					<div className="topbar-icon-item">
@@ -72,7 +77,7 @@ function Topbar() {
 					</div>
 					<div className="topbar-icon-item">
 						<Notifications className="topbar-icon" />
-						<span className="topbar-icon-badge">1</span>
+						<span className="topbar-icon-badge" >1</span>
 					</div>
 				</div>
 
