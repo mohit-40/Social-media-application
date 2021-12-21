@@ -1,15 +1,15 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from "react-router-dom"
 import "./Post.css"
 import { MoreVert } from "@material-ui/icons";
 import axios from 'axios';
 import { format } from "timeago.js"
-import { AuthContext } from '../../Context/AuthContext';
+import {useSelector} from "react-redux"
 
 function Post(props) {
-
+	const userState = useSelector(state => state.user)
+	const currentUser = userState.currentUser;
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-	const { user: currentUser } = useContext(AuthContext);
 	const [user, setUser] = useState({});
 
 	const [like, setLike] = useState(props.post.like.length);

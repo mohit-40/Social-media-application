@@ -1,11 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import "./Online.css"
 import axios from 'axios';
-import { AuthContext } from '../../Context/AuthContext';
+
+
 function Online({ userId, setCurrConversation }) {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 	const [user, setUser] = useState()
-	const { user: currentUser } = useContext(AuthContext)
+	const userState = useSelector(state => state.user)
+	const currentUser = userState.currentUser;
 	// fetch user 
 	useEffect(() => {
 		const fetchUser = async () => {

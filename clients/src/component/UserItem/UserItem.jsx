@@ -1,11 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { AuthContext } from '../../Context/AuthContext'
+import React, { useEffect, useState } from 'react'
+import {useSelector} from "react-redux"
 import "./UserItem.css"
 import axios from "axios"
 
 
 function UserItem({user}) {
-	const { user: currentUser } = useContext(AuthContext)
+
+	const userState = useSelector(state => state.user)
+	const currentUser = userState.currentUser;
+	
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 	const [followings,setFollowings] = useState([])
 	

@@ -1,16 +1,18 @@
 import React, { useRef, useState } from 'react'
-import Topbar from "../../component/Topbar/Topbar"
-import { AuthContext } from '../../Context/AuthContext';
+import Topbar from "../../component/Topbar/Topbar" 
 import "./UpdateInfo.css"
 import axios from "axios"
 import { useHistory } from 'react-router';
 
-import { useContext,useEffect } from "react";
+import { useEffect } from "react";
 import { io } from "socket.io-client"; 
+import { useSelector } from 'react-redux'
 
 
 function UpdateInfo() {
-	const {user:currentUser} =useContext(AuthContext)
+	const userState = useSelector(state => state.user)
+	const currentUser = userState.currentUser;
+
 	const [updated,setUpdated]=useState()
 	const name = useRef();
 	const from = useRef();

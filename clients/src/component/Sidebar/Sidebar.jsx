@@ -1,13 +1,16 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from "react-router-dom"
 import "./Sidebar.css"
 import { RssFeed, Chat, PersonAdd } from "@material-ui/icons";
 import CloseFriend from "../CloseFriend/CloseFriend"
-import { AuthContext } from "../../Context/AuthContext"
+import {useSelector} from "react-redux"
 import axios from 'axios';
 
 function Sidebar() {
-	const { user: currentUser } = useContext(AuthContext);
+
+	const userState = useSelector(state => state.user)
+	const currentUser = userState.currentUser;
+	
 	const [followings, setFollowings] = useState([])
 	const [loaded, setLoaded] = useState(false)
 	useEffect(() => {

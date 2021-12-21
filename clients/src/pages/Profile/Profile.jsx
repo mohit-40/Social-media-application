@@ -1,4 +1,4 @@
-import React, {  useContext,useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Profile.css"
 import { Link } from "react-router-dom"
 import Topbar from '../../component/Topbar/Topbar';
@@ -9,8 +9,7 @@ import { useParams } from 'react-router';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { storage } from "../../firebase/firebase";
-import { AuthContext } from '../../Context/AuthContext';
-
+import { useSelector } from 'react-redux'
 import { io } from "socket.io-client";
 
 function Profile() {
@@ -19,11 +18,12 @@ function Profile() {
 	const params = useParams();
 	const username = params.username;
 	const [user, setUser] = useState({});
-	const {user:currentUser}=useContext(AuthContext)
 	const [profilePic,setProfilePic] =  useState(null);
 	const [coverPic,setCoverPic] =  useState(null);
 	const [loaded,setLoaded]=useState(false)
 
+	const userState = useSelector(state => state.user)
+	const currentUser = userState.currentUser;
 
 	//connecting to socket server 
 	useEffect(()=>{
@@ -45,7 +45,7 @@ function Profile() {
 			}
 		}
 		fetchUser();
-	}, [username]);
+	}, [username , history ]);
 	
 
 	useEffect(() => {
@@ -91,7 +91,7 @@ function Profile() {
 			}
 		} 
 		call();
-	}, [coverPic,profilePic]);
+	}, [coverPic,profilePic,currentUser._id ,history , user._id, user.username ]);
 
 
 	return loaded&&(

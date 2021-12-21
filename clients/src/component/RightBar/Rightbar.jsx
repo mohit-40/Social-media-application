@@ -1,18 +1,16 @@
-import React from 'react'
+import React , { useState ,useEffect } from 'react'
 import "./Rightbar.css"
-import Online from "../Online/Online"
-import { Users } from "../../dummy-data"
-
-import { useContext,useEffect } from "react";
+import Online from "../Online/Online" 
 import { io } from "socket.io-client";
-import { AuthContext } from '../../Context/AuthContext'
-import { useState } from 'react';
+import {useSelector} from "react-redux"
 
 function Rightbar() {
 	const PF=process.env.REACT_APP_PUBLIC_FOLDER;
 	const [onlineFriend, setOnlineFriend] = useState([]);	
 	
-	const { user: currentUser } = useContext(AuthContext)
+	const userState = useSelector(state => state.user)
+	const currentUser = userState.currentUser;
+	
 	//connecting to socket server 
 	useEffect(()=>{
 		const socket = io.connect("ws://localhost:8900"); 

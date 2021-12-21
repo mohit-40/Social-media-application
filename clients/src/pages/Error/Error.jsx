@@ -1,15 +1,14 @@
+import React,{  useEffect } from 'react'
 import Topbar from "../../component/Topbar/Topbar"
-import React from 'react'
 import "./Error.css"
 
-import { useContext,useEffect } from "react";
-import { io } from "socket.io-client";
-import { AuthContext } from '../../Context/AuthContext'
+import {useSelector } from "react-redux" 
+import { io } from "socket.io-client"; 
 
 function Error({statusCode , message}) {
 	message=message?message:"Some Error Occured";
 	
-	const { user: currentUser } = useContext(AuthContext)
+	const currentUser = useSelector(state => state.user.currentUser)
 	//connecting to socket server 
 	useEffect(()=>{
 		const socket = io.connect("ws://localhost:8900"); 

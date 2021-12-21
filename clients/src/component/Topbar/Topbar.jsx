@@ -1,13 +1,15 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from "react-router-dom"
 import { Search, Person, Chat, Notifications } from "@material-ui/icons";
 import "./Topbar.css"
-import { AuthContext } from "../../Context/AuthContext"
+import {useSelector} from "react-redux"
 import axios from "axios"
 
 function Topbar() {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-	const { user: currentUser } = useContext(AuthContext);
+	const userState = useSelector(state => state.user)
+	const currentUser = userState.currentUser;
+	
 	const [allUsers, setAllUsers] = useState([])
 	const [search, setSearch] = useState('')
 

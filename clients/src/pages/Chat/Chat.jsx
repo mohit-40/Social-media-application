@@ -1,17 +1,18 @@
 import { Refresh } from '@material-ui/icons'
 import axios from "axios"
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Conversation from "../../component/Conversation/Conversation"
 import Message from "../../component/Message/Message"
 import Online from "../../component/Online/Online"
 import Topbar from "../../component/Topbar/Topbar"
-import { AuthContext } from '../../Context/AuthContext'
 import "./chat.css"
 import { io } from "socket.io-client";
+import {useSelector} from "react-redux"
 
-
-function Chat() {
-	const { user: currentUser } = useContext(AuthContext)
+function Chat() {  
+	const userState = useSelector(state => state.user)
+	const currentUser = userState.currentUser;
+	
 	const [conversations, setConversations] = useState([])
 	const [currConversation, setCurrConversation] = useState(null)
 	const [messages, setMessages] = useState([])
@@ -134,7 +135,7 @@ function Chat() {
 
 							{followings.filter((user) => chatSearch !== "" && user.name && user.name.toLowerCase().includes(chatSearch.toLowerCase())).slice(0,5).map((user) => {
 								return (
-									<div onClick={() => handleClick(user._id)} className="search-result-item" >{user.name}</div>
+									<div key={user?._id} onClick={() => handleClick(user._id)} className="search-result-item" >{user.name}</div>
 								)
 							})
 							}

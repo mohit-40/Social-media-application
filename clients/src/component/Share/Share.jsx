@@ -1,15 +1,18 @@
-import React, { useContext, useRef, useState } from 'react'
-import { AuthContext } from '../../Context/AuthContext';
+import React, { useRef, useState } from 'react'
 import { PermMedia, Label, Room, EmojiEmotions ,Cancel} from "@material-ui/icons"
 import "./Share.css"
 import { storage } from "../../firebase/firebase";
 import axios from "axios"
 import { useHistory } from "react-router-dom";
+import {useSelector} from "react-redux"
 
 
 function Share() {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-	const { user: currentUser } = useContext(AuthContext);
+
+	const userState = useSelector(state => state.user)
+	const currentUser = userState.currentUser;
+	
 	const history = useHistory();
 	const desc = useRef('');
 	const [file, setFile] = useState({})

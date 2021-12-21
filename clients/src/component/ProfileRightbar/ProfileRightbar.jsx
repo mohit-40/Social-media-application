@@ -1,14 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from "react-router-dom"
 import "./ProfileRightbar.css"
 import { Add, Remove } from "@material-ui/icons";
 import CloseFriend from '../CloseFriend/CloseFriend';
-import { AuthContext } from '../../Context/AuthContext';
 import axios from 'axios';
-
+import {useSelector} from "react-redux"
 
 function ProfileRightbar({ user }) {
-	const { user: currentUser } = useContext(AuthContext)
+	const userState = useSelector(state => state.user)
+	const currentUser = userState.currentUser;
 	const [followed, setFollowed] = useState(user.followers.includes(currentUser._id));
 	const [loaded, setLoaded] = useState(false)
 	const [followings, setFollowings] = useState([])

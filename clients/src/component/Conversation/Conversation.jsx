@@ -1,13 +1,11 @@
 import axios from 'axios'
-import React, { useContext, useEffect, useState } from 'react'
-import { AuthContext } from '../../Context/AuthContext'
+import React, { useEffect, useState } from 'react' 
 import "./Conversation.css"
-
+import { useSelector } from 'react-redux'
 
 function Conversation({ conversation }) {
-
-
-	const { user: currentUser } = useContext(AuthContext)
+	const userState = useSelector(state => state.user)
+	const currentUser = userState.currentUser;
 	const [user, setUser] = useState()
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 

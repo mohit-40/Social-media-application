@@ -1,21 +1,19 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./FriendPage.css"
-import { Link, useLocation } from "react-router-dom";
+import {  useLocation } from "react-router-dom";
 import Topbar from "../../component/Topbar/Topbar"
-import axios from "axios"
-import { AuthContext } from '../../Context/AuthContext'
+import axios from "axios" 
 import UserItem from "../../component/UserItem/UserItem"
  
+import {useSelector } from "react-redux" 
 import { io } from "socket.io-client";
 
 function FriendPage() {
-
+	
+	const currentUser = useSelector(state => state.user.currentUser)
 	let location = useLocation();
-	const [disUsers, setDisUsers] = useState([])
-	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-	const { user: currentUser } = useContext(AuthContext)
+	const [disUsers, setDisUsers] = useState([]) 
 
- 
 	//connecting to socket server 
 	useEffect(()=>{
 		const socket = io.connect("ws://localhost:8900"); 
@@ -38,16 +36,14 @@ function FriendPage() {
 			}
 		}
 		fetchallUser()
-	}, [currentUser, location.state.all])
-
-
+	}, [currentUser, location.state.users ,location.state.all])
 
 
 	return (
 		<>
 			<Topbar />
 			<div className="friend-menu">
-				{ disUsers.map((user) => <UserItem user={user} /> )}
+				{ disUsers.map((user) => <UserItem user={user} key= {user._id} /> )}
 			</div>
 
 		</>
