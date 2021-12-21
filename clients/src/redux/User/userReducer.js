@@ -1,6 +1,6 @@
 import { LOGIN_FAIL, LOGIN_START, LOGIN_SUCCESS ,LOGOUT_FAIL, LOGOUT_START, LOGOUT_SUCCESS } from "./userType"
 const initialUserState={
-	currentUserId: null,
+	currentUser: null,
 	isLoading:false,
 	error:false
 }

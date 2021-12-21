@@ -5,18 +5,21 @@ import {loginCall} from "../../apiCall"
 import { CircularProgress } from "@material-ui/core";
 import {useHistory} from 'react-router';
 import {Link} from "react-router-dom";
- 
-function Login() {
+import {useSelector ,useDispatch} from "react-redux" 
+import {login} from "../../redux/exportAllAction" 
 
+function Login() {
+	
 	const email= useRef();
 	const password= useRef();
 
-
-	const {user:currentUser, isFetching,  dispatch} = useContext(AuthContext);
+	const dispatch =useDispatch();
+	const userState = useSelector(state=>state.user)
+	const {currentUser , loading, error} = userState;
 	const history=useHistory();
 	const handleSubmit=(e)=>{
 		e.preventDefault();
-		loginCall({email:email.current.value,password:password.current.value},dispatch);
+		dispatch(login(  email.current.value, password.current.value ))
 		history.push("/");
 	}
 	 
@@ -33,13 +36,13 @@ function Login() {
 					<form onSubmit={handleSubmit} className="login-form">
 						<input  type="text" placeholder="Email" ref={email} />
 						<input  type="password" placeholder="Password" ref={password} />
-						<button className="login-btn" type="submit" disabled={isFetching}>  
-						{isFetching ? ( <CircularProgress size="20px" /> ) : ( "Log In" )}
+						<button className="login-btn" type="submit" disabled={loading}>  
+						{loading ? ( <CircularProgress size="20px" /> ) : ( "Log In" )}
 						</button>
 						<span className="forget-password">Forget Password</span>
 						<Link className='text-link' to="/register">
-							<button className="register-btn" type="submit" disabled={isFetching}>
-							{isFetching ? ( <CircularProgress size="20px" /> ) : ( "Sign Up" )}
+							<button className="register-btn" type="submit" disabled={loading}>
+							{loading ? ( <CircularProgress size="20px" /> ) : ( "Sign Up" )}
 							</button>
 						</Link>
 					</form>
