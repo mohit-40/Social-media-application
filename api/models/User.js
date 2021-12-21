@@ -66,6 +66,9 @@ const UserSchema = new mongoose.Schema({
 	relationship:{
 		type:Number,
 		enum:[1,2,3]
+	},
+	refreshTokenArray:{
+		type:Array
 	}
 } ,{timestamps:true});   //whenever update it will update timestamp
 

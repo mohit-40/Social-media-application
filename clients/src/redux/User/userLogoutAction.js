@@ -24,7 +24,7 @@ export const logout=(userId )=>{
 			// dispatch(clearRedux())
 			dispatch(logoutSuccess());
 		} catch (error) {
-			dispatch(logoutFail())
+			dispatch(logoutFail());
 		}
 	}
 }

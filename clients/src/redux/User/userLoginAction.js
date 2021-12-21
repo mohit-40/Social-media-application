@@ -18,7 +18,6 @@ export const login=(email, password)=>{
 	return async(dispatch)=>{
 		await dispatch(loginStart());
 		try {
-			console.log(password)
 			const res= await axios.post("/auth/login",{ email: email , password: password});
 			const user =res.data;  
 			localStorage.setItem("accessToken",user.accessToken);

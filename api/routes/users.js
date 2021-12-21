@@ -2,6 +2,8 @@ const router = require("express").Router();
 const User = require("../models/User");
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+const {verifyTokenAndAdmin, verifyToken,  verifyTokenAndAuthorization } =require("./verifyToken")
+
 // update a user 
 router.put("/:id", async (req, res) => {
 
