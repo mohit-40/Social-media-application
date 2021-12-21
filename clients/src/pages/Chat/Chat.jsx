@@ -8,6 +8,7 @@ import Topbar from "../../component/Topbar/Topbar"
 import "./chat.css"
 import { io } from "socket.io-client";
 import {useSelector} from "react-redux"
+import {userRequest} from "../../requestMethod"
 
 function Chat() {  
 	const userState = useSelector(state => state.user)
@@ -35,7 +36,7 @@ function Chat() {
 	//create the conversation
 	async function handleClick(userId) {
 		try {
-			const res = await axios.post("/conversations/", { senderId: currentUser._id, receiverId: userId })
+			const res = await userRequest.post("/conversations/"+currentUser._id, { senderId: currentUser._id, receiverId: userId })
 			setCurrConversation(res.data[0])
 
 			!conversations.some((conversation)=> conversation._id===res.data[0]._id) && setConversations([...conversations,res.data[0]])
@@ -71,7 +72,7 @@ function Chat() {
 	useEffect(() => {
 		const fetchConversations = async () => {
 			try {
-				const res = await axios.get("/conversations/" + currentUser._id)
+				const res = await userRequest.get("/conversations/" + currentUser._id)
 				setConversations(res.data)
 			} catch (error) {
 				console.log(error.message)
@@ -87,6 +88,7 @@ function Chat() {
 			try {
 				if (currConversation) {
 					const res = await axios.get("/messages/" + currConversation._id)
+					console.log(res.data);
 					setMessages(res.data)
 				}
 			} catch (error) {
@@ -143,7 +145,7 @@ function Chat() {
 
 
 							{conversations?.map((conversation) => (
-								<div key={conversation._id} onClick={() => setCurrConversation(conversation) } >
+								<div key={conversation?._id} onClick={() => setCurrConversation(conversation) } >
 									<div className={currConversation?._id===conversation?._id ? "selected" : ''}>
 										<Conversation key={conversation?._id} conversation={conversation} />
 									</div>

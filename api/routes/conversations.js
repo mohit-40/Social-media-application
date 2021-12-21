@@ -4,7 +4,7 @@ const Conversation = require('../models/Conversation');
 const {verifyTokenAndAdmin, verifyToken,  verifyTokenAndAuthorization } =require("./verifyToken")
 
 //start conversation
-router.post("/",async (req,res)=>{
+router.post("/:id",verifyTokenAndAuthorization, async (req,res)=>{
 	try{
 		const findConv=await Conversation.find({
 			members: { $all: [req.body.senderId, req.body.receiverId] },
@@ -27,10 +27,10 @@ router.post("/",async (req,res)=>{
 
 
 //get conversation
-router.get("/:userId",async(req,res)=>{
+router.get("/:id",verifyTokenAndAuthorization ,async(req,res)=>{
 	try {
 		const conversation=await Conversation.find({
-			members: { $in: [req.params.userId] },
+			members: { $in: [req.params.id] },
 		})
 		res.status(200).json(conversation)
 	} catch (error) {

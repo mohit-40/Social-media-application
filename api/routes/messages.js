@@ -16,7 +16,7 @@ router.post("/",async (req,res)=>{
 router.get("/:conversationId",async (req,res)=>{
 	try {
 		const allMessage=await Message.find({conversationId:req.params.conversationId})
-		res.status(200).send(allMessage)
+		res.status(200).json(allMessage)
 	} catch (error) {
 		res.status(500).json(error)
 	}
