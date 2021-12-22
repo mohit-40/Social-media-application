@@ -5,6 +5,7 @@ import { MoreVert } from "@material-ui/icons";
 import axios from 'axios';
 import { format } from "timeago.js"
 import {useSelector} from "react-redux"
+import { userRequest } from '../../requestMethod';
 
 function Post(props) {
 	const userState = useSelector(state => state.user)
@@ -23,7 +24,7 @@ function Post(props) {
 
 	const handleLike = async () => {
 		try {
-			await axios.put("/posts/" + props.post._id + "/like", { userId: currentUser._id });
+			await userRequest.put("/posts/" + props.post._id + "/like", { userId: currentUser._id });
 			if (isLike) { setLike(like - 1); }
 			else { setLike(like + 1); }
 			setIsLike(!isLike);
@@ -34,7 +35,7 @@ function Post(props) {
 
 	useEffect(() => {
 		const fetchUser = async () => {
-			const res = await axios.get(`/users?userId=${props.post.userId}`);
+			const res = await userRequest.get(`/users?userId=${props.post.userId}`);
 			setUser(res.data);
 		}
 		fetchUser();
@@ -43,9 +44,9 @@ function Post(props) {
 	const [isDeleted, setIsDeleted] = useState(false);
 	const handleDelete = async () => {
 		try {
-			await axios.delete("/posts/" + props.post._id, { data: { userId: currentUser._id } });
-			
-			setIsDeleted(true)
+			await userRequest.delete("/posts/" + props.post._id+"/"+currentUser._id);
+			setIsDeleted(true);
+			window.location.reload();
 		} catch (error) {
 			console.log(props.post._id,currentUser._id)
 			console.log(error.message);

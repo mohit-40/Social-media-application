@@ -7,6 +7,7 @@ import UserItem from "../../component/UserItem/UserItem"
  
 import {useSelector } from "react-redux" 
 import { io } from "socket.io-client";
+import { userRequest } from '../../requestMethod';
 
 function FriendPage() {
 	
@@ -25,7 +26,7 @@ function FriendPage() {
 		const fetchallUser = async () => {
 			try {
 				if (location.state.all) {
-					const res = await axios.get("/users/allUsers", { userId: currentUser._id })
+					const res = await userRequest.get("/users/allUsers", { userId: currentUser._id })
 					setDisUsers(res.data.filter((user) => user._id !== currentUser._id))
 				}
 				else {

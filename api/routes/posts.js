@@ -5,7 +5,7 @@ const User = require('../models/User');
 const {verifyTokenAndAdmin, verifyToken,  verifyTokenAndAuthorization } =require("./verifyToken")
 
 // create a post 
-router.post("/", async (req, res) => {
+router.post("/:id",verifyTokenAndAuthorization,async (req, res) => {
 	try {
 		const newPost = await new Post(req.body);
 		const post = await newPost.save()
@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
 	}
 })
 // update a post 
-router.put("/:id", async (req, res) => {
+router.put("/:id",verifyTokenAndAuthorization,async (req, res) => {
 	try {
 		const post = await Post.findById({ _id: req.params.id });
 		if (req.body.userId == post.userId) {
@@ -29,10 +29,10 @@ router.put("/:id", async (req, res) => {
 	}
 })
 // delete a post 
-router.delete("/:id", async (req, res) => {
+router.delete("/:pid/:id", verifyTokenAndAuthorization ,async (req, res) => {
 	try {
-		const post = await Post.findById({ _id: req.params.id });
-		if (req.body.userId === post.userId) {
+		const post = await Post.findById({ _id: req.params.pid });
+		if (req.params.id === post.userId) {
 			await post.delete();
 			res.status(200).json("post deleted successfully");
 		} else {
@@ -43,7 +43,7 @@ router.delete("/:id", async (req, res) => {
 	}
 })
 // like/unlike a  post 
-router.put("/:id/like", async (req, res) => {
+router.put("/:id/like",verifyToken , async (req, res) => {
 	try {
 		const post = await Post.findById({ _id: req.params.id });
 		if (!post.like.includes(req.body.userId)) {
@@ -63,7 +63,7 @@ router.put("/:id/like", async (req, res) => {
 })
 
 // get a post 
-router.get("/:id", async (req, res) => {
+router.get("/:id",verifyToken ,  async (req, res) => {
 	try {
 		const post = await Post.findById({ _id: req.params.id });
 		res.status(200).json(post);
@@ -73,9 +73,9 @@ router.get("/:id", async (req, res) => {
 })
 
 // get timeline post 
-router.get("/timeline/:userId", async (req, res) => {
+router.get("/timeline/:id",verifyTokenAndAuthorization , async (req, res) => {
 	try {
-		const currentUser = await User.findById(req.params.userId);
+		const currentUser = await User.findById(req.params.id);
 		const userPost = await Post.find({ userId: currentUser._id });
 		const friendPost = await Promise.all(
 			currentUser.followings.map((friendId) => Post.find({ userId: friendId }))
@@ -86,7 +86,7 @@ router.get("/timeline/:userId", async (req, res) => {
 	}
 })
 // get user all  post 
-router.get("/profile/:username", async (req, res) => {
+router.get("/profile/:username", verifyToken , async (req, res) => {
 	try {
 		const currentUser = await User.findOne({ username: req.params.username });
 		const userPost = await Post.find({ userId: currentUser._id });

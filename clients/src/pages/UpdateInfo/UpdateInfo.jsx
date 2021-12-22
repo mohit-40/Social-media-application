@@ -7,6 +7,7 @@ import { useHistory } from 'react-router';
 import { useEffect } from "react";
 import { io } from "socket.io-client"; 
 import { useSelector } from 'react-redux'
+import { userRequest } from '../../requestMethod';
 
 
 function UpdateInfo() {
@@ -45,7 +46,7 @@ function UpdateInfo() {
 		}
 		console.log(body)
 		try {
-			const res =await axios.put("/users/"+currentUser._id,body);
+			const res =await userRequest.put("/users/"+currentUser._id,body);
 			setUpdated(true)
 			console.log(res)
 			history.push("/profile/"+currentUser.username)

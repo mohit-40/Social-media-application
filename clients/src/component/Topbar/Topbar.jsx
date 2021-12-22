@@ -5,6 +5,7 @@ import "./Topbar.css"
 import {useSelector ,useDispatch} from "react-redux"
 import axios from "axios"
 import {logout } from "../../redux/exportAllAction"
+import { userRequest } from '../../requestMethod';
 
 function Topbar() {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -17,7 +18,7 @@ function Topbar() {
 	useEffect(() => {
 		const fetchAllUsers = async () => {
 			try {
-				const res = await axios.get("/users/allUsers")
+				const res = await userRequest.get("/users/allUsers")
 				setAllUsers(res.data);
 			} catch (error) {
 				console.log(error)

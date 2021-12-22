@@ -5,6 +5,7 @@ import { RssFeed, Chat, PersonAdd } from "@material-ui/icons";
 import CloseFriend from "../CloseFriend/CloseFriend"
 import {useSelector} from "react-redux"
 import axios from 'axios';
+import { userRequest } from '../../requestMethod';
 
 function Sidebar() {
 
@@ -15,7 +16,7 @@ function Sidebar() {
 	const [loaded, setLoaded] = useState(false)
 	useEffect(() => {
 		const fetchFollowing = async () => {
-			const res = await axios.get("/users/followings/" + currentUser._id)
+			const res = await userRequest.get("/users/followings/" + currentUser._id)
 			setFollowings(res.data)
 			setLoaded(true)
 		}

@@ -18,7 +18,7 @@ function Chat() {
 	const [currConversation, setCurrConversation] = useState(null)
 	const [messages, setMessages] = useState([])
 	const [newMessage, setNewMessage] = useState()
-	const scrollRef = useRef()
+	const scrollRef = useRef();
 	const socket = useRef();
 	const [onlineFriend, setOnlineFriend] = useState([]);
 	const [dynamicMessage, setDynamicMessage] = useState();
@@ -27,7 +27,7 @@ function Chat() {
 	//fetch followings
 	useEffect(() => {
 		const fetchFollowings = async () => {
-			const res = await axios.get("/users/followings/" + currentUser._id)
+			const res = await userRequest.get("/users/followings/" + currentUser._id)
 			setFollowings(res.data)
 		}
 		fetchFollowings()
@@ -85,11 +85,11 @@ function Chat() {
 	//fetch message
 	useEffect(() => {
 		const fetchMessages = async () => {
-			try {
-				if (currConversation) {
-					const res = await axios.get("/messages/" + currConversation._id)
+			try{
+				if(currConversation) {
+					const res = await axios.get("/messages/" + currConversation._id);
 					console.log(res.data);
-					setMessages(res.data)
+					// setMessages(res.data)
 				}
 			} catch (error) {
 				console.log(error)

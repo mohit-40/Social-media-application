@@ -11,6 +11,7 @@ import { useHistory } from 'react-router-dom';
 import { storage } from "../../firebase/firebase";
 import { useSelector } from 'react-redux'
 import { io } from "socket.io-client";
+import { userRequest } from '../../requestMethod';
 
 function Profile() {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -35,7 +36,7 @@ function Profile() {
 	useEffect(() => {
 		const fetchUser = async () => {
 			try {
-				const res = await axios.get(`/users?username=${username}`);
+				const res = await userRequest.get(`/users?username=${username}`);
 				setUser(res.data);
 				setLoaded(true)
 			}
@@ -60,7 +61,7 @@ function Profile() {
 					await uploadTask.on( "state_changed", snapshot => { }, error => { console.log(error); },
 						async () => {
 							await storage.ref(`${user.username}/coverPic`).child(coverPicName).getDownloadURL().then((imgurl )=> { updatedUser.coverPicture=imgurl})
-							await axios.put("/users/"+ user._id,updatedUser);
+							await userRequest.put("/users/"+ user._id,updatedUser);
 							setCoverPic(null)
 							window.location.reload();
 						}
@@ -78,7 +79,7 @@ function Profile() {
 					await uploadTask.on( "state_changed", snapshot => { }, error => { console.log(error); },
 						async () => {
 							await storage.ref(`${user.username}/profilePic`).child(profilePicName).getDownloadURL().then((imgurl )=> { updatedUser.profilePicture=imgurl})
-							await axios.put("/users/"+ user._id,updatedUser);
+							await userRequest.put("/users/"+ user._id,updatedUser);
 							setProfilePic(null)
 							window.location.reload();
 						}

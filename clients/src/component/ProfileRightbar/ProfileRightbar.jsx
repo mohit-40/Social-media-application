@@ -5,6 +5,7 @@ import { Add, Remove } from "@material-ui/icons";
 import CloseFriend from '../CloseFriend/CloseFriend';
 import axios from 'axios';
 import {useSelector} from "react-redux"
+import { userRequest } from '../../requestMethod';
 
 function ProfileRightbar({ user }) {
 	const userState = useSelector(state => state.user)
@@ -17,7 +18,7 @@ function ProfileRightbar({ user }) {
 
 	const handleFollow = async () => {
 		try {
-			followed ? await axios.put("/users/" + user._id + "/unfollow", { userId: currentUser._id }) : await axios.put("/users/" + user._id + "/follow", { userId: currentUser._id })
+			followed ? await userRequest.put("/users/"+ user._id +"/"+ currentUser._id + "/unfollow") : await userRequest.put("/users/"+ user._id +"/"+ currentUser._id + "/follow" )
 			setFollowed(!followed);
 		} catch (error) {
 			console.log(error.message);
@@ -27,8 +28,8 @@ function ProfileRightbar({ user }) {
 
 	useEffect(() => {
 		const fetchFollowings = async () => {
-			const res1 = await axios.get("/users/followings/" + user._id)
-			const res2 = await axios.get("/users/followers/" + user._id)
+			const res1 = await userRequest.get("/users/followings/" + user._id)
+			const res2 = await userRequest.get("/users/followers/" + user._id)
 			setFollowings(res1.data)
 			setFollowers(res2.data)
 			setLoaded(true)

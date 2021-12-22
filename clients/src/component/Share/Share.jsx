@@ -5,6 +5,7 @@ import { storage } from "../../firebase/firebase";
 import axios from "axios"
 import { useHistory } from "react-router-dom";
 import {useSelector} from "react-redux"
+import { userRequest } from '../../requestMethod';
 
 
 function Share() {
@@ -56,7 +57,7 @@ function Share() {
 					error => { console.log(error); },
 					async () => {
 						await storage.ref(`${currentUser.username}/posts/`).child(fileName).getDownloadURL().then((imgurl )=> { setUrl(imgurl); newPost.img = imgurl})
-						await axios.post("/posts", newPost);
+						await userRequest.post("/posts/"+currentUser._id, newPost);
 						setMakePost(true);
 						setTimeout(() => {
 							setMakePost(false);

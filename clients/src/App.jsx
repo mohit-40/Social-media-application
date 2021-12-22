@@ -18,34 +18,7 @@ function App() {
   const userState = useSelector(state => state.user)
   const currentUser = userState.currentUser;
 
-  const refreshToken = async () => {
-    try {
-      const REFRESH_TOKEN = localStorage.getItem("refreshToken")
-      const res = await axios.post("/auth/refresh/" + currentUser._id, { refreshToken: REFRESH_TOKEN });
-      localStorage.setItem("accessToken", res.data.accessToken)
-      console.log("accesstoken updated")
-      return res.data;
-    } catch (err) {
-      console.log(err);
-    }
-  };
   
-  userRequest.interceptors.request.use(
-    async (config) => {
-      let currentDate = new Date();
-      const ACCESS_TOKEN = localStorage.getItem("accessToken")
-      const decodedToken = jwtDecode(ACCESS_TOKEN);
-      if (decodedToken.exp * 1000 < currentDate.getTime()) {
-        const data = await refreshToken();
-        config.headers["authorization"] = "Bearer " + data.accessToken;
-      }
-      return config;
-    },
-    (error) => {
-      return Promise.reject(error);
-    }
-  );
-
   return (
     <Router>
       <Switch>

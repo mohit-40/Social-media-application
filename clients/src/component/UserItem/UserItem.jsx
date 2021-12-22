@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {useSelector} from "react-redux"
 import "./UserItem.css"
 import axios from "axios"
+import { userRequest } from '../../requestMethod'
 
 
 function UserItem({user}) {
@@ -15,7 +16,7 @@ function UserItem({user}) {
 	useEffect(()=>{
 		const fetchFollowings=async()=>{
 			try {
-				const res=await axios.get("/users/followings/"+currentUser._id)
+				const res=await userRequest.get("/users/followings/"+currentUser._id)
 				setFollowings(res.data)
 			} catch (error) {
 				console.log(error)
@@ -29,8 +30,8 @@ function UserItem({user}) {
 	
 	const handleClick =async () => {
 		try {
-			followed? 	await axios.put("/users/"+user._id+"/unfollow",{userId:currentUser._id}):
-						await axios.put("/users/"+user._id+"/follow",{userId:currentUser._id})
+			followed? 	await userRequest.put("/users/"+user._id+"/"+ currentUser._id +"/unfollow"):
+						await userRequest.put("/users/"+user._id+"/"+ currentUser._id +"/unfollow" )
 			setFollowed(!followed);
 		} catch (error) {
 			console.log(error)

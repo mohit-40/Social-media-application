@@ -13,7 +13,7 @@ function Online({ userId, setCurrConversation }) {
 	useEffect(() => {
 		const fetchUser = async () => {
 			try {
-				const res = await axios.get("/users?userId=" + userId)
+				const res = await userRequest.get("/users?userId=" + userId)
 				setUser(res.data)
 			} catch (error) {
 				console.log(error)

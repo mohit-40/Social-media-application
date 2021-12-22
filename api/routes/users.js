@@ -5,9 +5,8 @@ const saltRounds = 10;
 const {verifyTokenAndAdmin, verifyToken,  verifyTokenAndAuthorization } =require("./verifyToken")
 
 // update a user 
-router.put("/:id", async (req, res) => {
-
-	if (req.params.id === req.body.userId||req.body.isAdmin) {
+router.put("/:id",verifyTokenAndAuthorization, async (req, res) => {
+ 
 		try {
 			if (req.body.password) {
 				const salt = await bcrypt.genSalt(saltRounds);
@@ -18,29 +17,21 @@ router.put("/:id", async (req, res) => {
 		} catch (err) {
 			res.status(404).json(err.message);
 		}
-	}
-	else {
-		res.status(404).json("can't update others account");
-	}
+
 });
 // delete a user 
 
-router.delete("/:id", async (req, res) => {
-	if (req.params.id === req.body.userId ||req.body.isAdmin ) {
+router.delete("/:id",verifyTokenAndAuthorization, async (req, res) => { 
 		try {
 			await User.findByIdAndDelete({ _id: req.params.id });
 			res.status(200).json("User is delete Sucessfully");
 		} catch (err) {
 			res.status(404).json(err.message);
-		}
-	}
-	else {
-		res.status(404).json("Can't delte other User");
-	}
+		} 
 })
 
 // get a user 
-router.get("/", async (req, res) => {
+router.get("/", verifyToken ,async (req, res) => {
 	const username=req.query.username;
 	const userId=req.query.userId;
 	try {
@@ -54,14 +45,14 @@ router.get("/", async (req, res) => {
 })
 
 // follow a user 
-router.put("/:id/follow", async (req, res) => {
+router.put("/:userId/:id/follow",verifyTokenAndAuthorization, async (req, res) => {
 	try {
-		const user = await User.findById(req.params.id);
-		const currentUser = await User.findById(req.body.userId);
-		if (req.body.userId !== req.params.id) {
-			if (!user.followers.includes(req.body.userId)) {
-				await user.updateOne({ $push: { followers: req.body.userId } });
-				await currentUser.updateOne({ $push: { followings: req.params.id } });
+		const user = await User.findById(req.params.userId);
+		const currentUser = await User.findById(req.params.id);
+		if (req.params.id !== req.params.userId) {
+			if (!user.followers.includes(req.params.id)) {
+				await user.updateOne({ $push: { followers: req.params.id } });
+				await currentUser.updateOne({ $push: { followings: req.params.userId } });
 				res.status(200).json("User has been followed");
 			} else {
 				res.status(200).json("alredy following this user");
@@ -77,14 +68,14 @@ router.put("/:id/follow", async (req, res) => {
 
 // unfollow a user 
 
-router.put("/:id/unfollow", async (req, res) => {
+router.put("/:userId/:id/unfollow",verifyTokenAndAuthorization, async (req, res) => {
 	try {
-		const user = await User.findById(req.params.id);
-		const currentUser = await User.findById(req.body.userId);
-		if (req.body.userId !== req.params.id) {
-			if (user.followers.includes(req.body.userId)) {
-				await user.updateOne({ $pull: { followers: req.body.userId } });
-				await currentUser.updateOne({ $pull: { followings: req.params.id } });
+		const user = await User.findById(req.params.userId);
+		const currentUser = await User.findById(req.params.id);
+		if (req.params.id !== req.params.userId) {
+			if (user.followers.includes(req.params.id)) {
+				await user.updateOne({ $pull: { followers: req.params.id } });
+				await currentUser.updateOne({ $pull: { followings: req.params.userId } });
 				res.status(200).json("Successfully unfollow the asshole");
 			} else {
 				res.status(200).json("not following this user");
@@ -97,7 +88,7 @@ router.put("/:id/unfollow", async (req, res) => {
 	}
 })
 // get the followings
-router.get("/followings/:userId",async (req,res)=>{
+router.get("/followings/:userId", verifyToken ,async (req,res)=>{
 	try {
 		const user= await User.findById(req.params.userId)
 		const followings= await Promise.all(
@@ -111,7 +102,7 @@ router.get("/followings/:userId",async (req,res)=>{
 	}
 })
 // get the followers
-router.get("/followers/:userId",async (req,res)=>{
+router.get("/followers/:userId",verifyToken ,async (req,res)=>{
 	try {
 		const user= await User.findById(req.params.userId)
 		const followers= await Promise.all(
@@ -126,7 +117,7 @@ router.get("/followers/:userId",async (req,res)=>{
 })
 
 //get all users
-router.get("/allUsers/", async (req,res)=>{
+router.get("/allUsers/", verifyToken ,async (req,res)=>{
 	try {
 		const allUsers=await User.find({})
 		res.status(200).json(allUsers)
