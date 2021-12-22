@@ -45,8 +45,8 @@ router.post('/login',async(req,res)=>{
 				await User.findOneAndUpdate({email:req.body.email} , { $push:{ refreshTokenArray: refreshToken } } , {new :true} )
 
 				const  {password, refreshTokenArray , ...others } = user._doc;   
-				res.cookie("accessToken",accessToken);
-				res.cookie("refreshToken",refreshToken);
+				// res.cookie("accessToken",accessToken);
+				// res.cookie("refreshToken",refreshToken);
 				res.status(200).json({...others, accessToken ,refreshToken });
 			}
 		}
