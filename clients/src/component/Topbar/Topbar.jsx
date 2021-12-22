@@ -2,14 +2,29 @@ import React, { useEffect, useState } from 'react'
 import { Link } from "react-router-dom"
 import { Search, Person, Chat, Notifications } from "@material-ui/icons";
 import "./Topbar.css"
-import {useSelector ,useDispatch} from "react-redux"
-import {logout } from "../../redux/exportAllAction"
+import { useSelector, useDispatch } from "react-redux"
+import { logout } from "../../redux/exportAllAction"
 import { userRequest } from '../../requestMethod';
 
 function Topbar() {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+	//fetching currentuser
 	const userState = useSelector(state => state.user)
-	const currentUser = userState.currentUser;
+	const currentUserId = userState.currentUserId;
+	const [currentUser, setCurrentUser] = useState(null);
+	useEffect(() => {
+		const fetchUser = async () => {
+			try {
+				const res = await userRequest.get("/users?userId=" + currentUserId);
+				setCurrentUser(res.data);
+			} catch (error) {
+				console.log(error);
+			}
+		}
+		fetchUser();
+	}, [currentUserId, setCurrentUser])
+	//fetched currentUser
+
 	const [allUsers, setAllUsers] = useState([])
 	const [search, setSearch] = useState('')
 	const dispatch = useDispatch();
@@ -29,8 +44,8 @@ function Topbar() {
 	const handleSearch = (e) => {
 		setSearch(e.target.value);
 	}
-	const handleLogout = ()=>{
-		dispatch(logout(currentUser._id));
+	const handleLogout = () => {
+		dispatch(logout(currentUserId));
 	}
 
 
@@ -47,7 +62,7 @@ function Topbar() {
 					<div className="search-result">
 						{allUsers.filter((user) => search !== "" && user.name.toLowerCase().includes(search.toLowerCase())).slice(0, 5).map((user) => {
 							return (
-								<Link className="search-result-item" to={`/profile/${user.username}`}>
+								<Link key={user._id} className="search-result-item" to={`/profile/${user.username}`}>
 									<div >{user.name}</div>
 								</Link>
 							)
@@ -60,7 +75,7 @@ function Topbar() {
 
 			<div className="topbar-right">
 				<div className="topbar-link-container">
-					<Link className='text-link' to={`/profile/${currentUser.username}`}><span className="topbar-link">Home</span></Link>
+					<Link className='text-link' to={`/profile/${currentUser?.username}`}><span className="topbar-link">Home</span></Link>
 					<Link className='text-link' to="/"><span className="topbar-link">Timeline</span></Link>
 					<span className="topbar-link" onClick={handleLogout}>Logout</span>
 				</div>
@@ -81,7 +96,7 @@ function Topbar() {
 					</div>
 				</div>
 
-				<Link className='text-link' to={`/profile/${currentUser.username}`} ><img src={currentUser.profilePicture ? currentUser.profilePicture : PF + "/person/noAvatar.png"} alt="img" /></Link>
+				<Link className='text-link' to={`/profile/${currentUser?.username}`} ><img src={currentUser?.profilePicture ? currentUser?.profilePicture : PF + "/person/noAvatar.png"} alt="img" /></Link>
 			</div>
 		</div>
 	)

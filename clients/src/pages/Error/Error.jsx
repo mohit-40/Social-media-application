@@ -8,12 +8,12 @@ import { io } from "socket.io-client";
 function Error({statusCode , message}) {
 	message=message?message:"Some Error Occured";
 	
-	const currentUser = useSelector(state => state.user.currentUser)
+	const currentUserId = useSelector(state => state.user.currentUserId)
 	//connecting to socket server 
 	useEffect(()=>{
 		const socket = io.connect("ws://localhost:8900"); 
-		socket.emit("addUser", currentUser._id);
-	},[currentUser]);
+		socket.emit("addUser", currentUserId);
+	},[currentUserId]);
 
 	return (
 		<>

@@ -6,8 +6,7 @@ import { userRequest } from '../../requestMethod';
 function Online({ userId, setCurrConversation }) {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 	const [user, setUser] = useState()
-	const userState = useSelector(state => state.user)
-	const currentUser = userState.currentUser;
+	const currentUserId = useSelector(state => state.user.currentUserId)
 	// fetch user 
 	useEffect(() => {
 		const fetchUser = async () => {
@@ -25,11 +24,11 @@ function Online({ userId, setCurrConversation }) {
 	//fetch or create conversation 
 	const handleClick = async () => {
 		const body = {
-			senderId: currentUser._id,
+			senderId: currentUserId,
 			receiverId: user._id
 		}
 		try {
-			const res = await userRequest.post("/conversations/"+currentUser._id, body)
+			const res = await userRequest.post("/conversations/"+currentUserId, body)
 			setCurrConversation(res.data[0])
 		} catch (error) {
 			console.log(error)

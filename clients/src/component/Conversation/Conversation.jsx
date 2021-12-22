@@ -4,14 +4,17 @@ import { useSelector } from 'react-redux'
 import { userRequest } from '../../requestMethod'
 
 function Conversation({ conversation }) {
+	//fetching currentuser
 	const userState = useSelector(state => state.user)
-	const currentUser = userState.currentUser;
+	const currentUserId = userState.currentUserId;
+	// fetched currentUser
+
 	const [user, setUser] = useState()
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
 	// friend of conversation With
 	useEffect(() => {
-		const friendId = conversation.members.find( m => m !== currentUser._id);
+		const friendId = conversation.members.find( m => m !== currentUserId);
 		const getUser = async () => {
 			try {
 				const res = await userRequest.get("/users?userId=" + friendId);
@@ -21,7 +24,7 @@ function Conversation({ conversation }) {
 			}
 		};
 		getUser();
-	}, [currentUser, conversation]);
+	}, [currentUserId, conversation]);
 
 
 

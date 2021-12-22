@@ -13,7 +13,7 @@ function Login() {
 
 	const dispatch =useDispatch();
 	const userState = useSelector(state=>state.user)
-	const {currentUser , isLoading, error} = userState;
+	const { isLoading, error} = userState;
 	const history=useHistory();
 	const handleSubmit= (e)=>{
 			e.preventDefault();

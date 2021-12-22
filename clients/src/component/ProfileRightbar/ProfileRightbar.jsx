@@ -8,8 +8,8 @@ import { userRequest } from '../../requestMethod';
 
 function ProfileRightbar({ user }) {
 	const userState = useSelector(state => state.user)
-	const currentUser = userState.currentUser;
-	const [followed, setFollowed] = useState(user.followers.includes(currentUser._id));
+	const currentUserId = userState.currentUserId;
+	const [followed, setFollowed] = useState(user.followers.includes(currentUserId));
 	const [loaded, setLoaded] = useState(false)
 	const [followings, setFollowings] = useState([])
 	const [followers, setFollowers] = useState([])
@@ -17,7 +17,7 @@ function ProfileRightbar({ user }) {
 
 	const handleFollow = async () => {
 		try {
-			followed ? await userRequest.put("/users/"+ user._id +"/"+ currentUser._id + "/unfollow") : await userRequest.put("/users/"+ user._id +"/"+ currentUser._id + "/follow" )
+			followed ? await userRequest.put("/users/"+ user._id +"/"+ currentUserId + "/unfollow") : await userRequest.put("/users/"+ user._id +"/"+ currentUserId + "/follow" )
 			setFollowed(!followed);
 		} catch (error) {
 			console.log(error.message);
@@ -40,7 +40,7 @@ function ProfileRightbar({ user }) {
 	return loaded && (
 		<div className="profile-rightbar">
 			<div className="profile-rightbar-wrapper">
-				{user._id !== currentUser._id ?
+				{user._id !== currentUserId ?
 					<button className="follow-btn" onClick={handleFollow}>
 						{followed ? "UnFollow" : "Follow"}
 						{followed ? <Remove /> : <Add />}

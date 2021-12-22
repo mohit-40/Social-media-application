@@ -5,32 +5,32 @@ import { userRequest } from '../../requestMethod'
 
 
 function UserItem({user}) {
-
+	//fetching currentuser
 	const userState = useSelector(state => state.user)
-	const currentUser = userState.currentUser;
-	
+	const currentUserId = userState.currentUserId; 
+	//fetched currentUser
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 	const [followings,setFollowings] = useState([])
 	
 	useEffect(()=>{
 		const fetchFollowings=async()=>{
 			try {
-				const res=await userRequest.get("/users/followings/"+currentUser._id)
+				const res=await userRequest.get("/users/followings/"+currentUserId)
 				setFollowings(res.data)
 			} catch (error) {
 				console.log(error)
 			}
 		}
 		fetchFollowings()
-	},[])
+	},[currentUserId])
 	
-	const [followed, setFollowed] = useState(user.followers.includes(currentUser._id))
+	const [followed, setFollowed] = useState(user.followers.includes(currentUserId))
 
 	
 	const handleClick =async () => {
 		try {
-			followed? 	await userRequest.put("/users/"+user._id+"/"+ currentUser._id +"/unfollow"):
-						await userRequest.put("/users/"+user._id+"/"+ currentUser._id +"/unfollow" )
+			followed? 	await userRequest.put("/users/"+user._id+"/"+ currentUserId +"/unfollow"):
+						await userRequest.put("/users/"+user._id+"/"+ currentUserId +"/unfollow" )
 			setFollowed(!followed);
 		} catch (error) {
 			console.log(error)

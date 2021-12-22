@@ -10,8 +10,22 @@ import {useSelector} from "react-redux"
 import {userRequest} from "../../requestMethod"
 
 function Chat() {  
+	//fetching currentuser
 	const userState = useSelector(state => state.user)
-	const currentUser = userState.currentUser;
+	const currentUserId = userState.currentUserId;
+	const [currentUser, setCurrentUser]= useState(null);
+	useEffect(()=>{
+		const fetchUser=async()=>{
+			try {
+				const res = await userRequest.get("/users?userId="+currentUserId); 
+				setCurrentUser(res.data);
+			} catch(error) {
+				console.log(error);
+			}
+		}
+		fetchUser();
+	},[currentUserId,setCurrentUser])
+	//fetched currentUser
 	
 	const [conversations, setConversations] = useState([])
 	const [currConversation, setCurrConversation] = useState(null)
@@ -26,16 +40,16 @@ function Chat() {
 	//fetch followings
 	useEffect(() => {
 		const fetchFollowings = async () => {
-			const res = await userRequest.get("/users/followings/" + currentUser._id)
+			const res = await userRequest.get("/users/followings/" + currentUserId)
 			setFollowings(res.data)
 		}
 		fetchFollowings()
-	}, [currentUser]);
+	}, [currentUserId]);
 
 	//create the conversation
 	async function handleClick(userId) {
 		try {
-			const res = await userRequest.post("/conversations/"+currentUser._id, { senderId: currentUser._id, receiverId: userId })
+			const res = await userRequest.post("/conversations/"+currentUserId, { senderId: currentUserId, receiverId: userId })
 			setCurrConversation(res.data[0])
 
 			!conversations.some((conversation)=> conversation._id===res.data[0]._id) && setConversations([...conversations,res.data[0]])
@@ -59,26 +73,26 @@ function Chat() {
 	
 	//whenever new user connect add that user to socket server
 	useEffect(() => {
-		socket.current.emit("addUser", currentUser._id);
+		socket.current.emit("addUser", currentUserId);
 		socket.current.on("getUsers", (users) => {
 			console.log("hello")
-			setOnlineFriend(currentUser.followings.filter((f) => users.some((u) => u.userId === f)))
+			setOnlineFriend(currentUser?.followings.filter((f) => users.some((u) => u.userId === f)))
 		})
-	}, [currentUser]);
+	}, [currentUserId,currentUser]);
 	
 	
 	// fetch conversation
 	useEffect(() => {
 		const fetchConversations = async () => {
 			try {
-				const res = await userRequest.get("/conversations/" + currentUser._id)
+				const res = await userRequest.get("/conversations/" + currentUserId)
 				setConversations(res.data)
 			} catch (error) {
 				console.log(error.message)
 			}
 		}
 		fetchConversations()
-	}, [currentUser._id]);
+	}, [currentUserId]);
 
 
 	//fetch message
@@ -86,7 +100,7 @@ function Chat() {
 		const fetchMessages = async () => {
 			try{
 				if(currConversation) {
-					const res = await userRequest.get("/messages/" + currConversation._id+"/"+currentUser._id);
+					const res = await userRequest.get("/messages/" + currConversation._id+"/"+currentUserId);
 					console.log(res.data);
 					setMessages(res.data)
 				}
@@ -95,22 +109,22 @@ function Chat() {
 			}
 		}
 		fetchMessages()
-	}, [currConversation])
+	}, [currConversation, currentUserId])
 
 	// send message
 	const handleSend = async (e) => {
 		e.preventDefault()
 		const body = {
 			conversationId: currConversation,
-			senderId: currentUser._id,
+			senderId: currentUserId,
 			textMessage: newMessage
 		}
 		socket.current.emit("sendMessage", {
 			body: body,
-			receiverId: currConversation.members.find((member) => member != currentUser._id),
+			receiverId: currConversation.members.find((member) => member != currentUserId),
 		})
 		try {
-			const res = await userRequest.post("/messages/"+currentUser._id, body);
+			const res = await userRequest.post("/messages/"+currentUserId, body);
 			setMessages([...messages, res.data]);
 			setNewMessage("")
 		} catch (error) {
@@ -160,7 +174,7 @@ function Chat() {
 								<div className="chat-center-top">
 									{messages?.map((message) => (
 										<div ref={scrollRef}>
-											<Message key={message._id} message={message} own={message.senderId === currentUser._id ? true : false} />
+											<Message key={message._id} message={message} own={message.senderId === currentUserId ? true : false} />
 										</div>
 									))}
 
@@ -181,7 +195,7 @@ function Chat() {
 						<div className="chat-right-wrapper">
 							<h2 className="heading">Online Friend</h2>
 							<ul className="online-friend-list">
-								{onlineFriend.length===0? "No friend Online" : ''}
+								{onlineFriend?.length===0? "No friend Online" : ''}
 								{onlineFriend?.map((userId) => (
 									<Online key={userId} userId={userId} setCurrConversation={setCurrConversation} />
 								))}

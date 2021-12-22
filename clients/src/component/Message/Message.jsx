@@ -1,15 +1,10 @@
 
 import React, { useEffect, useState } from 'react'
 import "./Message.css"
-import { format } from "timeago.js"
-import { useSelector } from 'react-redux'
+import { format } from "timeago.js" 
 import { userRequest } from '../../requestMethod'
 
 function Message({message,own}) {
-
-	const userState = useSelector(state => state.user)
-	const currentUser = userState.currentUser;
-	
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 	const [user, setUser] = useState();
 

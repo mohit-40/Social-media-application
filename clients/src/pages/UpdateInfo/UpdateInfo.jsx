@@ -11,7 +11,21 @@ import { userRequest } from '../../requestMethod';
 
 function UpdateInfo() {
 	const userState = useSelector(state => state.user)
-	const currentUser = userState.currentUser;
+	const currentUserId = userState.currentUserId;
+	const [currentUser, setCurrentUser]= useState(null);
+	//fetch user
+	useEffect(()=>{
+		const fetchUser=async()=>{
+			try {
+				const res = await userRequest.get("/users?userId="+currentUserId); 
+				setCurrentUser(res.data);
+			} catch(error) {
+				console.log(error);
+			}
+		}
+		fetchUser();
+	},[currentUserId,setCurrentUser])
+
 
 	const [updated,setUpdated]=useState()
 	const name = useRef();
@@ -27,14 +41,14 @@ function UpdateInfo() {
 	//connecting to socket server 
 	useEffect(()=>{
 		const socket = io.connect("ws://localhost:8900"); 
-		socket.emit("addUser", currentUser._id);
-	},[currentUser]);
+		socket.emit("addUser", currentUserId);
+	},[currentUserId]);
 
 
 	const handleSubmit=async (e)=>{
 		e.preventDefault()
 		const body={
-			userId:currentUser._id,
+			userId:currentUserId,
 			name:name.current.value,
 			from:from.current.value,
 			live:live.current.value,
@@ -45,10 +59,10 @@ function UpdateInfo() {
 		}
 		console.log(body)
 		try {
-			const res =await userRequest.put("/users/"+currentUser._id,body);
+			const res =await userRequest.put("/users/"+currentUserId,body);
 			setUpdated(true)
 			console.log(res)
-			history.push("/profile/"+currentUser.username)
+			history.push("/profile/"+currentUser?.username)
 		} catch (error) {
 			console.log(error)
 		}
@@ -64,11 +78,11 @@ function UpdateInfo() {
 				{updated ? "the profile Infomation is now updated" : ''}
 
 				<form className="profile-update-form" onSubmit={handleSubmit}>
-					<input type="text" ref={name} placeholder="Name" defaultValue={currentUser.name} required/>
-					<input type="text" ref={from} placeholder="From" defaultValue={currentUser.from} required />
-					<input type="text" ref={live} placeholder="Live" defaultValue={currentUser.live} required />
-					<input type="text" ref={work} placeholder="Work" defaultValue={currentUser.work} required />
-					<input type="text" ref={school} placeholder="School" defaultValue={currentUser.school} required />
+					<input type="text" ref={name} placeholder="Name" defaultValue={currentUser?.name} required/>
+					<input type="text" ref={from} placeholder="From" defaultValue={currentUser?.from} required />
+					<input type="text" ref={live} placeholder="Live" defaultValue={currentUser?.live} required />
+					<input type="text" ref={work} placeholder="Work" defaultValue={currentUser?.work} required />
+					<input type="text" ref={school} placeholder="School" defaultValue={currentUser?.school} required />
 
 					<h3>Relationship Status</h3>
 					<div className="relationshipStatus">
@@ -77,7 +91,7 @@ function UpdateInfo() {
 						<label htmlFor="complicated"> Complicated <input type="radio" name="relationship" id="complicated" value="3" onChange={(e)=>relationship.current=e.target.value } /> </label>
 					</div>
 
-					<textarea name="" id="" cols="30" rows="5" ref={desc} placeholder="Write Something About You Here" defaultValue={currentUser.desc} required ></textarea>
+					<textarea name="" id="" cols="30" rows="5" ref={desc} placeholder="Write Something About You Here" defaultValue={currentUser?.desc} required ></textarea>
 					<button type="submit">Save</button>
 				</form>
 			</div>

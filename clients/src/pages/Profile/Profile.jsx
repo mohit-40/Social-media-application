@@ -22,14 +22,16 @@ function Profile() {
 	const [coverPic,setCoverPic] =  useState(null);
 	const [loaded,setLoaded]=useState(false)
 
+	//fetching currentUser
 	const userState = useSelector(state => state.user)
-	const currentUser = userState.currentUser;
+	const currentUserId = userState.currentUserId;
+	//fetched currentUser
 
 	//connecting to socket server 
 	useEffect(()=>{
 		const socket = io.connect("ws://localhost:8900"); 
-		socket.emit("addUser", currentUser._id);
-	},[currentUser]);
+		socket.emit("addUser", currentUserId);
+	},[currentUserId]);
 
 	
 	useEffect(() => {
@@ -51,7 +53,7 @@ function Profile() {
 	useEffect(() => {
 		const call=async ()=>{
 			const updatedUser={ 
-				userId: currentUser._id ,
+				userId: currentUserId ,
 			}
 			if (coverPic) {
 				try {
@@ -91,7 +93,7 @@ function Profile() {
 			}
 		} 
 		call();
-	}, [coverPic,profilePic,currentUser._id ,history , user._id, user.username ]);
+	}, [coverPic,profilePic,currentUserId ,history , user._id, user.username ]);
 
 
 	return loaded&&(
@@ -105,7 +107,7 @@ function Profile() {
 						<div className="profile-cover">
 							<img src={user.coverPicture ? user.coverPicture : PF + "/person/noCover.png"} alt="profileCoverPhoto" className="profile-cover-photo" />
 							<img src={user.profilePicture ? user.profilePicture : PF + "/person/noAvatar.png"} alt="profilePhoto" className="profile-photo" />
-							{currentUser._id === user._id ?
+							{currentUserId === user._id ?
 								<>
 									<label htmlFor="cover-pic" className="change-cover-label">
 										Change Cover

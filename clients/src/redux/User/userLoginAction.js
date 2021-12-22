@@ -4,9 +4,9 @@ import axios from "axios"
 export const loginStart=()=>({
 	type:LOGIN_START
 })
-export const loginSuccess=(user)=>({
+export const loginSuccess=(userId)=>({
 	type:LOGIN_SUCCESS,
-	payload: user
+	payload: userId
 })
 
 export const loginFail=()=>({
@@ -22,7 +22,7 @@ export const login=(email, password)=>{
 			const user =res.data;  
 			localStorage.setItem("accessToken",user.accessToken);
 			localStorage.setItem("refreshToken",user.refreshToken);
-			dispatch(loginSuccess(user));
+			dispatch(loginSuccess(user._id));
 		} catch (error) {
 			dispatch(loginFail())
 		}

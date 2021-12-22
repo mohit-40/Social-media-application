@@ -15,8 +15,8 @@ const refreshToken = async () => {
 	try {
 		const REFRESH_TOKEN = localStorage.getItem("refreshToken");
 		const state = store.getState();
-		const currentUser = state.user.currentUser;
-		const res = await axios.post("/auth/refresh/" + currentUser._id, { refreshToken: REFRESH_TOKEN });
+		const currentUserId = state.user.currentUserId;
+		const res = await axios.post("/auth/refresh/" + currentUserId, { refreshToken: REFRESH_TOKEN });
 		localStorage.setItem("accessToken", res.data.accessToken)
 		console.log("accesstoken updated")
 		return res.data;

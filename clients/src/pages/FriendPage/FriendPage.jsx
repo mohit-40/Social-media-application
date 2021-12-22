@@ -9,24 +9,27 @@ import { io } from "socket.io-client";
 import { userRequest } from '../../requestMethod';
 
 function FriendPage() {
-	
-	const currentUser = useSelector(state => state.user.currentUser)
+	const userState = useSelector(state => state.user)
+	const currentUserId = userState.currentUserId;
+
+
+
 	let location = useLocation();
 	const [disUsers, setDisUsers] = useState([]) 
 
 	//connecting to socket server 
 	useEffect(()=>{
 		const socket = io.connect("ws://localhost:8900"); 
-		socket.emit("addUser", currentUser._id);
-	},[currentUser]);
+		socket.emit("addUser", currentUserId);
+	},[currentUserId]);
 
 
 	useEffect(() => {
 		const fetchallUser = async () => {
 			try {
 				if (location.state.all) {
-					const res = await userRequest.get("/users/allUsers", { userId: currentUser._id })
-					setDisUsers(res.data.filter((user) => user._id !== currentUser._id))
+					const res = await userRequest.get("/users/allUsers", { userId: currentUserId })
+					setDisUsers(res.data.filter((user) => user._id !== currentUserId))
 				}
 				else {
 					setDisUsers(location.state.users)
@@ -36,7 +39,7 @@ function FriendPage() {
 			}
 		}
 		fetchallUser()
-	}, [currentUser, location.state.users ,location.state.all])
+	}, [currentUserId, location.state.users ,location.state.all])
 
 
 	return (

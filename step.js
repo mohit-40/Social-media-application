@@ -1,8 +1,3 @@
-verify api 
-add id parameter 
-call using userRequest
+make it dynamic
 
-improve redux by userId
-
-add follower redux 
-
+add follower/follwings redux as they are connected 

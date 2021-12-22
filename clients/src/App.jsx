@@ -13,19 +13,19 @@ import { useSelector } from 'react-redux'
 
 function App() {
   const userState = useSelector(state => state.user)
-  const currentUser = userState.currentUser;
+  const currentUserId = userState.currentUserId;
 
   
   return (
     <Router>
       <Switch>
-          <Route path="/" exact > {currentUser? <Home /> : <Login />}</Route>
+          <Route path="/" exact > {currentUserId? <Home /> : <Login />}</Route>
           <Route path="/profile/:username" exact > <Profile /> </Route>
-          <Route path="/login" exact >{currentUser? <Home /> : <Login /> }</Route>
-          <Route path="/register" exact > {currentUser? <Home /> : <Register />}</Route>
-          <Route path="/chat" exact > {currentUser? <Chat /> : <Register />}</Route>
-          <Route path="/friendPage" exact > {currentUser? <FriendPage /> : <Register />}</Route>
-          <Route path="/UpdateInfo" exact > {currentUser? <UpdateInfo /> : <Register />}</Route>
+          <Route path="/login" exact >{currentUserId? <Home /> : <Login /> }</Route>
+          <Route path="/register" exact > {currentUserId? <Home /> : <Register />}</Route>
+          <Route path="/chat" exact > {currentUserId? <Chat /> : <Register />}</Route>
+          <Route path="/friendPage" exact > {currentUserId? <FriendPage /> : <Register />}</Route>
+          <Route path="/UpdateInfo" exact > {currentUserId? <UpdateInfo /> : <Register />}</Route>
           <Route path="/error" exact > <Error/> </Route>
       </Switch>
     </Router>

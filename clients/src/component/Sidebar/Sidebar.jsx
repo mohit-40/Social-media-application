@@ -3,24 +3,26 @@ import { Link } from "react-router-dom"
 import "./Sidebar.css"
 import { RssFeed, Chat, PersonAdd } from "@material-ui/icons";
 import CloseFriend from "../CloseFriend/CloseFriend"
-import {useSelector} from "react-redux"
+import { useSelector } from "react-redux"
 import { userRequest } from '../../requestMethod';
 
 function Sidebar() {
-
+	//fetching currentuser
 	const userState = useSelector(state => state.user)
-	const currentUser = userState.currentUser;
-	
+	const currentUserId = userState.currentUserId;
+	//fetched currentUser
+
+
 	const [followings, setFollowings] = useState([])
 	const [loaded, setLoaded] = useState(false)
 	useEffect(() => {
 		const fetchFollowing = async () => {
-			const res = await userRequest.get("/users/followings/" + currentUser._id)
+			const res = await userRequest.get("/users/followings/" + currentUserId)
 			setFollowings(res.data)
 			setLoaded(true)
 		}
 		fetchFollowing()
-	}, [currentUser]);
+	}, [currentUserId]);
 
 
 	return loaded && (
@@ -61,7 +63,7 @@ function Sidebar() {
 						followings.slice(0, 3).map((user) => <CloseFriend key={user._id} user={user} className="friend-list-item" />)
 						: 'you currently have no friend'
 					}
-					<Link className='text-link' to={{ pathname: `/friendPage`, state: { users: followings} }} >
+					<Link className='text-link' to={{ pathname: `/friendPage`, state: { users: followings } }} >
 						<button className="show-all">Show All</button>
 					</Link>
 				</div>

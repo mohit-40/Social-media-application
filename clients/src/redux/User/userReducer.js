@@ -1,6 +1,6 @@
 import { LOGIN_FAIL, LOGIN_START, LOGIN_SUCCESS ,LOGOUT_FAIL, LOGOUT_START, LOGOUT_SUCCESS } from "./userType"
 const initialUserState={
-	currentUser: null,
+	currentUserId: null,
 	isLoading:false,
 	error:false
 }
@@ -9,20 +9,20 @@ const userReducer=(state=initialUserState , action)=>{
 	switch (action.type) {
 		case LOGIN_START: return {
 			...state,
-			currentUser:null,
+			currentUserId:null,
 			isLoading:true,
 			error:false
 
 		}
 		case LOGIN_SUCCESS: return {
 			...state,
-			currentUser: action.payload,			
+			currentUserId: action.payload,			
 			isLoading:false,
 			error: false
 		}
 		case LOGIN_FAIL: return {
 			...state,
-			currentUser:null,
+			currentUserId:null,
 			isLoading:false,
 			error:true
 		}
@@ -35,7 +35,7 @@ const userReducer=(state=initialUserState , action)=>{
 		}
 		case LOGOUT_SUCCESS: return {
 			...state,
-			currentUser: null,			
+			currentUserId: null,			
 			isLoading:false,
 			error: false
 		}

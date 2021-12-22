@@ -7,8 +7,11 @@ import {useSelector} from "react-redux"
 import { userRequest } from '../../requestMethod';
 
 function Post(props) {
+	//fetching currentuser
 	const userState = useSelector(state => state.user)
-	const currentUser = userState.currentUser;
+	const currentUserId = userState.currentUserId;
+	// fetched currentUser
+	
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 	const [user, setUser] = useState({});
 
@@ -17,13 +20,13 @@ function Post(props) {
 
 
 	useEffect(() => {
-		setIsLike(props.post.like.includes(currentUser._id));
-	}, [currentUser, props.post.like]);
+		setIsLike(props.post.like.includes(currentUserId));
+	}, [currentUserId, props.post.like]);
 
 
 	const handleLike = async () => {
 		try {
-			await userRequest.put("/posts/" + props.post._id + "/like", { userId: currentUser._id });
+			await userRequest.put("/posts/" + props.post._id + "/like", { userId: currentUserId });
 			if (isLike) { setLike(like - 1); }
 			else { setLike(like + 1); }
 			setIsLike(!isLike);
@@ -43,11 +46,11 @@ function Post(props) {
 	const [isDeleted, setIsDeleted] = useState(false);
 	const handleDelete = async () => {
 		try {
-			await userRequest.delete("/posts/" + props.post._id+"/"+currentUser._id);
+			await userRequest.delete("/posts/" + props.post._id+"/"+currentUserId);
 			setIsDeleted(true);
 			window.location.reload();
 		} catch (error) {
-			console.log(props.post._id,currentUser._id)
+			console.log(props.post._id,currentUserId)
 			console.log(error.message);
 		}
 	}
@@ -66,7 +69,7 @@ function Post(props) {
 					</div>
 					<div className="post-top-right">
 						<MoreVert className="more-icon" />
-						{props.post.userId === currentUser._id ? <button className="delete-post-btn" onClick={handleDelete}>Delete</button> : ''}
+						{props.post.userId === currentUserId ? <button className="delete-post-btn" onClick={handleDelete}>Delete</button> : ''}
 					
 						{isDeleted ? <div className="deleted">Post Deleted</div> : ''}
 					</div>
