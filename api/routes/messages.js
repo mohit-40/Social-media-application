@@ -3,7 +3,7 @@ const Message=require('../models/Message');
 const {verifyTokenAndAdmin, verifyToken,  verifyTokenAndAuthorization } =require("./verifyToken")
 
 //create a conversation message
-router.post("/",async (req,res)=>{
+router.post("/:id", verifyTokenAndAuthorization ,async (req,res)=>{
 	try {
 		const newMessage= await new Message(req.body)
 		const savedMessage=await newMessage.save()
@@ -13,7 +13,7 @@ router.post("/",async (req,res)=>{
 	}
 })
 //get the conversation message
-router.get("/:conversationId",async (req,res)=>{
+router.get("/:conversationId/:id",verifyTokenAndAuthorization ,async (req,res)=>{
 	try {
 		const allMessage=await Message.find({conversationId:req.params.conversationId})
 		res.status(200).json(allMessage)

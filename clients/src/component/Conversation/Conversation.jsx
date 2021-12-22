@@ -1,7 +1,7 @@
-import axios from 'axios'
 import React, { useEffect, useState } from 'react' 
 import "./Conversation.css"
 import { useSelector } from 'react-redux'
+import { userRequest } from '../../requestMethod'
 
 function Conversation({ conversation }) {
 	const userState = useSelector(state => state.user)
@@ -14,7 +14,7 @@ function Conversation({ conversation }) {
 		const friendId = conversation.members.find( m => m !== currentUser._id);
 		const getUser = async () => {
 			try {
-				const res = await axios("/users?userId=" + friendId);
+				const res = await userRequest.get("/users?userId=" + friendId);
 				setUser(res.data);
 			} catch (err) {
 				console.log(err);

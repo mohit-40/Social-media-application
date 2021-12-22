@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Link } from "react-router-dom"
 import "./Post.css"
 import { MoreVert } from "@material-ui/icons";
-import axios from 'axios';
 import { format } from "timeago.js"
 import {useSelector} from "react-redux"
 import { userRequest } from '../../requestMethod';

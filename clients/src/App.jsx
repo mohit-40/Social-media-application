@@ -9,9 +9,6 @@ import Register from './pages/Register/Register';
 import FriendPage from "./pages/FriendPage/FriendPage";
 import UpdateInfo from "./pages/UpdateInfo/UpdateInfo";
 import { useSelector } from 'react-redux'
-import {userRequest} from "./requestMethod"
-import axios from "axios"
-import jwtDecode from 'jwt-decode'
 
 
 function App() {

@@ -3,7 +3,6 @@ import { Link } from "react-router-dom"
 import { Search, Person, Chat, Notifications } from "@material-ui/icons";
 import "./Topbar.css"
 import {useSelector ,useDispatch} from "react-redux"
-import axios from "axios"
 import {logout } from "../../redux/exportAllAction"
 import { userRequest } from '../../requestMethod';
 

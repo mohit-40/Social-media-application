@@ -4,7 +4,6 @@ import "./Sidebar.css"
 import { RssFeed, Chat, PersonAdd } from "@material-ui/icons";
 import CloseFriend from "../CloseFriend/CloseFriend"
 import {useSelector} from "react-redux"
-import axios from 'axios';
 import { userRequest } from '../../requestMethod';
 
 function Sidebar() {

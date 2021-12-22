@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import "./Online.css"
-import axios from 'axios';
 import { userRequest } from '../../requestMethod';
 
 function Online({ userId, setCurrConversation }) {

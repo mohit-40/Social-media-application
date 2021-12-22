@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react'
 import Topbar from "../../component/Topbar/Topbar" 
 import "./UpdateInfo.css"
-import axios from "axios"
 import { useHistory } from 'react-router';
 
 import { useEffect } from "react";

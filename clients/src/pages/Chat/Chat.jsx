@@ -1,5 +1,4 @@
 import { Refresh } from '@material-ui/icons'
-import axios from "axios"
 import React, { useEffect, useRef, useState } from 'react'
 import Conversation from "../../component/Conversation/Conversation"
 import Message from "../../component/Message/Message"
@@ -87,9 +86,9 @@ function Chat() {
 		const fetchMessages = async () => {
 			try{
 				if(currConversation) {
-					const res = await axios.get("/messages/" + currConversation._id);
+					const res = await userRequest.get("/messages/" + currConversation._id+"/"+currentUser._id);
 					console.log(res.data);
-					// setMessages(res.data)
+					setMessages(res.data)
 				}
 			} catch (error) {
 				console.log(error)
@@ -111,7 +110,7 @@ function Chat() {
 			receiverId: currConversation.members.find((member) => member != currentUser._id),
 		})
 		try {
-			const res = await axios.post("/messages/", body);
+			const res = await userRequest.post("/messages/"+currentUser._id, body);
 			setMessages([...messages, res.data]);
 			setNewMessage("")
 		} catch (error) {

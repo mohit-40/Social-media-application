@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import "./FriendPage.css"
 import {  useLocation } from "react-router-dom";
 import Topbar from "../../component/Topbar/Topbar"
-import axios from "axios" 
 import UserItem from "../../component/UserItem/UserItem"
  
 import {useSelector } from "react-redux" 

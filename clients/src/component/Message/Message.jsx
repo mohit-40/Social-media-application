@@ -1,9 +1,9 @@
 
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import "./Message.css"
 import { format } from "timeago.js"
 import { useSelector } from 'react-redux'
+import { userRequest } from '../../requestMethod'
 
 function Message({message,own}) {
 
@@ -16,7 +16,7 @@ function Message({message,own}) {
 	useEffect(()=>{
 		const fetchUser=async ()=>{
 		try {
-				const res= await axios("/users?userId=" + message.senderId)		
+				const res= await userRequest.get("/users?userId=" + message.senderId)		
 				setUser(res.data)	
 			} catch (error) {
 				console.log(error)

@@ -7,7 +7,7 @@ const verifyToken=(req,res,next)=>{
 		jwt.verify(token,process.env.ACCESS_TOKEN_SECRET,(err,user)=>{
 			if(err) { 
 				console.log(token);
-				return res.status(404).json(err, "jwt token not valid")
+				return res.status(404).json("jwt token not valid")
 			}
 			req.user=user;
 			next();
@@ -34,7 +34,7 @@ const verifyTokenAndAdmin=(req,res,next)=>{
 	});
 }
 
-const gernateAccessToken = (user)=> jwt.sign({_id:user._id , isAdmin:user.isAdmin }, process.env.ACCESS_TOKEN_SECRET,{expiresIn:"10s"});
+const gernateAccessToken = (user)=> jwt.sign({_id:user._id , isAdmin:user.isAdmin }, process.env.ACCESS_TOKEN_SECRET,{expiresIn:"20s"});
 const gernateRefreshToken = (user)=> jwt.sign({_id:user._id , isAdmin:user.isAdmin } , process.env.REFRESH_TOKEN_SECRET)
 
 module.exports={verifyToken, verifyTokenAndAuthorization,verifyTokenAndAdmin ,gernateAccessToken ,gernateRefreshToken }

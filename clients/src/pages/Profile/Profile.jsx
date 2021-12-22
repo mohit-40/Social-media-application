@@ -6,7 +6,6 @@ import Sidebar from '../../component/Sidebar/Sidebar';
 import Feed from '../../component/Feed/Feed';
 import ProfileRightbar from '../../component/ProfileRightbar/ProfileRightbar';
 import { useParams } from 'react-router';
-import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { storage } from "../../firebase/firebase";
 import { useSelector } from 'react-redux'

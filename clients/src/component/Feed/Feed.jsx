@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import "./Feed.css"
 import Share from '../Share/Share'
 import Post from '../Post/Post'
-import axios from "axios" 
 import { useSelector } from 'react-redux'
 import { userRequest } from '../../requestMethod'
 

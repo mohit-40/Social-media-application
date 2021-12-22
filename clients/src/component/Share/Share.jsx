@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react'
 import { PermMedia, Label, Room, EmojiEmotions ,Cancel} from "@material-ui/icons"
 import "./Share.css"
 import { storage } from "../../firebase/firebase";
-import axios from "axios"
 import { useHistory } from "react-router-dom";
 import {useSelector} from "react-redux"
 import { userRequest } from '../../requestMethod';
@@ -76,7 +75,7 @@ function Share() {
 		}
 		else{
 			try {
-				await axios.post("/posts", newPost);
+				await userRequest.post("/posts", newPost);
 				setMakePost(true);
 				setTimeout(() => {
 					setMakePost(false);

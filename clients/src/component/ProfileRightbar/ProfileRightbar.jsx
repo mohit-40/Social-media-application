@@ -3,7 +3,6 @@ import { Link } from "react-router-dom"
 import "./ProfileRightbar.css"
 import { Add, Remove } from "@material-ui/icons";
 import CloseFriend from '../CloseFriend/CloseFriend';
-import axios from 'axios';
 import {useSelector} from "react-redux"
 import { userRequest } from '../../requestMethod';
 
