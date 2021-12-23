@@ -8,13 +8,20 @@ import Profile from './pages/Profile/Profile';
 import Register from './pages/Register/Register';
 import FriendPage from "./pages/FriendPage/FriendPage";
 import UpdateInfo from "./pages/UpdateInfo/UpdateInfo";
-import { useSelector } from 'react-redux'
-
+import { useDispatch, useSelector } from 'react-redux'
+import { io } from 'socket.io-client';
+import { useEffect } from 'react';
+import { setSocket } from './redux/exportAllAction';
 
 function App() {
+  const dispatch = useDispatch()
   const userState = useSelector(state => state.user)
   const currentUserId = userState.currentUserId;
-
+  useEffect(()=>{
+    const socket = io("http://localhost:8900");
+    currentUserId && socket?.emit("addUser",currentUserId);
+    dispatch(setSocket(socket));
+  },[dispatch, currentUserId]);
   
   return (
     <Router>

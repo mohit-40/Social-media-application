@@ -4,24 +4,17 @@ import {  useLocation } from "react-router-dom";
 import Topbar from "../../component/Topbar/Topbar"
 import UserItem from "../../component/UserItem/UserItem"
  
-import {useSelector } from "react-redux" 
-import { io } from "socket.io-client";
+import {useSelector } from "react-redux"  
 import { userRequest } from '../../requestMethod';
 
 function FriendPage() {
+	//fetching currentUser
 	const userState = useSelector(state => state.user)
 	const currentUserId = userState.currentUserId;
-
+	//fetched currentUser 
 	let location = useLocation();
 	const [displayUsers, setDisplayUsers] = useState([]) 
 
-	//connecting to socket server 
-	useEffect(()=>{
-		const socket = io.connect("ws://localhost:8900"); 
-		socket.emit("addUser", currentUserId);
-	},[currentUserId]);
-
-	
 	useEffect(() => {
 		const fetchAllUser = async () => {
 			try {

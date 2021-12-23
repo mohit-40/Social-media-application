@@ -8,8 +8,7 @@ import ProfileRightbar from '../../component/ProfileRightbar/ProfileRightbar';
 import { useParams } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import { storage } from "../../firebase/firebase";
-import { useSelector } from 'react-redux'
-import { io } from "socket.io-client";
+import { useSelector } from 'react-redux' 
 import { userRequest } from '../../requestMethod';
 
 function Profile() {
@@ -26,12 +25,6 @@ function Profile() {
 	const userState = useSelector(state => state.user)
 	const currentUserId = userState.currentUserId;
 	//fetched currentUser
-
-	//connecting to socket server 
-	useEffect(()=>{
-		const socket = io.connect("ws://localhost:8900"); 
-		socket.emit("addUser", currentUserId);
-	},[currentUserId]);
 
 	
 	useEffect(() => {

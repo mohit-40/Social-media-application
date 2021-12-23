@@ -3,8 +3,7 @@ import Topbar from "../../component/Topbar/Topbar"
 import "./UpdateInfo.css"
 import { useHistory } from 'react-router';
 
-import { useEffect } from "react";
-import { io } from "socket.io-client"; 
+import { useEffect } from "react"; 
 import { useSelector } from 'react-redux'
 import { userRequest } from '../../requestMethod';
 
@@ -13,7 +12,7 @@ function UpdateInfo() {
 	const userState = useSelector(state => state.user)
 	const currentUserId = userState.currentUserId;
 	const [currentUser, setCurrentUser]= useState(null);
-	//fetch user
+	//fetching currentUser
 	useEffect(()=>{
 		const fetchUser=async()=>{
 			try {
@@ -25,7 +24,7 @@ function UpdateInfo() {
 		}
 		fetchUser();
 	},[currentUserId,setCurrentUser])
-
+	//feched currentUser
 
 	const [updated,setUpdated]=useState()
 	const name = useRef();
@@ -36,14 +35,6 @@ function UpdateInfo() {
 	const relationship = useRef();
 	const desc = useRef();
 	const history=useHistory();
-
-	
-	//connecting to socket server 
-	useEffect(()=>{
-		const socket = io.connect("ws://localhost:8900"); 
-		socket.emit("addUser", currentUserId);
-	},[currentUserId]);
-
 
 	const handleSubmit=async (e)=>{
 		e.preventDefault()

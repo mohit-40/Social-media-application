@@ -1,31 +1,28 @@
 import React, { useState, useEffect } from 'react'
 import "./Rightbar.css"
 import Online from "../Online/Online"
-import { io } from "socket.io-client";
 import { useSelector } from "react-redux"
-import { userRequest } from '../../requestMethod';
 
 function Rightbar() {
-	//fetching currentuser
+	//fetching reduxState
 	const userState = useSelector(state => state.user)
 	const currentUserId = userState.currentUserId;
-	//fetched currentUser
 	const followings = useSelector(state=>state.following.usersId)
-
+	const socket= useSelector(state => state.socket.socket)
+	//fetched reduxState
 
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 	const [onlineFriend, setOnlineFriend] = useState([]);
 
 	//connecting to socket server 
-	useEffect(() => {
-		const socket = io.connect("ws://localhost:8900");
-		socket.emit("addUser", currentUserId);
-		socket.on("getUsers", users => {
+	useEffect(() => {    
+		console.log("socket useeffect called",socket)
+		currentUserId && socket?.emit("addUser",currentUserId);
+		socket?.on("getUsers", users => {
 			setOnlineFriend(followings?.filter((fid) => users.some((u) => u.userId === fid)))
+			console.log("listen to the getUser event ",socket)
 		})
-	}, [currentUserId,followings]);
-
-
+	}, [currentUserId,followings,socket]);
 
 	return (
 		<div className="rightbar">

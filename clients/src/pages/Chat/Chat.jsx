@@ -4,8 +4,7 @@ import Conversation from "../../component/Conversation/Conversation"
 import Message from "../../component/Message/Message"
 import Online from "../../component/Online/Online"
 import Topbar from "../../component/Topbar/Topbar"
-import "./chat.css"
-import { io } from "socket.io-client";
+import "./chat.css" 
 import {useSelector} from "react-redux"
 import {userRequest} from "../../requestMethod"
 import { updateFollowing } from '../../redux/exportAllAction'
@@ -13,6 +12,7 @@ import { useDispatch } from 'react-redux'
 
 function Chat() {  
 	//fetching currentuser
+	const socket=useSelector(state=>state.socket.socket);
 	const userState = useSelector(state => state.user)
 	const currentUserId = userState.currentUserId;
 	const [currentUser, setCurrentUser]= useState(null);
@@ -33,8 +33,7 @@ function Chat() {
 	const [currConversation, setCurrConversation] = useState(null)
 	const [messages, setMessages] = useState([])
 	const [newMessage, setNewMessage] = useState()
-	const scrollRef = useRef();
-	const socket = useRef();
+	const scrollRef = useRef(); 
 	const [onlineFriend, setOnlineFriend] = useState([]);
 	const [dynamicMessage, setDynamicMessage] = useState();
 	const [chatSearch, setChatSearch] = useState('')
@@ -61,13 +60,12 @@ function Chat() {
 		}
 	}
 
-	// connection to socket io
-	useEffect(() => {
-		socket.current = io("ws://localhost:8900");
-		socket.current.on("getMessage", (body) => {
+	// listen to socket event
+	useEffect(() => { 
+		socket?.on("getMessage", (body) => {
 			setDynamicMessage(body)
 		})
-	}, []);
+	}, [socket]);
 
 	//updating the message after receiving
 	useEffect(() => {
@@ -75,13 +73,13 @@ function Chat() {
 	}, [dynamicMessage, currConversation]);
 	
 	//whenever new user connect add that user to socket server
-	useEffect(() => {
-		socket.current.emit("addUser", currentUserId);
-		socket.current.on("getUsers", (users) => { 
+	useEffect(() => { 
+		currentUserId && socket?.emit("addUser",currentUserId);
+		socket?.on("getUsers", (users) => { 
 			setOnlineFriend(currentUser?.followings.filter((f) => users.some((u) => u.userId === f)))
+			console.log("listen to the getUser event ",socket)
 		})
-	}, [currentUserId,currentUser]);
-	
+	}, [currentUserId,currentUser,socket]);
 	
 	// fetch conversation
 	useEffect(() => {
@@ -121,7 +119,7 @@ function Chat() {
 			senderId: currentUserId,
 			textMessage: newMessage
 		}
-		socket.current.emit("sendMessage", {
+		socket?.emit("sendMessage", {
 			body: body,
 			receiverId: currConversation.members.find((member) => member != currentUserId),
 		})

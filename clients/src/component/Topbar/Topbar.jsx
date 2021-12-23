@@ -4,14 +4,14 @@ import { Search, Person, Chat, Notifications } from "@material-ui/icons";
 import "./Topbar.css"
 import { useSelector, useDispatch } from "react-redux"
 import { logout } from "../../redux/exportAllAction"
-import { userRequest } from '../../requestMethod';
-import { io } from "socket.io-client";
+import { userRequest } from '../../requestMethod'; 
 
 function Topbar() {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-	//fetching currentuser
-	const userState = useSelector(state => state.user)
-	const currentUserId = userState.currentUserId;
+	//fetching reduxState
+	const dispatch = useDispatch();
+	const socket =useSelector(state=>state.socket.socket);
+	const currentUserId = useSelector(state => state.user.currentUserId)
 	const [currentUser, setCurrentUser] = useState(null);
 	useEffect(() => {
 		const fetchUser = async () => {
@@ -27,9 +27,8 @@ function Topbar() {
 	//fetched currentUser
 
 	const [search, setSearch] = useState('')
-	const dispatch = useDispatch();
-
 	const [allUsers, setAllUsers] = useState([])
+
 	useEffect(() => {
 		const fetchAllUsers = async () => {
 			try {
@@ -42,13 +41,8 @@ function Topbar() {
 		fetchAllUsers()
 	}, [])
 
-
-	const socket = useRef();
-	useEffect(()=>{
-		socket.current = io("ws://localhost:8900"); 
-	},[])
 	const handleLogout = () => { 
-		socket.current.emit("removeUser",currentUserId);
+		socket?.emit("removeUser",currentUserId);
 		dispatch(logout(currentUserId));
 	}
 
