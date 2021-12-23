@@ -25,25 +25,22 @@ function Topbar() {
 	}, [currentUserId, setCurrentUser])
 	//fetched currentUser
 
-	const [allUsers, setAllUsers] = useState([])
 	const [search, setSearch] = useState('')
 	const dispatch = useDispatch();
-
+	
+	const [allUsers, setAllUsers] = useState([])
 	useEffect(() => {
 		const fetchAllUsers = async () => {
 			try {
 				const res = await userRequest.get("/users/allUsers")
-				setAllUsers(res.data);
+				setAllUsers(res.data); 
 			} catch (error) {
 				console.log(error)
 			}
 		}
 		fetchAllUsers()
-	}, [])
+	}, [ ])
 
-	const handleSearch = (e) => {
-		setSearch(e.target.value);
-	}
 	const handleLogout = () => {
 		dispatch(logout(currentUserId));
 	}
@@ -58,16 +55,15 @@ function Topbar() {
 			<div className="topbar-center">
 				<div className="search">
 					<Search className="search-icon" />
-					<input type="text" name="" id="" placeholder="Search for Person or friend" onChange={handleSearch} />
+					<input type="text" name="" id="" placeholder="Search for Person or friend" onChange={(e)=> setSearch(e.target.value)} />
 					<div className="search-result">
-						{allUsers.filter((user) => search !== "" && user.name.toLowerCase().includes(search.toLowerCase())).slice(0, 5).map((user) => {
+						{allUsers.filter((user) => search !== "" && user?.name?.toLowerCase().includes(search.toLowerCase())).slice(0, 5).map((user) => {
 							return (
 								<Link key={user._id} className="search-result-item" to={`/profile/${user.username}`}>
 									<div >{user.name}</div>
 								</Link>
 							)
-						})
-						}
+						}) }
 					</div>
 
 				</div>

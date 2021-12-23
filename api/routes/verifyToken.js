@@ -34,7 +34,7 @@ const verifyTokenAndAdmin=(req,res,next)=>{
 	});
 }
 
-const gernateAccessToken = (user)=> jwt.sign({_id:user._id , isAdmin:user.isAdmin }, process.env.ACCESS_TOKEN_SECRET,{expiresIn:"20s"});
+const gernateAccessToken = (user)=> jwt.sign({_id:user._id , isAdmin:user.isAdmin }, process.env.ACCESS_TOKEN_SECRET,{expiresIn:"60s"});
 const gernateRefreshToken = (user)=> jwt.sign({_id:user._id , isAdmin:user.isAdmin } , process.env.REFRESH_TOKEN_SECRET)
 
 module.exports={verifyToken, verifyTokenAndAuthorization,verifyTokenAndAdmin ,gernateAccessToken ,gernateRefreshToken }

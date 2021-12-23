@@ -9,19 +9,9 @@ function Rightbar() {
 	//fetching currentuser
 	const userState = useSelector(state => state.user)
 	const currentUserId = userState.currentUserId;
-	const [currentUser, setCurrentUser] = useState(null);
-	useEffect(() => {
-		const fetchUser = async () => {
-			try {
-				const res = await userRequest.get("/users?userId=" + currentUserId);
-				setCurrentUser(res.data);
-			} catch (error) {
-				console.log(error);
-			}
-		}
-		fetchUser();
-	}, [currentUserId, setCurrentUser])
 	//fetched currentUser
+	const followings = useSelector(state=>state.following.usersId)
+
 
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 	const [onlineFriend, setOnlineFriend] = useState([]);
@@ -31,9 +21,9 @@ function Rightbar() {
 		const socket = io.connect("ws://localhost:8900");
 		socket.emit("addUser", currentUserId);
 		socket.on("getUsers", users => {
-			setOnlineFriend(currentUser?.followings.filter((f) => users.some((u) => u.userId === f)))
+			setOnlineFriend(followings?.filter((fid) => users.some((u) => u.userId === fid)))
 		})
-	}, [currentUserId,currentUser]);
+	}, [currentUserId,followings]);
 
 
 

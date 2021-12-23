@@ -8,6 +8,8 @@ import "./chat.css"
 import { io } from "socket.io-client";
 import {useSelector} from "react-redux"
 import {userRequest} from "../../requestMethod"
+import { updateFollowing } from '../../redux/exportAllAction'
+import { useDispatch } from 'react-redux'
 
 function Chat() {  
 	//fetching currentuser
@@ -36,15 +38,16 @@ function Chat() {
 	const [onlineFriend, setOnlineFriend] = useState([]);
 	const [dynamicMessage, setDynamicMessage] = useState();
 	const [chatSearch, setChatSearch] = useState('')
-	const [followings, setFollowings] = useState([])
+	const dispatch = useDispatch();
+	const followings = useSelector(state => state.following.usersId)
 	//fetch followings
 	useEffect(() => {
 		const fetchFollowings = async () => {
 			const res = await userRequest.get("/users/followings/" + currentUserId)
-			setFollowings(res.data)
+			dispatch(updateFollowing(res.data))
 		}
 		fetchFollowings()
-	}, [currentUserId]);
+	}, [currentUserId,dispatch]);
 
 	//create the conversation
 	async function handleClick(userId) {
@@ -74,8 +77,7 @@ function Chat() {
 	//whenever new user connect add that user to socket server
 	useEffect(() => {
 		socket.current.emit("addUser", currentUserId);
-		socket.current.on("getUsers", (users) => {
-			console.log("hello")
+		socket.current.on("getUsers", (users) => { 
 			setOnlineFriend(currentUser?.followings.filter((f) => users.some((u) => u.userId === f)))
 		})
 	}, [currentUserId,currentUser]);
@@ -132,6 +134,20 @@ function Chat() {
 		}
 	}
 
+	// fetching alluser for search 
+	const [allUsers, setAllUsers] = useState([])
+	useEffect(() => {
+		const fetchAllUsers = async () => {
+			try {
+				const res = await userRequest.get("/users/allUsers")
+				setAllUsers(res.data); 
+			} catch (error) {
+				console.log(error)
+			}
+		}
+		fetchAllUsers()
+	}, [ ])
+
 	//scroll automatically on new messages 
 	useEffect(() => {
 		scrollRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -148,14 +164,12 @@ function Chat() {
 						<div className="chat-left-wrapper">
 							<input type="text" className="search-friend" placeholder="Search friend for Chat" onChange={(e) => { setChatSearch(e.target.value) }} />
 
-							{followings.filter((user) => chatSearch !== "" && user.name && user.name.toLowerCase().includes(chatSearch.toLowerCase())).slice(0,5).map((user) => {
+							{allUsers.filter((user) =>  followings.includes(user._id) && chatSearch !== "" && user.name && user.name.toLowerCase().includes(chatSearch.toLowerCase())).slice(0,5).map((user) => {
 								return (
 									<div key={user?._id} onClick={() => handleClick(user._id)} className="search-result-item" >{user.name}</div>
 								)
 							})
 							}
-
-
 
 							{conversations?.map((conversation) => (
 								<div key={conversation?._id} onClick={() => setCurrConversation(conversation) } >

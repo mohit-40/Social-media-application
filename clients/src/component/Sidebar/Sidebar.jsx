@@ -5,24 +5,25 @@ import { RssFeed, Chat, PersonAdd } from "@material-ui/icons";
 import CloseFriend from "../CloseFriend/CloseFriend"
 import { useSelector } from "react-redux"
 import { userRequest } from '../../requestMethod';
+import { useDispatch } from 'react-redux';
+import { updateFollowing } from '../../redux/exportAllAction';
 
 function Sidebar() {
 	//fetching currentuser
 	const userState = useSelector(state => state.user)
 	const currentUserId = userState.currentUserId;
 	//fetched currentUser
-
-
-	const [followings, setFollowings] = useState([])
+	const dispatch= useDispatch();
+	const followings = useSelector(state=> state.following.usersId)
 	const [loaded, setLoaded] = useState(false)
 	useEffect(() => {
 		const fetchFollowing = async () => {
 			const res = await userRequest.get("/users/followings/" + currentUserId)
-			setFollowings(res.data)
+			dispatch(updateFollowing(res.data))
 			setLoaded(true)
 		}
 		fetchFollowing()
-	}, [currentUserId]);
+	}, [currentUserId,dispatch]);
 
 
 	return loaded && (
@@ -43,7 +44,7 @@ function Sidebar() {
 						</Link>
 					</li>
 					<li className="menu-list-item">
-						<Link className='text-link' to={{ pathname: `/friendPage`, state: { users: [], all: true } }} >
+						<Link className='text-link' to={{ pathname: `/friendPage`, state: { usersId: [], all: true } }} >
 							<PersonAdd className="menu-list-icon" />
 							<span className="menu-list-text">Find Friend</span>
 						</Link>
@@ -58,12 +59,12 @@ function Sidebar() {
 
 
 				<div className="friend-list">
-					<h2 className="heading">My Friend <span className="follower-following-counter">({followings.length})</span></h2>
+					<h2 className="heading">My Followings <span className="follower-following-counter">({followings.length})</span></h2>
 					{followings.length !== 0 ?
-						followings.slice(0, 3).map((user) => <CloseFriend key={user._id} user={user} className="friend-list-item" />)
-						: 'you currently have no friend'
+						followings.slice(0, 3).map((followingId) => <CloseFriend key={followingId} userId={followingId} className="friend-list-item" />)
+						: 'currently no followings'
 					}
-					<Link className='text-link' to={{ pathname: `/friendPage`, state: { users: followings } }} >
+					<Link className='text-link' to={{ pathname: `/friendPage`, state: { usersId: followings } }} >
 						<button className="show-all">Show All</button>
 					</Link>
 				</div>

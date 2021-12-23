@@ -1,3 +1,6 @@
+// add follower/follwings redux as they are connected 
+online friend problem and dynamic
 make it dynamic
-
-add follower/follwings redux as they are connected 
+Notification
+responsive
+deploy

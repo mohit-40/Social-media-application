@@ -55,7 +55,7 @@ router.put("/:userId/:id/follow",verifyTokenAndAuthorization, async (req, res) =
 				await currentUser.updateOne({ $push: { followings: req.params.userId } });
 				res.status(200).json("User has been followed");
 			} else {
-				res.status(200).json("alredy following this user");
+				res.status(400).json("alredy following this user");
 			}
 		} else {
 			res.status(400).json("can't follow yourself");
@@ -78,7 +78,7 @@ router.put("/:userId/:id/unfollow",verifyTokenAndAuthorization, async (req, res)
 				await currentUser.updateOne({ $pull: { followings: req.params.userId } });
 				res.status(200).json("Successfully unfollow the asshole");
 			} else {
-				res.status(200).json("not following this user");
+				res.status(400).json("not following this user");
 			}
 		} else {
 			res.status(400).json("cant unfollow yourself");
@@ -91,11 +91,7 @@ router.put("/:userId/:id/unfollow",verifyTokenAndAuthorization, async (req, res)
 router.get("/followings/:userId", verifyToken ,async (req,res)=>{
 	try {
 		const user= await User.findById(req.params.userId)
-		const followings= await Promise.all(
-			user.followings.map((followingId)=>{
-				return ( User.findById(followingId) )
-			})
-		)
+		const followings= user.followings
 		res.status(200).json(followings)
 	} catch (error) {
 		res.status(404).json(error.message)
@@ -105,11 +101,7 @@ router.get("/followings/:userId", verifyToken ,async (req,res)=>{
 router.get("/followers/:userId",verifyToken ,async (req,res)=>{
 	try {
 		const user= await User.findById(req.params.userId)
-		const followers= await Promise.all(
-			user.followers.map((followingId)=>{
-				return ( User.findById(followingId) )
-			})
-		)
+		const followers= user.followers
 		res.status(200).json(followers)
 	} catch (error) {
 		res.status(404).json(error.message)
@@ -119,8 +111,9 @@ router.get("/followers/:userId",verifyToken ,async (req,res)=>{
 //get all users
 router.get("/allUsers/", verifyToken ,async (req,res)=>{
 	try {
-		const allUsers=await User.find({})
-		res.status(200).json(allUsers)
+		const allUsers=await User.find()
+		const uid=allUsers.map( (u) => ({_id: u._id,  name: u.name, username: u.username}));
+		res.status(200).json(uid)
 	} catch (error) {
 		res.status(500).json(error.message)
 	}
