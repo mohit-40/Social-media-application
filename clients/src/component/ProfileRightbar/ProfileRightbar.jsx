@@ -28,7 +28,8 @@ function ProfileRightbar({ user }) {
 				socket?.emit("sendNotification",{
 					receiverId: user?._id,
 					senderId: currentUserId,
-					type:"unfollow you"
+					text:"unfollow you",
+					type:"unfollow"
 				})
 				setFollowed(!followed);
 				setFollowers(followers.filter(fid=> fid !== currentUserId))
@@ -39,7 +40,8 @@ function ProfileRightbar({ user }) {
 				socket?.emit("sendNotification",{
 					receiverId: user?._id,
 					senderId: currentUserId,
-					type:"started following you"
+					text:"started following you",
+					type:"unfollow" 
 				})
 				setFollowed(!followed);
 				setFollowers([...followers ,currentUserId])

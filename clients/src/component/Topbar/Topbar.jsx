@@ -49,10 +49,11 @@ function Topbar() {
 
 	const [notification,setNotification]= useState([]);
 	const [displayNotification,setDisplayNotification]= useState(false); 
+	const [messages,setMessages] =useState(0);
 	useEffect(()=>{
 		socket?.on("getNotification",body=>{
+			setMessages([body,...notification].filter(n=> n.type==="message").length)
 			setNotification([body,...notification])
-			console.log(notification);
 		})
 	},[socket,notification])
 	
@@ -85,14 +86,14 @@ function Topbar() {
 					<span className="topbar-link" onClick={handleLogout}>Logout</span>
 				</div>
 				<div className="topbar-icon-container">
-					<div className="topbar-icon-item">
+					{/* <div className="topbar-icon-item">
 						<Person className="topbar-icon" />
 						<span className="topbar-icon-badge">1</span>
-					</div>
+					</div> */}
 					<div className="topbar-icon-item">
 						<Link className='text-link' to="/chat">
 							<Chat className="topbar-icon" />
-							<span className="topbar-icon-badge">1</span>
+							<span className="topbar-icon-badge">{messages}</span>
 						</Link>
 					</div>
 					<div className="topbar-icon-item">

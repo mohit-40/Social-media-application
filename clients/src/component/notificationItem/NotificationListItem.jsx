@@ -14,7 +14,8 @@ function NotificationListItem({ n }) {
 			}
 		}
 		fetchUser();
-	},[])
+		console.log(n);
+	},[n])
 
 	return (
 		<div>
@@ -22,7 +23,7 @@ function NotificationListItem({ n }) {
 				<div className="notificationImgContainer">
 					<img src={user?.profilePicture} alt="img" className='notificationImg' />
 				</div>
-				{user?.name} {n.type}
+				{user?.name} {n.text}
 			</li>
 		</div>
 	)

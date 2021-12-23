@@ -35,10 +35,10 @@ io.on("connection",(socket)=>{
 		const receiver = getUser(receiverId);  
 		io.to(receiver?.socketId).emit('getMessage',body)
 	})
-	socket.on("sendNotification" , ({senderId , receiverId , type})=>{
+	socket.on("sendNotification" , ({senderId , receiverId , type ,text})=>{
 		console.log(type);
 		const receiver = getUser(receiverId)
-		io.to(receiver?.socketId).emit("getNotification" , {senderId , receiverId , type} )
+		io.to(receiver?.socketId).emit("getNotification" , {senderId , receiverId , type, text} )
 	})
 
 })

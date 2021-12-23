@@ -31,7 +31,8 @@ function Post({post , posts ,setPosts}) {
 			socket?.emit("sendNotification",{
 				receiverId: post.userId,
 				senderId: currentUserId,
-				type: isLike?"unlike your Post":"like your post"
+				text: isLike?"unlike your Post":"like your post",
+				type:isLike?"unlike":"like"
 			})
 			if (isLike) { setLike(like - 1); }
 			else { setLike(like + 1); }

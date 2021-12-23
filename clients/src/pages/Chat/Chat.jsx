@@ -128,7 +128,8 @@ function Chat() {
 			socket?.emit("sendNotification",{
 				receiverId: currConversation.members.find((member) => member != currentUserId),
 				senderId: currentUserId,
-				type:"send you a message"
+				text:"send you a message",
+				type:"message"
 			})
 			setNewMessage("")
 		} catch (error) {
