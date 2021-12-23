@@ -101,6 +101,27 @@
   align-items: center;
   justify-content: center;
 }
+.topbar .topbar-right .topbar-icon-container .topbar-icon-item .notificationList {
+  list-style: none;
+  background: #eeeeee;
+  border-radius: 10px;
+  position: absolute;
+  top: 39px;
+  width: 130px;
+}
+.topbar .topbar-right .topbar-icon-container .topbar-icon-item .notificationList .notificationListItem {
+  padding: 3px 2px;
+  border-bottom: 1px solid black;
+}
+.topbar .topbar-right .topbar-icon-container .topbar-icon-item .notificationList .notificationButton {
+  margin: 2px 2px;
+  background: blue;
+  color: white;
+  padding: 5px 5px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
 .topbar .topbar-right img {
   height: 50px;
   width: 50px;

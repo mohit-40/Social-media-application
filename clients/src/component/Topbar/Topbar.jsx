@@ -42,6 +42,7 @@ function Topbar() {
 		fetchAllUsers()
 	}, [])
 
+
 	const socket = useRef();
 	useEffect(()=>{
 		socket.current = io("ws://localhost:8900"); 
@@ -51,7 +52,11 @@ function Topbar() {
 		dispatch(logout(currentUserId));
 	}
 
-
+	const [displayNotification,setDisplayNotification]= useState(false);
+	const [displayPersonNotification,setDisplayPersonNotification]= useState(false);
+	const [displayMessageNotification,setDisplayMessageNotification]= useState(false);
+	const [notification,setNotification]= useState([]);
+	
 	return (
 		<div className="topbar">
 			<div className="topbar-left">
@@ -71,7 +76,6 @@ function Topbar() {
 							)
 						})}
 					</div>
-
 				</div>
 			</div>
 
@@ -83,8 +87,12 @@ function Topbar() {
 				</div>
 				<div className="topbar-icon-container">
 					<div className="topbar-icon-item">
-						<Person className="topbar-icon" />
+						<Person className="topbar-icon" onClick={()=>setDisplayPersonNotification(!displayPersonNotification)}/>
 						<span className="topbar-icon-badge">1</span>
+						<ul className='notificationList' style={displayPersonNotification ? {display:"block"} :{display:"none"}}>
+							<li className='notificationListItem'>Mohit send you message</li>
+							<button className='notificationButton'>Mark Read</button>
+						</ul>
 					</div>
 					<div className="topbar-icon-item">
 						<Link className='text-link' to="/chat">
@@ -93,8 +101,14 @@ function Topbar() {
 						</Link>
 					</div>
 					<div className="topbar-icon-item">
-						<Notifications className="topbar-icon" />
+						<Notifications className="topbar-icon" onClick={()=>setDisplayNotification(!displayNotification)} />
 						<span className="topbar-icon-badge" >1</span>
+						<ul className='notificationList' style={displayNotification ? {display:"block"} :{display:"none"}}>
+							<li className='notificationListItem'>Mohit send you message</li>
+							<li className='notificationListItem'>Mohit like your post</li>
+							<li className='notificationListItem'>Mohit started following you</li>
+							<button className='notificationButton'>Mark Read</button>
+						</ul>
 					</div>
 				</div>
 

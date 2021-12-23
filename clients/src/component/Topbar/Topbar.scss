@@ -102,6 +102,33 @@
 					align-items: center;
 					justify-content: center;
 				}
+
+
+				.notificationList{
+					list-style: none;
+					background:rgb(238, 238, 238);
+					border-radius: 10px;
+					position:absolute;
+					top: 39px;
+					width: 130px;
+					// display: none; 
+					// word-wrap: normal;
+					.notificationListItem{
+						padding: 3px 2px ;
+						border-bottom: 1px solid black;
+					}
+					.notificationButton{
+						margin: 2px 2px;
+						background:blue;
+						color:white;
+						padding: 5px 5px;
+						border-radius: 10px;
+						border: none;
+						cursor: pointer;
+						
+					}
+					
+				}
 			}
 		}
 		img{
