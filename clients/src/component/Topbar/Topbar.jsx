@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link } from "react-router-dom"
 import { Search, Person, Chat, Notifications } from "@material-ui/icons";
 import "./Topbar.css"
 import { useSelector, useDispatch } from "react-redux"
 import { logout } from "../../redux/exportAllAction"
 import { userRequest } from '../../requestMethod';
+import { io } from "socket.io-client";
 
 function Topbar() {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -27,21 +28,26 @@ function Topbar() {
 
 	const [search, setSearch] = useState('')
 	const dispatch = useDispatch();
-	
+
 	const [allUsers, setAllUsers] = useState([])
 	useEffect(() => {
 		const fetchAllUsers = async () => {
 			try {
 				const res = await userRequest.get("/users/allUsers")
-				setAllUsers(res.data); 
+				setAllUsers(res.data);
 			} catch (error) {
 				console.log(error)
 			}
 		}
 		fetchAllUsers()
-	}, [ ])
+	}, [])
 
-	const handleLogout = () => {
+	const socket = useRef();
+	useEffect(()=>{
+		socket.current = io("ws://localhost:8900"); 
+	},[])
+	const handleLogout = () => { 
+		socket.current.emit("removeUser",currentUserId);
 		dispatch(logout(currentUserId));
 	}
 
@@ -55,7 +61,7 @@ function Topbar() {
 			<div className="topbar-center">
 				<div className="search">
 					<Search className="search-icon" />
-					<input type="text" name="" id="" placeholder="Search for Person or friend" onChange={(e)=> setSearch(e.target.value)} />
+					<input type="text" name="" id="" placeholder="Search for Person or friend" onChange={(e) => setSearch(e.target.value)} />
 					<div className="search-result">
 						{allUsers.filter((user) => search !== "" && user?.name?.toLowerCase().includes(search.toLowerCase())).slice(0, 5).map((user) => {
 							return (
@@ -63,7 +69,7 @@ function Topbar() {
 									<div >{user.name}</div>
 								</Link>
 							)
-						}) }
+						})}
 					</div>
 
 				</div>

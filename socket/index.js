@@ -19,6 +19,12 @@ io.on("connection",(socket)=>{
 		addUser(userId,socket.id)
 		io.emit("getUsers",users)
 	})
+	socket.on("removeUser",(userId)=>{
+		console.log("userRemoved")
+		const user=getUser(userId);
+		user && removeUser(user.socketId);
+		io.emit("getUsers",users);
+	})
 	socket.on("disconnect",()=>{
 		console.log("disconnected and user removed")
 		removeUser(socket.id);
