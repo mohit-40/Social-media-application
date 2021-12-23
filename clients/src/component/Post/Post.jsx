@@ -6,7 +6,7 @@ import { format } from "timeago.js"
 import {useSelector} from "react-redux"
 import { userRequest } from '../../requestMethod';
 
-function Post(props) {
+function Post({post , posts ,setPosts}) {
 	//fetching currentuser
 	const userState = useSelector(state => state.user)
 	const currentUserId = userState.currentUserId;
@@ -15,18 +15,18 @@ function Post(props) {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 	const [user, setUser] = useState({});
 
-	const [like, setLike] = useState(props.post.like.length);
+	const [like, setLike] = useState(post.like?.length);
 	const [isLike, setIsLike] = useState(false);
 
 
 	useEffect(() => {
-		setIsLike(props.post.like.includes(currentUserId));
-	}, [currentUserId, props.post.like]);
+		setIsLike(post.like?.includes(currentUserId));
+	}, [currentUserId, post.like]);
 
 
 	const handleLike = async () => {
 		try {
-			await userRequest.put("/posts/" + props.post._id + "/like", { userId: currentUserId });
+			await userRequest.put("/posts/" + post._id + "/like", { userId: currentUserId });
 			if (isLike) { setLike(like - 1); }
 			else { setLike(like + 1); }
 			setIsLike(!isLike);
@@ -37,20 +37,20 @@ function Post(props) {
 
 	useEffect(() => {
 		const fetchUser = async () => {
-			const res = await userRequest.get(`/users?userId=${props.post.userId}`);
+			const res = await userRequest.get(`/users?userId=${post.userId}`);
 			setUser(res.data);
 		}
 		fetchUser();
-	}, [props.post.userId])
+	}, [post.userId])
 
 	const [isDeleted, setIsDeleted] = useState(false);
 	const handleDelete = async () => {
 		try {
-			await userRequest.delete("/posts/" + props.post._id+"/"+currentUserId);
+			await userRequest.delete("/posts/" + post._id+"/"+currentUserId);
 			setIsDeleted(true);
-			window.location.reload();
+			setPosts(posts.filter(p=> p._id!== post._id)) 
 		} catch (error) {
-			console.log(props.post._id,currentUserId)
+			console.log(post._id,currentUserId)
 			console.log(error.message);
 		}
 	}
@@ -65,19 +65,19 @@ function Post(props) {
 						<Link className='text-link' to={`/profile/${user.username}`}>
 							<div className="name">{user.name}</div>
 						</Link>
-						<div className="time">{format(props.post.createdAt)}</div>
+						<div className="time">{format(post.createdAt)}</div>
 					</div>
 					<div className="post-top-right">
 						<MoreVert className="more-icon" />
-						{props.post.userId === currentUserId ? <button className="delete-post-btn" onClick={handleDelete}>Delete</button> : ''}
+						{post.userId === currentUserId ? <button className="delete-post-btn" onClick={handleDelete}>Delete</button> : ''}
 					
 						{isDeleted ? <div className="deleted">Post Deleted</div> : ''}
 					</div>
 				</div>
 				<hr />
 				<div className="post-middle">
-					<div className="post-text">{props.post.desc}</div>
-					{props.post.img && <img src={props.post.img} className="post-img" alt="post-img" />}
+					<div className="post-text">{post.desc}</div>
+					{post.img && <img src={post.img} className="post-img" alt="post-img" />}
 				</div>
 				<div className="post-bottom">
 					<div className="post-bottom-left">
@@ -86,7 +86,7 @@ function Post(props) {
 						<span className="like-counter">{like} people like it</span>
 					</div>
 					<div className="post-bottom-right">
-						<span className="comment-counter">{props.post.comment} comment</span>
+						<span className="comment-counter">{post.comment} comment</span>
 					</div>
 				</div>
 			</div>

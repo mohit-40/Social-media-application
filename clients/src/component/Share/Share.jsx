@@ -7,7 +7,7 @@ import { useSelector } from "react-redux"
 import { userRequest } from '../../requestMethod';
 
 
-function Share() {
+function Share({ posts, setPosts }) {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 	//fetching currentuser
 	const userState = useSelector(state => state.user)
@@ -28,8 +28,8 @@ function Share() {
 
 
 	const history = useHistory();
-	const desc = useRef('');
-	const [file, setFile] = useState({})
+	const [desc, setDesc] = useState("");
+	const [file, setFile] = useState()
 	const [progress, setProgress] = useState(0)
 
 	const [preview, setPreview] = useState(null)
@@ -54,14 +54,13 @@ function Share() {
 		e.preventDefault();
 		const newPost = {
 			"userId": currentUserId,
-			"desc": desc.current.value,
+			"desc": desc,
 		}
 		if (file) {
 			try {
 				const fileName = Date.now() + file.name
 				const uploadTask = storage.ref(`${currentUser?.username}/posts/${fileName}`).put(file);
-				await uploadTask.on(
-					"state_changed",
+				await uploadTask.on("state_changed",
 					snapshot => {
 						const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
 						setProgress(progress);
@@ -69,39 +68,40 @@ function Share() {
 					error => { console.log(error); },
 					async () => {
 						await storage.ref(`${currentUser?.username}/posts/`).child(fileName).getDownloadURL().then((imgurl) => { newPost.img = imgurl })
-						await userRequest.post("/posts/" + currentUserId, newPost);
+						const res = await userRequest.post("/posts/" + currentUserId, newPost);
+						setPosts([res.data, ...posts])
+						setDesc("")
+						setPreview(null);
+						setProgress(0);
+						setFile(null);
 						setMakePost(true);
 						setTimeout(() => {
 							setMakePost(false);
-							setPreview(null);
-							setProgress(0);
-							setFile(null);
-							window.location.reload();
-						}, 2000);
+						}, 1000);
 					}
 				)
 			}
 			catch (error) {
 				console.log(error.message)
-				history.push("/error")
+				// history.push("/error")
 			}
 		}
 		else {
 			try {
-				await userRequest.post("/posts", newPost);
+				const res = await userRequest.post("/posts/" + currentUserId, newPost);
+				setPosts([res.data, ...posts])
+				setPreview(null);
+				setProgress(0);
+				setFile(null);
 				setMakePost(true);
+				setDesc("")
 				setTimeout(() => {
 					setMakePost(false);
-					setPreview(null);
-					setProgress(0);
-					setFile(null);
-					window.location.reload();
-				}, 2000);
+				}, 1000);
 			} catch (error) {
 				console.log(error.message)
-				history.push("/error")
+				// history.push("/error")
 			}
-
 		}
 
 	}
@@ -117,12 +117,12 @@ function Share() {
 			<div className="share-wrapper">
 				<div className="share-top">
 					<img src={currentUser?.profilePicture ? currentUser?.profilePicture : PF + "person/noAvatar.png"} alt="profileimg" />
-					<input type="text" ref={desc} placeholder={"What in Your Mind Today " + currentUser?.username + " ??"} />
+					<input type="text" value={desc} onChange={(e) => setDesc(e.target.value)} placeholder={"What in Your Mind Today " + currentUser?.username + " ??"} />
 				</div>
 				<hr />
 				{preview ?
 					<div className="img-upload">
-						<img src={preview} className="uploaded-img" alt="No Image Selected" />
+						<img src={preview} className="uploaded-img" alt="No images Selected" />
 						<div className="remove-uploaded-img" onClick={handleRemoveImg}><Cancel /></div>
 						<progress className="upload-progress" value={progress} />
 						{progress === 100 ? <div className="upload-complete"> Image Upload completed</div> : ''}
@@ -130,7 +130,7 @@ function Share() {
 					:
 					''
 				}
-				{makePost ? <div className="post-complete"> Post Successfully / reloading Now</div> : ''}
+				{makePost ? <div className="post-complete"> Post Successfully </div> : ''}
 				<div className="share-bottom">
 
 					<form onSubmit={handleSubmit} className="option-container">

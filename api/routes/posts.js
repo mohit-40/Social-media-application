@@ -8,8 +8,8 @@ const {verifyTokenAndAdmin, verifyToken,  verifyTokenAndAuthorization } =require
 router.post("/:id",verifyTokenAndAuthorization,async (req, res) => {
 	try {
 		const newPost = await new Post(req.body);
-		const post = await newPost.save()
-		res.status(200).json("Post uploaded successfully");
+		const post = await newPost.save() 
+		res.status(200).json(post);
 	} catch (error) {
 		res.status(404).json(error.message);
 	}
