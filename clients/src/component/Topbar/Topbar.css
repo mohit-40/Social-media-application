@@ -108,6 +108,8 @@
   position: absolute;
   top: 39px;
   width: 130px;
+  height: 50vh;
+  overflow-y: scroll;
 }
 .topbar .topbar-right .topbar-icon-container .topbar-icon-item .notificationList .notificationListItem {
   padding: 3px 2px;

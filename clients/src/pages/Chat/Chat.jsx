@@ -76,8 +76,7 @@ function Chat() {
 	useEffect(() => { 
 		currentUserId && socket?.emit("addUser",currentUserId);
 		socket?.on("getUsers", (users) => { 
-			setOnlineFriend(currentUser?.followings.filter((f) => users.some((u) => u.userId === f)))
-			console.log("listen to the getUser event ",socket)
+			setOnlineFriend(currentUser?.followings.filter((f) => users.some((u) => u.userId === f))) 
 		})
 	}, [currentUserId,currentUser,socket]);
 	
@@ -119,13 +118,18 @@ function Chat() {
 			senderId: currentUserId,
 			textMessage: newMessage
 		}
-		socket?.emit("sendMessage", {
-			body: body,
-			receiverId: currConversation.members.find((member) => member != currentUserId),
-		})
 		try {
 			const res = await userRequest.post("/messages/"+currentUserId, body);
 			setMessages([...messages, res.data]);
+			socket?.emit("sendMessage", {
+				body: body,
+				receiverId: currConversation.members.find((member) => member != currentUserId),
+			})
+			socket?.emit("sendNotification",{
+				receiverId: currConversation.members.find((member) => member != currentUserId),
+				senderId: currentUserId,
+				type:"send you a message"
+			})
 			setNewMessage("")
 		} catch (error) {
 			console.log(error)

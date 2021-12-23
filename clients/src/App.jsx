@@ -18,9 +18,11 @@ function App() {
   const userState = useSelector(state => state.user)
   const currentUserId = userState.currentUserId;
   useEffect(()=>{
-    const socket = io("http://localhost:8900");
-    currentUserId && socket?.emit("addUser",currentUserId);
-    dispatch(setSocket(socket));
+    if(currentUserId){
+      const socket = io("http://localhost:8900");
+      socket?.emit("addUser",currentUserId);
+      dispatch(setSocket(socket));
+    }
   },[dispatch, currentUserId]);
   
   return (

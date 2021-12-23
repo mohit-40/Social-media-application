@@ -10,6 +10,7 @@ function Post({post , posts ,setPosts}) {
 	//fetching currentuser
 	const userState = useSelector(state => state.user)
 	const currentUserId = userState.currentUserId;
+	const socket= useSelector(state => state.socket.socket)
 	// fetched currentUser
 	
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -22,11 +23,16 @@ function Post({post , posts ,setPosts}) {
 	useEffect(() => {
 		setIsLike(post.like?.includes(currentUserId));
 	}, [currentUserId, post.like]);
-
-
+	
+	
 	const handleLike = async () => {
 		try {
 			await userRequest.put("/posts/" + post._id + "/like", { userId: currentUserId });
+			socket?.emit("sendNotification",{
+				receiverId: post.userId,
+				senderId: currentUserId,
+				type: isLike?"unlike your Post":"like your post"
+			})
 			if (isLike) { setLike(like - 1); }
 			else { setLike(like + 1); }
 			setIsLike(!isLike);
@@ -49,8 +55,7 @@ function Post({post , posts ,setPosts}) {
 			await userRequest.delete("/posts/" + post._id+"/"+currentUserId);
 			setIsDeleted(true);
 			setPosts(posts.filter(p=> p._id!== post._id)) 
-		} catch (error) {
-			console.log(post._id,currentUserId)
+		} catch (error) { 
 			console.log(error.message);
 		}
 	}

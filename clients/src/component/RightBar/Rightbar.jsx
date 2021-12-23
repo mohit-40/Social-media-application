@@ -15,12 +15,10 @@ function Rightbar() {
 	const [onlineFriend, setOnlineFriend] = useState([]);
 
 	//connecting to socket server 
-	useEffect(() => {    
-		console.log("socket useeffect called",socket)
+	useEffect(() => {     
 		currentUserId && socket?.emit("addUser",currentUserId);
 		socket?.on("getUsers", users => {
-			setOnlineFriend(followings?.filter((fid) => users.some((u) => u.userId === fid)))
-			console.log("listen to the getUser event ",socket)
+			setOnlineFriend(followings?.filter((fid) => users.some((u) => u.userId === fid))) 
 		})
 	}, [currentUserId,followings,socket]);
 

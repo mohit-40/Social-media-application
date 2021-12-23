@@ -8,9 +8,12 @@ import { userRequest } from '../../requestMethod';
 import {follow} from "../../redux/exportAllAction"
 import {unfollow} from "../../redux/exportAllAction"
 function ProfileRightbar({ user }) {
+	//fetching reduxState
 	const dispatch=useDispatch()
 	const userState = useSelector(state => state.user)
 	const currentUserId = userState.currentUserId;
+	const socket= useSelector(state=> state.socket.socket)
+	//fetched reduxState
 	const [followed, setFollowed] = useState(user.followers.includes(currentUserId));
 	const [loaded, setLoaded] = useState(false)
 	const [followings, setFollowings] = useState([])
@@ -22,12 +25,22 @@ function ProfileRightbar({ user }) {
 			if(followed){
 				await userRequest.put("/users/"+ user._id +"/"+ currentUserId + "/unfollow")
 				dispatch(unfollow(user._id))	
+				socket?.emit("sendNotification",{
+					receiverId: user?._id,
+					senderId: currentUserId,
+					type:"unfollow you"
+				})
 				setFollowed(!followed);
 				setFollowers(followers.filter(fid=> fid !== currentUserId))
 			}
 			else{
 				await userRequest.put("/users/"+ user._id +"/"+ currentUserId + "/follow" )
 				dispatch(follow(user._id))	
+				socket?.emit("sendNotification",{
+					receiverId: user?._id,
+					senderId: currentUserId,
+					type:"started following you"
+				})
 				setFollowed(!followed);
 				setFollowers([...followers ,currentUserId])
 			}

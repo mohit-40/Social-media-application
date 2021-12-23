@@ -58,7 +58,6 @@ function UserItem({ userId }) {
 				await userRequest.put("/users/" + userId + "/" + currentUserId + "/follow")
 				dispatch(follow(userId))
 				setFollowed(!followed);
-				console.log(followed, user?.followers, currentUserId);
 			}
 		} catch (error) {
 			console.log(error)
