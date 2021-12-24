@@ -39,7 +39,14 @@
 		width: 100%;
 		font-size: 16px;
 		padding: 10px;
-		
+		border:none;
+		border-radius: 10px;
+		color: rgb(255, 255, 255);
+		background-color: blue;
+		cursor: pointer;
+		&:hover{
+			background-color: rgba(8, 8, 133, 0.959); 
+		}
 	}
 	hr{
 		margin: 10px;

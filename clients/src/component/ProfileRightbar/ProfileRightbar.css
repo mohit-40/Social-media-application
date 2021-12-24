@@ -6,16 +6,32 @@
 }
 .profile-rightbar .profile-rightbar-wrapper .show-all {
   width: 100%;
-  font-size: 0.9rem;
+  font-size: 16px;
   padding: 10px;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  background-color: blue;
+  cursor: pointer;
+}
+.profile-rightbar .profile-rightbar-wrapper .show-all:hover {
+  background-color: rgba(8, 8, 133, 0.959);
 }
 .profile-rightbar .profile-rightbar-wrapper .follow-btn {
-  padding: 5px;
-  background-color: blue;
-  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
   font-size: 1.1rem;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
   color: white;
+  background-color: blue;
   cursor: pointer;
+}
+.profile-rightbar .profile-rightbar-wrapper .follow-btn:hover {
+  background-color: rgba(8, 8, 133, 0.959);
 }
 .profile-rightbar .profile-rightbar-wrapper .user-info .info {
   margin: 10px;

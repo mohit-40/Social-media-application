@@ -4,17 +4,33 @@
 		padding: 20px;
 		.show-all{
 			width: 100%;
-			font-size: 0.9rem;
+			font-size: 16px;
 			padding: 10px;
+			border:none;
+			border-radius: 10px;
+			color: rgb(255, 255, 255);
+			background-color: blue;
+			cursor: pointer;
+			&:hover{
+				background-color: rgba(8, 8, 133, 0.959); 
+			}
 		}
 
 		.follow-btn{
-			padding: 5px;
-			background-color: blue;
-			border: none;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 50%;
 			font-size: 1.1rem;
-			color: white;
+			padding: 10px;
+			border:none;
+			border-radius: 10px;
+			color: rgb(255, 255, 255);
+			background-color: blue;
 			cursor: pointer;
+			&:hover{
+				background-color: rgba(8, 8, 133, 0.959); 
+			}
 		}
 		.user-info{
 			.info{

@@ -4,14 +4,14 @@ import { Search, Person, Chat, Notifications } from "@material-ui/icons";
 import "./Topbar.css"
 import { useSelector, useDispatch } from "react-redux"
 import { logout } from "../../redux/exportAllAction"
-import { userRequest } from '../../requestMethod'; 
+import { userRequest } from '../../requestMethod';
 import NotificationListItem from '../notificationItem/NotificationListItem';
 
 function Topbar() {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 	//fetching reduxState
 	const dispatch = useDispatch();
-	const socket =useSelector(state=>state.socket.socket);
+	const socket = useSelector(state => state.socket.socket);
 	const currentUserId = useSelector(state => state.user.currentUserId)
 	const [currentUser, setCurrentUser] = useState(null);
 	useEffect(() => {
@@ -41,22 +41,22 @@ function Topbar() {
 		fetchAllUsers()
 	}, [])
 
-	const handleLogout = () => { 
-		socket?.emit("removeUser",currentUserId);
+	const handleLogout = () => {
+		socket?.emit("removeUser", currentUserId);
 		dispatch(logout(currentUserId));
 	}
-	
 
-	const [notification,setNotification]= useState([]);
-	const [displayNotification,setDisplayNotification]= useState(false); 
-	const [messages,setMessages] =useState(0);
-	useEffect(()=>{
-		socket?.on("getNotification",body=>{
-			setMessages([body,...notification].filter(n=> n.type==="message").length)
-			setNotification([body,...notification])
+
+	const [notification, setNotification] = useState([]);
+	const [displayNotification, setDisplayNotification] = useState(false);
+	const [messages, setMessages] = useState(0);
+	useEffect(() => {
+		socket?.on("getNotification", body => {
+			setMessages([body, ...notification].filter(n => n.type === "message").length)
+			setNotification([body, ...notification])
 		})
-	},[socket,notification])
-	
+	}, [socket, notification])
+
 	return (
 		<div className="topbar">
 			<div className="topbar-left">
@@ -68,22 +68,24 @@ function Topbar() {
 					<Search className="search-icon" />
 					<input type="text" name="" id="" placeholder="Search for Person or friend" onChange={(e) => setSearch(e.target.value)} />
 					<div className="search-result">
-						{allUsers.filter((user) => search !== "" && user?.name?.toLowerCase().includes(search.toLowerCase())).slice(0, 5).map((user) => {
-							return (
-								<Link key={user._id} className="search-result-item" to={`/profile/${user.username}`}>
-									<div >{user.name}</div>
-								</Link>
-							)
-						})}
+						{
+							allUsers.filter((user) => search !== "" && user?.name?.toLowerCase().includes(search.toLowerCase())).slice(0, 5).map((user) => {
+								return (
+									<Link key={user._id} className="search-result-item" to={`/profile/${user.username}`}>
+										<div >{user.name}</div>
+									</Link>
+								)
+							})
+						}
 					</div>
 				</div>
 			</div>
 
 			<div className="topbar-right">
 				<div className="topbar-link-container">
-					<Link className='text-link' to={`/profile/${currentUser?.username}`}><span className="topbar-link">Home</span></Link>
-					<Link className='text-link' to="/"><span className="topbar-link">Timeline</span></Link>
-					<span className="topbar-link" onClick={handleLogout}>Logout</span>
+					<Link className='text-link' to={`/profile/${currentUser?.username}`}><span className="topbar-link"><i class="fas fa-home"></i> Home</span></Link>
+					<Link className='text-link' to="/"><span className="topbar-link"><i class="fas fa-stream"></i> Timeline</span></Link>
+					<span className="topbar-link" onClick={handleLogout}><i class="fas fa-sign-out-alt"></i> Logout</span>
 				</div>
 				<div className="topbar-icon-container">
 					{/* <div className="topbar-icon-item">
@@ -97,13 +99,13 @@ function Topbar() {
 						</Link>
 					</div>
 					<div className="topbar-icon-item">
-						<Notifications className="topbar-icon" onClick={()=>setDisplayNotification(!displayNotification)} />
+						<Notifications className="topbar-icon" onClick={() => setDisplayNotification(!displayNotification)} />
 						<span className="topbar-icon-badge" >{notification.length}</span>
-						<ul className='notificationList' style={displayNotification ? {display:"block"} :{display:"none"}}>
+						<ul className='notificationList' style={displayNotification ? { display: "block" } : { display: "none" }}>
 							{notification && notification.map((n) =>
 								<NotificationListItem n={n} key={n} />
 							)}
-							{notification.length!==0 ? <button className='notificationButton' onClick={()=>setNotification([])}>Mark Read</button> : "No new notification"}
+							{notification.length !== 0 ? <button className='notificationButton' onClick={() => setNotification([])}>Mark Read</button> : "No new notification"}
 						</ul>
 					</div>
 				</div>

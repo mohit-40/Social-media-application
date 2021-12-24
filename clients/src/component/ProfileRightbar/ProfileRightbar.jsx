@@ -69,8 +69,8 @@ function ProfileRightbar({ user }) {
 			<div className="profile-rightbar-wrapper">
 				{user._id !== currentUserId ?
 					<button className="follow-btn" onClick={handleFollow}>
-						{followed ? "UnFollow" : "Follow"}
-						{followed ? <Remove /> : <Add />}
+						{followed ? <i class="fas fa-user-minus" >  UnFollow</i> :   <i class="fas fa-user-plus"> Follow</i>}
+						{/* {followed ? "UnFollow " : "Follow"} */}
 					</button>
 					: ''}
 
@@ -78,19 +78,19 @@ function ProfileRightbar({ user }) {
 					<div className="title">About {user.name}</div>
 					{!user.work && !user.school && !user.from && !user.live && !user.relationship && <div>This User Information not available</div>}
 					<div className="info">
-						{user.work ? <span >Work at <b>{user.work}</b> </span> : ''}
+						{user.work ? <span ><i class="fas fa-briefcase"></i> Work at <b>{user.work}</b> </span> : ''}
 					</div>
 					<div className="info">
-						{user.school ? <span >Studied at <b>{user.school}</b> </span> : ''}
+						{user.school ? <span ><i class="fas fa-university"></i> Studied at <b>{user.school}</b> </span> : ''}
 					</div>
 					<div className="info">
-						{user.from ? <span >From <b>{user.from}</b> </span> : ''}
+						{user.from ? <span ><i class="fas fa-building"></i> From <b>{user.from}</b> </span> : ''}
 					</div>
 					<div className="info">
-						{user.live ? <span >Live in <b>{user.live}</b> </span> : ''}
+						{user.live ? <span ><i class="fas fa-globe-americas"></i> Live in <b>{user.live}</b> </span> : ''}
 					</div>
 					<div className="info">
-						{user.relationship ? <span >Relationship Status <b>{user.relationship===1? "Single (😃)" : user.relationship===2 ? "In RelationShip (😞)" : "Complicated (😉)"}</b> </span> : ''}
+						{user.relationship ? <span><i class="fas fa-heart"></i> Relationship Status <b>{user.relationship===1? "Single (😃)" : user.relationship===2 ? "In RelationShip (😞)" : "Complicated (😉)"}</b> </span> : ''}
 					</div>
 				</div>
 				<hr />

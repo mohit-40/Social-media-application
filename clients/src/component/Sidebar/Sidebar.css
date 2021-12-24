@@ -41,6 +41,14 @@
   width: 100%;
   font-size: 16px;
   padding: 10px;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  background-color: blue;
+  cursor: pointer;
+}
+.sidebar button:hover {
+  background-color: rgba(8, 8, 133, 0.959);
 }
 .sidebar hr {
   margin: 10px;

@@ -26,16 +26,15 @@
 }
 .topbar .topbar-center .search {
   background-color: white;
-  width: 100%;
   border-radius: 50px;
-  display: flex;
-  align-items: center;
+  width: 100%;
   height: 30px;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  flex-direction: row;
 }
 .topbar .topbar-center .search .search-icon {
-  display: none;
+  display: block;
 }
 .topbar .topbar-center .search input {
   width: 94%;

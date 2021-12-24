@@ -101,19 +101,21 @@ function Profile() {
 							<img src={user.coverPicture ? user.coverPicture : PF + "/person/noCover.png"} alt="profileCoverPhoto" className="profile-cover-photo" />
 							<img src={user.profilePicture ? user.profilePicture : PF + "/person/noAvatar.png"} alt="profilePhoto" className="profile-photo" />
 							{currentUserId === user._id ?
-								<>
-									<label htmlFor="cover-pic" className="change-cover-label">
+								<div className="profile-top-btn-container">
+									<label htmlFor="cover-pic" className="profile-top-btn">
+										<i class="fas fa-images"></i>
 										Change Cover
 										<input type="file" name="cover-pic" id="cover-pic" style={{ display: "none" }} className="change-cover" onChange={(e) => setCoverPic(e.target.files[0])} />
 									</label>
-									<label htmlFor="profile-pic" className="change-profile-label">
+									<label htmlFor="profile-pic" className="profile-top-btn">
+										<i class="fas fa-user"></i>
 										Change Profile
 										<input type="file" name="profile-pic" id="profile-pic" style={{ display: "none" }} className="profile-cover" onChange={(e) => setProfilePic(e.target.files[0])} />
 									</label>
 									<Link to="/updateInfo">
-										<button className="update-info-btn cover-pic">Update Info</button>
+										<button className="profile-top-btn cover-pic"> <i class="fas fa-pen"></i> Update Info</button>
 									</Link>
-								</>
+								</div>
 								:
 								''
 							}

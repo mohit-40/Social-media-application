@@ -66,6 +66,7 @@
 .post .post-wrapper .post-bottom .post-bottom-left .like-counter {
   margin-left: 15px;
   font-size: 15px;
+  border-bottom: 2px dashed gray;
 }
 .post .post-wrapper .post-bottom .post-bottom-right .comment-counter {
   font-size: 16px;

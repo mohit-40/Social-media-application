@@ -134,7 +134,7 @@ function Post({post , posts ,setPosts}) {
 				<div className="post-bottom">
 					<div className="post-bottom-left">
 						{isLike? <i class="fas fa-heart" onClick={handleLike} style={{color:"red" , fontSize:"25px"}}></i> :<i class="far fa-heart" onClick={handleLike} style={{color:"red" , fontSize:"25px"}} ></i> }
-						<span className="like-counter">{like} people like it</span>
+						<span className="like-counter"><b>{like} people like it</b></span>
 					</div>
 					<div className="post-bottom-right">
 						<span className="comment-counter" onClick={()=>setDisplayComment(!displayComment)}><i class="fas fa-comments"></i> <b> {postComment.length} comment </b></span>
