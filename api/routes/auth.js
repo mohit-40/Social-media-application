@@ -3,7 +3,7 @@ const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const saltRounds =10;
 const jwt=require("jsonwebtoken")
-const {gernateAccessToken ,gernateRefreshToken, verifyTokenAndAuthorization } =require("./verifyToken")
+const {gernateAccessToken ,gernateRefreshToken, verifyTokenAndAuthorization } =require("./function/verifyToken")
 
 
 //register
@@ -12,7 +12,6 @@ router.post("/register", async(req,res)=>{
 		const originalPassword=req.body.password;
 		const salt = await bcrypt.genSalt(saltRounds);
 		const hashPassword = await bcrypt.hash(req.body.password, salt);
-
 		const newUser=await new User({
 			name:req.body.name,
 			lastName:req.body.lastName,
@@ -28,6 +27,7 @@ router.post("/register", async(req,res)=>{
 		res.status(404).json(err.message);
 	}
 })
+
 
 //login
 router.post('/login',async(req,res)=>{

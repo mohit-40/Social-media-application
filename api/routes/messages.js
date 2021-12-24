@@ -1,6 +1,6 @@
 const router=require('express').Router();
 const Message=require('../models/Message');
-const {verifyTokenAndAdmin, verifyToken,  verifyTokenAndAuthorization } =require("./verifyToken")
+const {verifyTokenAndAdmin, verifyToken,  verifyTokenAndAuthorization } =require("./function/verifyToken")
 
 //create a conversation message
 router.post("/:id", verifyTokenAndAuthorization ,async (req,res)=>{

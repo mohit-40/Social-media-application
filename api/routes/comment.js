@@ -1,6 +1,6 @@
 const router=require('express').Router();
 const Comment=require('../models/Comment');
-const {verifyTokenAndAdmin, verifyToken,  verifyTokenAndAuthorization } = require("./verifyToken")
+const {verifyTokenAndAdmin, verifyToken,  verifyTokenAndAuthorization } = require("./function/verifyToken")
 
 //get the comment
 router.get("/:pid" , verifyToken ,async(req,res) =>{

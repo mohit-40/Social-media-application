@@ -14,6 +14,7 @@ const postRoute = require("./routes/posts");
 const conversationRoute= require("./routes/conversations");
 const messageRoute = require("./routes/messages");
 const commentRoute = require("./routes/comment");
+const otpRoute = require("./routes/otp");
 const port= process.env.PORT || 8800;
 
 //! /* -------------------------------- mongoose -------------------------------- */
@@ -33,6 +34,7 @@ app.use("/api/posts", postRoute);
 app.use("/api/conversations",conversationRoute);
 app.use("/api/messages",messageRoute);
 app.use("/api/comment",commentRoute);
+app.use("/api/otp",otpRoute);
 
 //! /* --------------------------------- listen server --------------------------------- */
 app.listen(port,()=>{

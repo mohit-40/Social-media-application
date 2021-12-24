@@ -2,7 +2,7 @@ const router = require("express").Router();
 const { findById } = require("../models/Post");
 const Post = require('../models/Post');
 const User = require('../models/User');
-const {verifyTokenAndAdmin, verifyToken,  verifyTokenAndAuthorization } =require("./verifyToken")
+const {verifyTokenAndAdmin, verifyToken,  verifyTokenAndAuthorization } =require("./function/verifyToken")
 
 // create a post 
 router.post("/:id",verifyTokenAndAuthorization,async (req, res) => {

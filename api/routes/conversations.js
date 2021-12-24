@@ -1,7 +1,7 @@
 const router=require('express').Router()
 const { find } = require('../models/Conversation');
 const Conversation = require('../models/Conversation');
-const {verifyTokenAndAdmin, verifyToken,  verifyTokenAndAuthorization } =require("./verifyToken")
+const {verifyTokenAndAdmin, verifyToken,  verifyTokenAndAuthorization } =require("./function/verifyToken")
 
 //start conversation
 router.post("/:id",verifyTokenAndAuthorization, async (req,res)=>{

@@ -2,7 +2,7 @@ const router = require("express").Router();
 const User = require("../models/User");
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-const {verifyTokenAndAdmin, verifyToken,  verifyTokenAndAuthorization } =require("./verifyToken")
+const {verifyTokenAndAdmin, verifyToken,  verifyTokenAndAuthorization } =require("./function/verifyToken")
 
 // update a user 
 router.put("/:id",verifyTokenAndAuthorization, async (req, res) => {
@@ -24,6 +24,7 @@ router.put("/:id",verifyTokenAndAuthorization, async (req, res) => {
 router.delete("/:id",verifyTokenAndAuthorization, async (req, res) => { 
 		try {
 			await User.findByIdAndDelete({ _id: req.params.id });
+			
 			res.status(200).json("User is delete Sucessfully");
 		} catch (err) {
 			res.status(404).json(err.message);
