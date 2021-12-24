@@ -21,12 +21,14 @@
 		flex: 5;
 		height: 50px;
 		display: flex;
+		flex-direction: column;
 		align-items: center;
 		.search{
 			background-color: white;
 			border-radius: 50px;
 			width: 100%;
 			height: 30px;
+			margin-top: 10px;
 
 			display: flex;
 			align-items: center;
@@ -35,26 +37,32 @@
 				display: block;
 			}
 			input{
-				width: 94%;
+				width: 100%;
 				border: none;
+				border-radius: 10px;
 				outline: none;
 				font-size: 16px;
 			}
-			.search-result{
-				display: flex;
-				flex-direction: column;
-				align-items: center;
+		}
+		.search-result{
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			width: 100%;
+			.search-result-item{
+				background-color: rgb(135, 197, 248);
+				color: black;
 				width: 100%;
-				.search-result-item{
-					background-color: cornsilk;
-					color: black;
-					width: 100%;
-					text-align: center;
-					padding: 5px;
-					border: 2px solid black;
+				text-align: center;
+				padding: 5px 5px;
+				border-bottom:1px solid black;
+				border-radius: 10px;
+				text-decoration: none;
+				&:hover{
+					background-color: rgb(68, 166, 247);
 				}
-				
 			}
+			
 		}
 	}
 	.topbar-right{

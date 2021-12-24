@@ -67,6 +67,7 @@
   margin-left: 15px;
   font-size: 15px;
   border-bottom: 2px dashed gray;
+  cursor: pointer;
 }
 .post .post-wrapper .post-bottom .post-bottom-right .comment-counter {
   font-size: 16px;

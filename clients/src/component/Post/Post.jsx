@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import {FavoriteBorder , Favorite} from "@material-ui/icons";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 import "./Post.css"
 import { MoreVert } from "@material-ui/icons";
 import { format } from "timeago.js"
 import {useSelector} from "react-redux"
 import { userRequest } from '../../requestMethod';
 import PostCommentItem from "../postCommentItem/PostCommentItem";
+import LikeModal from '../LikeModal/LikeModal';
 
 function Post({post , posts ,setPosts}) {
 	//fetching currentuser
@@ -18,7 +18,7 @@ function Post({post , posts ,setPosts}) {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 	const [user, setUser] = useState({});
 
-	const [like, setLike] = useState(post.like?.length);
+	const [like, setLike] = useState(post.like);
 	const [isLike, setIsLike] = useState(false);
 
 
@@ -36,8 +36,8 @@ function Post({post , posts ,setPosts}) {
 				text: isLike?"unlike your Post":"like your post",
 				type:isLike?"unlike":"like"
 			})
-			if (isLike) { setLike(like - 1); }
-			else { setLike(like + 1); }
+			if (isLike) { setLike(prev=> prev.filter(l=> l !==currentUserId)); }
+			else { setLike(prev => [currentUserId ,...prev]); }
 			setIsLike(!isLike);
 		} catch(error) {
 			console.log(error.message)
@@ -107,6 +107,9 @@ function Post({post , posts ,setPosts}) {
 		}
 	}
 
+	const [modalShow, setModalShow] = useState(false);
+
+
 	return (
 		<div className="post">
 			<div className="post-wrapper">
@@ -134,7 +137,8 @@ function Post({post , posts ,setPosts}) {
 				<div className="post-bottom">
 					<div className="post-bottom-left">
 						{isLike? <i class="fas fa-heart" onClick={handleLike} style={{color:"red" , fontSize:"25px"}}></i> :<i class="far fa-heart" onClick={handleLike} style={{color:"red" , fontSize:"25px"}} ></i> }
-						<span className="like-counter"><b>{like} people like it</b></span>
+						<span className="like-counter" onClick={() => setModalShow(true)} ><b>{like.length} people like it</b></span>
+						<LikeModal show={modalShow} onHide={() => setModalShow(false)} likes={like} />
 					</div>
 					<div className="post-bottom-right">
 						<span className="comment-counter" onClick={()=>setDisplayComment(!displayComment)}><i class="fas fa-comments"></i> <b> {postComment.length} comment </b></span>
@@ -146,7 +150,7 @@ function Post({post , posts ,setPosts}) {
 					)}
 					<form className='postCommentForm'>
 						<input type="text" value={comment} onChange={e=>setComment(e.target.value)} className="postCommentInput" placeholder='write your comment here'/>
-						<button className='postCommentButton' type="submit" onClick={(e)=>handleSendComment(e)}><i class="fas fa-paper-plane" style={{fontSize:"25px"}}></i></button>
+						<button className='postCommentButton' type="submit" onClick={(e)=>handleSendComment(e)}><i class="fas fa-paper-plane" style={{fontSize:"16px"}}>Send</i></button>
 					</form>
 				</div>
 			</div>

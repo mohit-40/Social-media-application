@@ -1,0 +1,19 @@
+.likeModalList{
+	list-style: none;
+	.likeModalListItem{
+		display: flex;
+		align-items: center;
+		margin:10px 0px;
+		.likeModalListItemImgContainer{
+			margin-right: 10px;
+			height: 50px;
+			width: 50px;
+			.likeModalListItemImg{
+				height: 100%;
+				width: 100%;
+				border-radius: 50%;
+				object-fit: cover;
+			}
+		}
+	}
+}

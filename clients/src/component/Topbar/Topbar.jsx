@@ -60,24 +60,24 @@ function Topbar() {
 	return (
 		<div className="topbar">
 			<div className="topbar-left">
-				<Link className='text-link' to="/"><span className="topbar-logo">Socialify</span></Link>
+				<Link className='text-link' to="/"><span className="topbar-logo"><i class="fas fa-chess-pawn"></i> Socialify</span></Link>
 			</div>
 
 			<div className="topbar-center">
 				<div className="search">
 					<Search className="search-icon" />
 					<input type="text" name="" id="" placeholder="Search for Person or friend" onChange={(e) => setSearch(e.target.value)} />
-					<div className="search-result">
-						{
-							allUsers.filter((user) => search !== "" && user?.name?.toLowerCase().includes(search.toLowerCase())).slice(0, 5).map((user) => {
-								return (
-									<Link key={user._id} className="search-result-item" to={`/profile/${user.username}`}>
-										<div >{user.name}</div>
-									</Link>
-								)
-							})
-						}
-					</div>
+				</div>
+				<div className="search-result">
+					{
+						allUsers.filter((user) => search !== "" && user?.name?.toLowerCase().includes(search.toLowerCase())).slice(0, 5).map((user) => {
+							return (
+								<Link key={user._id} className="search-result-item" to={`/profile/${user.username}`}>
+									<div >{user.name}</div>
+								</Link>
+							)
+						})
+					}
 				</div>
 			</div>
 

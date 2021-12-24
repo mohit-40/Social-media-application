@@ -15,7 +15,6 @@
 }
 .profile .profile-right .profile-right-top .profile-cover .profile-top-btn-container {
   display: flex;
-  flex-wrap: wrap;
 }
 .profile .profile-right .profile-right-top .profile-cover .profile-top-btn-container .profile-top-btn {
   background: green;
@@ -23,6 +22,12 @@
   margin: 3px 3px;
   padding: 5px 5px;
   font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+.profile .profile-right .profile-right-top .profile-cover .profile-top-btn-container .profile-top-btn:hover {
+  background: #025802;
 }
 .profile .profile-right .profile-right-top .profile-cover .profile-cover-photo {
   width: 100%;
