@@ -41,8 +41,10 @@ function FriendPage() {
 	return (
 		<>
 			<Topbar />
-			<div className="friend-menu">
-				{ displayUsers?.map((userId) => <UserItem userId={userId} key= {userId} /> )}
+			<div className="friendMenuContainer">
+				<div className="friendMenuWrapper">
+					{ displayUsers?.map((userId) => <UserItem userId={userId} key= {userId} /> )}
+				</div>
 			</div>
 
 		</>

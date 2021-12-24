@@ -4,9 +4,12 @@ import "./UserItem.css"
 import { userRequest } from '../../requestMethod'
 import { useDispatch } from 'react-redux'
 import { follow, unfollow, updateFollowing } from '../../redux/exportAllAction'
+import { Link } from '@material-ui/core'
+import { useHistory } from 'react-router-dom'
 
 
 function UserItem({ userId }) {
+	const history=useHistory();
 	//fetching currentuser
 	const userState = useSelector(state => state.user)
 	const currentUserId = userState.currentUserId;
@@ -66,27 +69,38 @@ function UserItem({ userId }) {
 
 
 	return (
-		<div className="friend-menu-item">
-			<img src={user?.profilePicture ? user?.profilePicture : PF + "/person/noAvatar.png"} alt="" />
-			<div className="info">
-				<div className="name info-item">{user?.name}</div>
-				<div className="from info-item">{user?.from}</div>
-				<div className="work info-item">{user?.work}</div>
-				<div className="btn-container info-item">
-					{
-						userId !== currentUserId ?
-							<button onClick={handleClick}>
-								{followed ? "UnFollow" : "Follow"}
-							</button>
-							:
-							""
-					}
-					{/* <button >Message</button> */}
+		<>
+			<div className="friendMenuItem">
+				<div className="friendMenuItemImgContainer">
+					<img src={user?.profilePicture ? user?.profilePicture : PF + "/person/noAvatar.png"} alt="" className="friendMenuItemImg" />
 				</div>
-
+				<div className="friendMenuItemContent">
+					<div className="friendMenuItemLeft">
+						<div className="top"><b>{user?.name}</b></div>
+						<div className="bottom">
+							<div className="from info-item"><i class="fas fa-building"></i> {user?.from}</div>
+							<div className="work info-item"><i class="fas fa-briefcase"></i> {user?.work}</div>
+							<div className="work info-item"><i class="fas fa-university"></i> {user?.school}</div>
+						</div>
+					</div>
+					<div className="friendMenuItemRight">
+						{
+							userId !== currentUserId ?
+							<>
+								<button onClick={handleClick} className='friendMenuItemRightButton'>
+									{followed ?  <i class="fas fa-user-minus" >  UnFollow</i> :   <i class="fas fa-user-plus"> Follow</i> }
+								</button>
+								<button className='friendMenuItemRightButton' onClick={()=>history.push(`/profile/${user?.username}`)}> <i class="fas fa-user-alt"></i> Profile</button>
+							</>
+								:
+								""
+						}
+					</div>
+				</div>
 			</div>
-		</div>
+
+		</>
 	)
 }
 
-export default UserItem
+export default UserItem;

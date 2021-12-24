@@ -16,6 +16,7 @@ function Rightbar() {
 
 	//connecting to socket server 
 	useEffect(() => {     
+		console.log()
 		currentUserId && socket?.emit("addUser",currentUserId);
 		socket?.on("getUsers", users => {
 			setOnlineFriend(followings?.filter((fid) => users.some((u) => u.userId === fid))) 
@@ -36,9 +37,8 @@ function Rightbar() {
 				<div className="rightbar-bottom">
 					<span className="heading">Online Friend</span>
 					<ul className="online-friend-list">
-						{onlineFriend?.lenght === 0
-							?
-							"No Friend Online Currently 😞"
+						{
+							onlineFriend.length===0 ? "No Friend Online Currently 😞"
 							:
 							onlineFriend?.map((userId) => <Online key={userId} userId={userId} />)
 						}

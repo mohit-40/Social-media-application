@@ -59,9 +59,9 @@ function Sidebar() {
 
 
 				<div className="friend-list">
-					<h2 className="heading">My Followings <span className="follower-following-counter">({followings.length})</span></h2>
+					<h2 className="heading"><span className="follower-following-counter"><i class="fas fa-users" style={{fontSize:"25px"}}></i> My Followings  ({followings.length})</span></h2>
 					{followings.length !== 0 ?
-						followings.slice(0, 3).map((followingId) => <CloseFriend key={followingId} userId={followingId} className="friend-list-item" />)
+						followings.slice(0, 5).map((followingId) => <CloseFriend key={followingId} userId={followingId} className="friend-list-item" />)
 						: 'currently no followings'
 					}
 					<Link className='text-link' to={{ pathname: `/friendPage`, state: { usersId: followings } }} >

@@ -1,36 +1,44 @@
-.friend-menu-item {
-  display: flex;
-  flex-wrap: wrap;
-  background-color: #5e4fdd;
-  border-radius: 20px;
-  border: 2px solid #8cb2eb;
-  width: 400px;
-  margin: 10px 10px;
-  padding: 10px 10px;
-}
-.friend-menu-item img {
-  height: 150px;
-  width: 150px;
-  border-radius: 20px;
-  margin-right: 20px;
-}
-.friend-menu-item .info {
-  display: flex;
-  flex-direction: column;
-  font-size: 17px;
-}
-.friend-menu-item .info .info-item {
-  margin-top: 3px;
-}
-.friend-menu-item .info .name {
-  font-size: 22px;
-  font-weight: 600;
-}
-.friend-menu-item .info .btn-container {
+.friendMenuItem {
+  border: 1px dashed black;
+  border-radius: 10px;
+  background-color: #d7d7ff;
+  margin: 5px 0px;
   display: flex;
 }
-.friend-menu-item .info .btn-container button {
+.friendMenuItem .friendMenuItemImgContainer {
+  height: 120px;
+  width: 120px;
+}
+.friendMenuItem .friendMenuItemImgContainer .friendMenuItemImg {
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+  border: 5px solid #4d41f8;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.friendMenuItem .friendMenuItemContent {
+  width: 100%;
+  display: flex;
+  margin: 10px 15px;
+}
+.friendMenuItem .friendMenuItemContent .friendMenuItemLeft {
+  flex: 3;
+}
+.friendMenuItem .friendMenuItemContent .friendMenuItemRight {
+  flex: 1;
+}
+.friendMenuItem .friendMenuItemContent .friendMenuItemRight .friendMenuItemRightButton {
+  margin: 5px 5px;
+  max-width: 100%;
   font-size: 16px;
-  padding: 5px;
-  margin-right: 10px;
+  padding: 5px 5px;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  background-color: blue;
+  cursor: pointer;
+}
+.friendMenuItem .friendMenuItemContent .friendMenuItemRight .friendMenuItemRightButton:hover {
+  background-color: rgba(8, 8, 133, 0.959);
 }/*# sourceMappingURL=UserItem.css.map */

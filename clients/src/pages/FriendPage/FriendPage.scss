@@ -1,4 +1,11 @@
-.friend-menu{
-	display: flex;
-	flex-wrap: wrap;
+.friendMenuContainer{
+	height: 100%;
+	width: 100%;
+	.friendMenuWrapper{
+		width: 80%;
+		margin: 10px auto;
+		
+		display: flex;
+		flex-direction: column;
+	}
 }

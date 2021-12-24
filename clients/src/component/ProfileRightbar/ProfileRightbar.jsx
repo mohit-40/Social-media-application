@@ -75,7 +75,7 @@ function ProfileRightbar({ user }) {
 					: ''}
 
 				<div className="user-info">
-					<div className="title">About {user.name}</div>
+					<div className="title"><i class="far fa-address-card" style={{fontSize:"25px"}} ></i> About {user.name}</div>
 					{!user.work && !user.school && !user.from && !user.live && !user.relationship && <div>This User Information not available</div>}
 					<div className="info">
 						{user.work ? <span ><i class="fas fa-briefcase"></i> Work at <b>{user.work}</b> </span> : ''}
@@ -96,7 +96,7 @@ function ProfileRightbar({ user }) {
 				<hr />
 
 
-				<div className="title">{user.name} following <span className="follower-following-counter">({followings.length})</span></div>
+				<div className="title"><i class="fas fa-users" style={{fontSize:"25px"}}></i> {user.name} following <span className="follower-following-counter">({followings.length})</span></div>
 				<div className="user-friend-container">
 					{followings.length !== 0 ?
 						followings.slice(0,3).map((followingId) => <CloseFriend key={followingId} className="user-friend-item" userId={followingId} />) :
@@ -109,7 +109,7 @@ function ProfileRightbar({ user }) {
 
 				<hr />
 
-				<div className="title">{user.name} follower <span className="follower-following-counter">({followers.length})</span></div>
+				<div className="title"><i class="fas fa-users" style={{fontSize:"25px"}}></i> {user.name} follower <span className="follower-following-counter">({followers.length})</span></div>
 				<div className="user-friend-container">
 					{followers.length !== 0 ?
 						followers.slice(0,3).map((followerId) => <CloseFriend key={followerId} className="user-friend-item" userId={followerId} />) :
