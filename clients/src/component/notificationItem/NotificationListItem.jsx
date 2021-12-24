@@ -7,14 +7,13 @@ function NotificationListItem({ n }) {
 	useEffect(()=>{
 		const fetchUser =async()=>{
 			try {
-				const res = await userRequest.get("/users?userId=" + n.senderId)
+				const res = await userRequest.get("/users?userId=" + n?.senderId)
 				setUser(res.data);
 			} catch(error) {
 				console.log(error)
 			}
 		}
-		fetchUser();
-		console.log(n);
+		fetchUser(); 
 	},[n])
 
 	return (
@@ -23,7 +22,7 @@ function NotificationListItem({ n }) {
 				<div className="notificationImgContainer">
 					<img src={user?.profilePicture} alt="img" className='notificationImg' />
 				</div>
-				{user?.name} {n.text}
+				{user?.name} {n?.text}
 			</li>
 		</div>
 	)

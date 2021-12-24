@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import {FavoriteBorder , Favorite} from "@material-ui/icons";
 import { Link } from "react-router-dom"
 import "./Post.css"
 import { MoreVert } from "@material-ui/icons";
 import { format } from "timeago.js"
 import {useSelector} from "react-redux"
 import { userRequest } from '../../requestMethod';
+import PostCommentItem from "../postCommentItem/PostCommentItem";
 
 function Post({post , posts ,setPosts}) {
 	//fetching currentuser
@@ -61,6 +63,50 @@ function Post({post , posts ,setPosts}) {
 		}
 	}
 
+	const [postComment , setPostComment] = useState([]);
+	useEffect(()=>{
+		const fetchComment= async()=>{
+			try {
+				const res= await userRequest.get("/comment/"+post._id);
+				setPostComment(res.data);
+			} catch(error) {
+				console.log(error);
+			}
+		}
+		fetchComment();
+	},[post._id])
+	const [comment, setComment] = useState("")
+	const [displayComment , setDisplayComment] = useState(false);
+	const handleSendComment= async(e)=>{
+		e.preventDefault()
+		try {
+			const c={
+				postId : post._id,
+				userId:currentUserId,
+				text: comment
+			}
+			const res = await userRequest.post("/comment/"+post._id , c)
+			setPostComment(prev=>[...prev , res.data])
+			setComment("");
+			socket?.emit("sendNotification",{
+				receiverId: post.userId,
+				senderId: currentUserId,
+				text: "comment on your post",
+				type: "comment"
+			})
+		} catch(error) {
+			console.log(error)
+		}
+	}
+	const deleteComment=async(cid)=>{
+		try { 
+			await userRequest.delete(`/comment/${cid}/${currentUserId}`)
+			setPostComment(postComment.filter(c=> c._id!=cid))
+		} catch(error) {
+			console.log(error)
+		}
+	}
+
 	return (
 		<div className="post">
 			<div className="post-wrapper">
@@ -75,7 +121,7 @@ function Post({post , posts ,setPosts}) {
 					</div>
 					<div className="post-top-right">
 						<MoreVert className="more-icon" />
-						{post.userId === currentUserId ? <button className="delete-post-btn" onClick={handleDelete}>Delete</button> : ''}
+						{post.userId === currentUserId ? <i class="fas fa-trash" onClick={handleDelete} style={{fontSize:"25px"}}></i>  : ''}
 					
 						{isDeleted ? <div className="deleted">Post Deleted</div> : ''}
 					</div>
@@ -87,13 +133,21 @@ function Post({post , posts ,setPosts}) {
 				</div>
 				<div className="post-bottom">
 					<div className="post-bottom-left">
-						<img src={PF + "like.png"} alt="" onClick={handleLike} />
-						<img src={PF + "heart.png"} alt="" onClick={handleLike} />
+						{isLike? <i class="fas fa-heart" onClick={handleLike} style={{color:"red" , fontSize:"25px"}}></i> :<i class="far fa-heart" onClick={handleLike} style={{color:"red" , fontSize:"25px"}} ></i> }
 						<span className="like-counter">{like} people like it</span>
 					</div>
 					<div className="post-bottom-right">
-						<span className="comment-counter">{post.comment} comment</span>
+						<span className="comment-counter" onClick={()=>setDisplayComment(!displayComment)}><i class="fas fa-comments"></i> <b> {postComment.length} comment </b></span>
 					</div>
+				</div>
+				<div className="postComment">
+					{displayComment && postComment.map((c)=>
+						<PostCommentItem c={c} deleteComment={deleteComment} />
+					)}
+					<form className='postCommentForm'>
+						<input type="text" value={comment} onChange={e=>setComment(e.target.value)} className="postCommentInput" placeholder='write your comment here'/>
+						<button className='postCommentButton' type="submit" onClick={(e)=>handleSendComment(e)}><i class="fas fa-paper-plane" style={{fontSize:"25px"}}></i></button>
+					</form>
 				</div>
 			</div>
 		</div>

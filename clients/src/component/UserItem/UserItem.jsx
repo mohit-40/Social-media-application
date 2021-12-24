@@ -43,7 +43,7 @@ function UserItem({ userId }) {
 		fetchUser();
 	}, [userId, currentUserId])
 
-	const [followed, setFollowed] = useState("")
+	const [followed, setFollowed] = useState(user?.followers.includes(currentUserId))
 
 
 

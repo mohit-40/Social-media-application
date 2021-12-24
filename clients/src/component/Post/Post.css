@@ -68,7 +68,25 @@
   font-size: 15px;
 }
 .post .post-wrapper .post-bottom .post-bottom-right .comment-counter {
-  font-size: 15px;
+  font-size: 16px;
   cursor: pointer;
   border-bottom: 2px dashed gray;
+}
+.post .postComment .postCommentForm {
+  margin-top: 5px;
+  display: flex;
+}
+.post .postComment .postCommentInput {
+  width: 100%;
+  border-radius: 10px;
+  padding: 5px;
+  font-size: 16px;
+}
+.post .postComment .postCommentButton {
+  border-radius: 10px;
+  border: none;
+  padding: 5px 5px;
+  margin: 2px 2px;
+  background-color: chartreuse;
+  cursor: pointer;
 }/*# sourceMappingURL=Post.css.map */

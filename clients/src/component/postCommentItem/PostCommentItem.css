@@ -1,0 +1,27 @@
+.postCommentItem {
+  display: flex;
+  align-items: center;
+  margin: 5px 0px;
+  width: 100%;
+}
+.postCommentItem .postCommentItemImgContainer {
+  height: 35px;
+  width: 35px;
+}
+.postCommentItem .postCommentItemImgContainer .postCommentItemImg {
+  height: 100%;
+  width: 100%;
+  border-radius: 100%;
+}
+.postCommentItem .postCommentItemContent {
+  width: 100%;
+  margin-left: 11px;
+}
+.postCommentItem .postCommentItemContent .postCommentItemButton {
+  border-radius: 10px;
+  padding: 3px 3px;
+  background: #e45858;
+  color: white;
+  border: none;
+  cursor: pointer;
+}/*# sourceMappingURL=PostCommentItem.css.map */

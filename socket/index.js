@@ -38,7 +38,9 @@ io.on("connection",(socket)=>{
 	socket.on("sendNotification" , ({senderId , receiverId , type ,text})=>{
 		console.log(type);
 		const receiver = getUser(receiverId)
-		io.to(receiver?.socketId).emit("getNotification" , {senderId , receiverId , type, text} )
+		if(senderId !== receiverId){
+			io.to(receiver?.socketId).emit("getNotification" , {senderId , receiverId , type, text} )
+		}
 	})
 
 })

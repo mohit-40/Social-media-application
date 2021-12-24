@@ -1,0 +1,31 @@
+.postCommentItem{
+	display: flex;
+	align-items: center;
+	margin: 5px 0px;
+	width: 100%;
+	.postCommentItemImgContainer{
+	
+		height:35px ;
+		width: 35px;
+		.postCommentItemImg{
+			height: 100%;
+			width: 100%;
+			border-radius: 100%;
+		}
+	}
+	.postCommentItemContent{
+		width: 100%;
+		margin-left: 11px;
+		.postCommentItemText{ 
+		}
+		.postCommentItemButton{ 
+			border-radius: 10px;
+			padding: 3px 3px;
+			background: rgb(228, 88, 88);
+			color: white;
+			border: none;
+			cursor: pointer;
+
+		}
+	}
+}

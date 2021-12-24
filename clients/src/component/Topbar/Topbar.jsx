@@ -100,7 +100,7 @@ function Topbar() {
 						<Notifications className="topbar-icon" onClick={()=>setDisplayNotification(!displayNotification)} />
 						<span className="topbar-icon-badge" >{notification.length}</span>
 						<ul className='notificationList' style={displayNotification ? {display:"block"} :{display:"none"}}>
-							{notification.map((n) =>
+							{notification && notification.map((n) =>
 								<NotificationListItem n={n} key={n} />
 							)}
 							{notification.length!==0 ? <button className='notificationButton' onClick={()=>setNotification([])}>Mark Read</button> : "No new notification"}

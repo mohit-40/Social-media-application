@@ -13,6 +13,7 @@ const userRoute = require("./routes/users");
 const postRoute = require("./routes/posts");
 const conversationRoute= require("./routes/conversations");
 const messageRoute = require("./routes/messages");
+const commentRoute = require("./routes/comment");
 const port= process.env.PORT || 8800;
 
 //! /* -------------------------------- mongoose -------------------------------- */
@@ -31,6 +32,7 @@ app.use("/api/users", userRoute);
 app.use("/api/posts", postRoute);
 app.use("/api/conversations",conversationRoute);
 app.use("/api/messages",messageRoute);
+app.use("/api/comment",commentRoute);
 
 //! /* --------------------------------- listen server --------------------------------- */
 app.listen(port,()=>{
