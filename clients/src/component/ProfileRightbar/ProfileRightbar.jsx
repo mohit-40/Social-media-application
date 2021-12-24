@@ -84,13 +84,16 @@ function ProfileRightbar({ user }) {
 						{user.school ? <span ><i class="fas fa-university"></i> Studied at <b>{user.school}</b> </span> : ''}
 					</div>
 					<div className="info">
-						{user.from ? <span ><i class="fas fa-building"></i> From <b>{user.from}</b> </span> : ''}
+						{user.from ? <span ><i class="fas fa-globe-americas"></i> From <b>{user.from}</b> </span> : ''}
 					</div>
 					<div className="info">
-						{user.live ? <span ><i class="fas fa-globe-americas"></i> Live in <b>{user.live}</b> </span> : ''}
+						{user.live ? <span > <i class="fas fa-building"></i> Live in <b>{user.live}</b> </span> : ''}
 					</div>
 					<div className="info">
 						{user.relationship ? <span><i class="fas fa-heart"></i> Relationship Status <b>{user.relationship===1? "Single (😃)" : user.relationship===2 ? "In RelationShip (😞)" : "Complicated (😉)"}</b> </span> : ''}
+					</div>
+					<div className="info">
+						{user.birthday ? <span><i class="fas fa-birthday-cake"></i> Birthday on <b>{user.birthday}</b> </span> : ''}
 					</div>
 				</div>
 				<hr />

@@ -33,6 +33,7 @@ function UpdateInfo() {
 	const work = useRef();
 	const school = useRef();
 	const relationship = useRef();
+	const birthday = useRef();
 	const desc = useRef();
 	const history=useHistory();
 
@@ -62,7 +63,7 @@ function UpdateInfo() {
 
 
 	return (
-		<>
+		<div className='updateProfileContainer'>
 			<Topbar />
 			<div className="profile-update">
 
@@ -70,6 +71,10 @@ function UpdateInfo() {
 
 				<form className="profile-update-form" onSubmit={handleSubmit}>
 					<input type="text" ref={name} placeholder="Name" defaultValue={currentUser?.name} required/>
+					<div className="birthday">
+						<label htmlFor="birthday" className='birthday-label'>Date of Birth    :</label>
+						<input type="date" ref={birthday} placeholder="birthday" defaultValue={currentUser?.birthday} />
+					</div>
 					<input type="text" ref={from} placeholder="From" defaultValue={currentUser?.from} required />
 					<input type="text" ref={live} placeholder="Live" defaultValue={currentUser?.live} required />
 					<input type="text" ref={work} placeholder="Work" defaultValue={currentUser?.work} required />
@@ -86,7 +91,7 @@ function UpdateInfo() {
 					<button type="submit">Save</button>
 				</form>
 			</div>
-		</>
+		</div>
 	)
 }
 

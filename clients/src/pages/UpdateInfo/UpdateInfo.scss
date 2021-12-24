@@ -1,46 +1,59 @@
-.profile-update{
-	max-width: 300px;
-	margin: auto;
-	height: calc(100vh - 60px);
-	.profile-update-form{
-		height: 100%;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		h3{
-			align-self: flex-start;
-		}
-		.relationshipStatus{
+.updateProfileContainer{
+	background-image: url("https://images.unsplash.com/photo-1564951434112-64d74cc2a2d7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80") ;
+	background-repeat: no-repeat;
+	background-size: cover;
+	.profile-update{
+		max-width: 300px;
+		margin: auto;
+		height: calc(100vh - 60px);
+		.profile-update-form{
+			height: 100%;
 			display: flex;
 			flex-direction: column;
-			width: 100%;
-			label{
-				font-size: 1.2rem;
-				display: flex;
-				justify-content:space-between;
+			align-items: center;
+			justify-content: center;
+			h3{
+				align-self: flex-start;
 			}
-		}
-		&>input,textarea{
-			width: 100%;
-			font-size: 1.2rem;
-			outline: none;
-			margin: 10px;
-			padding: 5px;
-		}
-		textarea{
-			resize: none;
-			min-height: 150px;
-		}
-		button{
-			font-size: 1.1rem;
-			padding: 10px;
-			cursor: pointer;
-			background-color: rgb(55, 55, 230);
-			color: white;
-
-			&:hover{
-				background-color: rgb(6, 23, 116);
+			.relationshipStatus{
+				display: flex;
+				flex-direction: column;
+				width: 100%;
+				label{
+					font-size: 1.2rem;
+					display: flex;
+					justify-content:space-between;
+				}
+			}
+			.birthday-label{
+				font-size: 1.2rem;
+				font-weight: 500; 
+			}
+			&>input,textarea{
+				width: 100%;
+				font-size: 1.2rem;
+				outline: none;
+				margin: 10px;
+				padding: 5px;
+				border: 1px solid black;
+				border-radius: 10px;
+			}
+			textarea{
+				resize: none;
+				min-height: 150px;
+			}
+			button{
+				width: 100%;
+				font-size: 1.1rem;
+				padding: 5px 10px;
+				border-radius: 10px;
+				border: none;
+				cursor: pointer;
+				background-color: rgb(55, 55, 230);
+				color: white;	
+				&:hover{
+					background-color: rgb(6, 23, 116);
+				}
 			}
 		}
 	}
