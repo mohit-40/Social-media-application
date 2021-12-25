@@ -10,31 +10,32 @@ router.get("/gernate/:email" , async(req,res) =>{
 		var digits = '0123456789';
     	let OTP = '';
     	for (let i = 0; i < 4; i++ ) { OTP += digits[Math.floor(Math.random() * 10)]; }
-		//otp gernated
+		console.log(OTP) 
+
+
 		//saving in db
 		const newOtp = await new Otp({email: req.params.email , otp: OTP })
 		await newOtp.save();
-		//saved in db
+
 		//sending to email using nodemailer
 		const functionRes= await sendMail(req.params.email , OTP);
-		if(functionRes===true) { res.status(200).json(`otp send to the email ${req.params.email}`) }
-		else{ res.status(400).json(functionRes) }
-		//send to email
+		if(functionRes.status===true) { res.status(200).json(functionRes.link) }
+		else{ res.status(400).json(functionRes.error) }
     }
 	catch(error) {
 		res.status(400).json(error.message);
 	}
 })
 //verify otp 
-router.get("/verify",async(req,res)=>{
+router.post("/verify",async(req,res)=>{
 	//body => otp , email
 	try {
-		const otpDetail= await Otp.findOne( { email : req.body.email });
+		const otpDetail= await Otp.findOne({ email : req.body.email }); 
 		const otp = otpDetail.otp;
-		if(otp===req.body.otp) { res.status(200).json(true) }
-		else {res.status(400).json(false) }
+		if(otp===req.body.otp) { res.status(200).json("otp matched") } 
+		else {res.status(400).json("otp do not match") }
 	} catch(error) {
-		res.status(404).json("error.message");
+		res.status(404).json(error.message);
 	}
 })
 

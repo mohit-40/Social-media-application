@@ -7,8 +7,9 @@
 	justify-content: center;
 	.register-wrapper{
 		height: 70%;
-		width: 70%;
+		width: 900px;
 		display: flex;
+		flex-wrap: wrap;
 		.register-left,.register-right{
 			flex:1;
 			display: flex;
@@ -32,7 +33,7 @@
 		.register-right{
 			.register-form{
 				height: 80%;
-				width: 80%;
+				max-width: 500px;
 				display: flex;
 				flex-direction: column;
 				justify-content: space-between;
@@ -40,41 +41,72 @@
 				background-color: #fff;
 				border-radius: 10px;
 				input{
-					height: 50px;
     				border-radius: 10px;
     				border: 1px solid gray;
+					height: 50px;
     				font-size: 18px;
     				padding-left: 20px;
+					margin: 5px 0px;
 					outline: none;
 				}
-			
+				.inputAndBtn{
+					display: flex;
+					flex-wrap: wrap;
+					width: 100%;
+					input{
+						height: fit-content;
+						// flex:3
+					}
 					button{
-						width: 100%;
-    					align-self: center;
-    					height: 50px;
-    					border-radius: 10px;
-    					border: none;
-    					background-color: #42b72a;
-    					color: white;
-    					font-size: 20px;
-    					font-weight: 500;
-    					cursor: pointer;
+						margin: 5px 0px;
+						// flex:1.1;
+					}		
+				}
+				.submit-btn{
+					width: 100%;
+					align-self: center;
+					height: 50px;
+					border-radius: 10px;
+					border: none;
+					background-color: #42b72a;
+					color: white;
+					font-size: 20px;
+					font-weight: 500;
+					cursor: pointer;
+					&:hover{
+						background-color: #18570b;
 					}
-					.register-btn{
-						height: 50px;
-						border-radius: 10px;
-						border: none;
-						background-color: #1775ee;
-						color: white;
-						font-size: 20px;
-						font-weight: 500;
-						cursor: pointer;
+					&[disabled]{
+						cursor:not-allowed;
 					}
-					.forget-password{
-						text-decoration: underline;
-						color: blue;
-						cursor: pointer;
+				}
+				.otp-btn{
+					border-radius: 10px;
+					border: none;
+					padding: 3px 5px;
+					background-color: #42b72a;
+					&:hover{
+						background-color: #1c660d;
 					}
+				}
+				.register-btn{
+					height: 50px;
+					border-radius: 10px;
+					border: none;
+					background-color: #1775ee;
+					color: white;
+					font-size: 20px;
+					font-weight: 500;
+					cursor: pointer;
+					&:hover{
+						background-color: #190b57;
+					}
+				}
+				.forget-password{
+					text-decoration: underline;
+					color: blue;
+					cursor: pointer;
+				}
 			}
 		}
 	}

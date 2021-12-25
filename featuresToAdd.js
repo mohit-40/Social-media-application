@@ -13,6 +13,7 @@ register login and user detail
 delete message and conversation
 delete user  (CHALLENGE = then have to delete from all following, follower, like , comment, message)
 which db model is good for like=> { postId, like []} or {userId , postId }
+on catching error how to find the res we get 
 
 notification backend and notification style
 birthday section

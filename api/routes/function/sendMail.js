@@ -24,10 +24,9 @@ const sendMail=async(email,otp)=>{
 		console.log("Message sent: %s", info.messageId);
 		console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 
-
-		return (true);
+		return ({status : true, error:"", link : nodemailer.getTestMessageUrl(info)});
 	} catch(error) {
-		return (error)
+		return ({status : true, error : error, link : "" })
 	}
 }
 

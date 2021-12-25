@@ -8,8 +8,9 @@
 }
 .register .register-wrapper {
   height: 70%;
-  width: 70%;
+  width: 900px;
   display: flex;
+  flex-wrap: wrap;
 }
 .register .register-wrapper .register-left, .register .register-wrapper .register-right {
   flex: 1;
@@ -31,7 +32,7 @@
 }
 .register .register-wrapper .register-right .register-form {
   height: 80%;
-  width: 80%;
+  max-width: 500px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -40,14 +41,28 @@
   border-radius: 10px;
 }
 .register .register-wrapper .register-right .register-form input {
-  height: 50px;
   border-radius: 10px;
   border: 1px solid gray;
+  height: 50px;
   font-size: 18px;
   padding-left: 20px;
+  margin: 5px 0px;
   outline: none;
 }
-.register .register-wrapper .register-right .register-form button {
+.register .register-wrapper .register-right .register-form .inputAndBtn {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.register .register-wrapper .register-right .register-form .inputAndBtn input {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+.register .register-wrapper .register-right .register-form .inputAndBtn button {
+  margin: 5px 0px;
+}
+.register .register-wrapper .register-right .register-form .submit-btn {
   width: 100%;
   align-self: center;
   height: 50px;
@@ -59,6 +74,21 @@
   font-weight: 500;
   cursor: pointer;
 }
+.register .register-wrapper .register-right .register-form .submit-btn:hover {
+  background-color: #18570b;
+}
+.register .register-wrapper .register-right .register-form .submit-btn[disabled] {
+  cursor: not-allowed;
+}
+.register .register-wrapper .register-right .register-form .otp-btn {
+  border-radius: 10px;
+  border: none;
+  padding: 3px 5px;
+  background-color: #42b72a;
+}
+.register .register-wrapper .register-right .register-form .otp-btn:hover {
+  background-color: #1c660d;
+}
 .register .register-wrapper .register-right .register-form .register-btn {
   height: 50px;
   border-radius: 10px;
@@ -68,6 +98,9 @@
   font-size: 20px;
   font-weight: 500;
   cursor: pointer;
+}
+.register .register-wrapper .register-right .register-form .register-btn:hover {
+  background-color: #190b57;
 }
 .register .register-wrapper .register-right .register-form .forget-password {
   text-decoration: underline;
