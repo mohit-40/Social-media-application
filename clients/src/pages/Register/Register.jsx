@@ -35,7 +35,7 @@ function Register() {
 			}		
 			try {
 				const res = await axios.post("/auth/register",user);
-				history.push("/login");
+				history.push("/updateInfo");
 			} catch(error) {
 				setError(error.message);
 				console.log(error);
@@ -70,7 +70,10 @@ function Register() {
 			setOtpVerified(true);
 		} catch(error) {
 			setError(error.message)
-			console.log(error.message);
+			if(error.response) {
+				setError(error.response.data);
+				console.log(error.response.data);
+			}
 		}
 	}
 	const handleEmailChange=()=>{
