@@ -69,37 +69,37 @@ function ProfileRightbar({ user }) {
 			<div className="profile-rightbar-wrapper">
 				{user._id !== currentUserId ?
 					<button className="follow-btn" onClick={handleFollow}>
-						{followed ? <i class="fas fa-user-minus" >  UnFollow</i> :   <i class="fas fa-user-plus"> Follow</i>}
+						{followed ? <i className="fas fa-user-minus" >  UnFollow</i> :   <i className="fas fa-user-plus"> Follow</i>}
 						{/* {followed ? "UnFollow " : "Follow"} */}
 					</button>
 					: ''}
 
 				<div className="user-info">
-					<div className="title"><i class="far fa-address-card" style={{fontSize:"25px"}} ></i> About {user.name}</div>
+					<div className="title"><i className="far fa-address-card" style={{fontSize:"25px"}} ></i> About {user.name}</div>
 					{!user.work && !user.school && !user.from && !user.live && !user.relationship && <div>This User Information not available</div>}
 					<div className="info">
-						{user.work ? <span ><i class="fas fa-briefcase"></i> Work at <b>{user.work}</b> </span> : ''}
+						{user.work ? <span ><i className="fas fa-briefcase"></i> Work at <b>{user.work}</b> </span> : ''}
 					</div>
 					<div className="info">
-						{user.school ? <span ><i class="fas fa-university"></i> Studied at <b>{user.school}</b> </span> : ''}
+						{user.school ? <span ><i className="fas fa-university"></i> Studied at <b>{user.school}</b> </span> : ''}
 					</div>
 					<div className="info">
-						{user.from ? <span ><i class="fas fa-globe-americas"></i> From <b>{user.from}</b> </span> : ''}
+						{user.from ? <span ><i className="fas fa-globe-americas"></i> From <b>{user.from}</b> </span> : ''}
 					</div>
 					<div className="info">
-						{user.live ? <span > <i class="fas fa-building"></i> Live in <b>{user.live}</b> </span> : ''}
+						{user.live ? <span > <i className="fas fa-building"></i> Live in <b>{user.live}</b> </span> : ''}
 					</div>
 					<div className="info">
-						{user.relationship ? <span><i class="fas fa-heart"></i> Relationship Status <b>{user.relationship===1? "Single (😃)" : user.relationship===2 ? "In RelationShip (😞)" : "Complicated (😉)"}</b> </span> : ''}
+						{user.relationship ? <span><i className="fas fa-heart"></i> Relationship Status <b>{user.relationship===1? "Single (😃)" : user.relationship===2 ? "In RelationShip (😞)" : "Complicated (😉)"}</b> </span> : ''}
 					</div>
 					<div className="info">
-						{user.birthday ? <span><i class="fas fa-birthday-cake"></i> Birthday on <b>{user.birthday}</b> </span> : ''}
+						{user.birthday ? <span><i className="fas fa-birthday-cake"></i> Birthday on <b>{user.birthday}</b> </span> : ''}
 					</div>
 				</div>
 				<hr />
 
 
-				<div className="title"><i class="fas fa-users" style={{fontSize:"25px"}}></i> {user.name} following <span className="follower-following-counter">({followings.length})</span></div>
+				<div className="title"><i className="fas fa-users" style={{fontSize:"25px"}}></i> {user.name} following <span className="follower-following-counter">({followings.length})</span></div>
 				<div className="user-friend-container">
 					{followings.length !== 0 ?
 						followings.slice(0,3).map((followingId) => <CloseFriend key={followingId} className="user-friend-item" userId={followingId} />) :
@@ -112,7 +112,7 @@ function ProfileRightbar({ user }) {
 
 				<hr />
 
-				<div className="title"><i class="fas fa-users" style={{fontSize:"25px"}}></i> {user.name} follower <span className="follower-following-counter">({followers.length})</span></div>
+				<div className="title"><i className="fas fa-users" style={{fontSize:"25px"}}></i> {user.name} follower <span className="follower-following-counter">({followers.length})</span></div>
 				<div className="user-friend-container">
 					{followers.length !== 0 ?
 						followers.slice(0,3).map((followerId) => <CloseFriend key={followerId} className="user-friend-item" userId={followerId} />) :

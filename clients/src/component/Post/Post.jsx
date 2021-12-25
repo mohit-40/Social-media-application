@@ -124,7 +124,7 @@ function Post({post , posts ,setPosts}) {
 					</div>
 					<div className="post-top-right">
 						<MoreVert className="more-icon" />
-						{post.userId === currentUserId ? <i class="fas fa-trash" onClick={handleDelete} style={{fontSize:"25px"}}></i>  : ''}
+						{post.userId === currentUserId ? <i className="fas fa-trash" onClick={handleDelete} style={{fontSize:"25px"}}></i>  : ''}
 					
 						{isDeleted ? <div className="deleted">Post Deleted</div> : ''}
 					</div>
@@ -136,12 +136,12 @@ function Post({post , posts ,setPosts}) {
 				</div>
 				<div className="post-bottom">
 					<div className="post-bottom-left">
-						{isLike? <i class="fas fa-heart" onClick={handleLike} style={{color:"red" , fontSize:"25px"}}></i> :<i class="far fa-heart" onClick={handleLike} style={{color:"red" , fontSize:"25px"}} ></i> }
+						{isLike? <i className="fas fa-heart" onClick={handleLike} style={{color:"red" , fontSize:"25px"}}></i> :<i className="far fa-heart" onClick={handleLike} style={{color:"red" , fontSize:"25px"}} ></i> }
 						<span className="like-counter" onClick={() => setModalShow(true)} ><b>{like.length} people like it</b></span>
 						<LikeModal show={modalShow} onHide={() => setModalShow(false)} likes={like} />
 					</div>
 					<div className="post-bottom-right">
-						<span className="comment-counter" onClick={()=>setDisplayComment(!displayComment)}><i class="fas fa-comments"></i> <b> {postComment.length} comment </b></span>
+						<span className="comment-counter" onClick={()=>setDisplayComment(!displayComment)}><i className="fas fa-comments"></i> <b> {postComment.length} comment </b></span>
 					</div>
 				</div>
 				<div className="postComment">
@@ -150,7 +150,7 @@ function Post({post , posts ,setPosts}) {
 					)}
 					<form className='postCommentForm'>
 						<input type="text" value={comment} onChange={e=>setComment(e.target.value)} className="postCommentInput" placeholder='write your comment here'/>
-						<button className='postCommentButton' type="submit" onClick={(e)=>handleSendComment(e)}><i class="fas fa-paper-plane" style={{fontSize:"16px"}}>Send</i></button>
+						<button className='postCommentButton' type="submit" onClick={(e)=>handleSendComment(e)}><i className="fas fa-paper-plane" style={{fontSize:"16px"}}>Send</i></button>
 					</form>
 				</div>
 			</div>

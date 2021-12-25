@@ -31,9 +31,9 @@ function Sidebar() {
 
 
 	return loaded && (
-		<div className="sidebar">
+		<div className="sidebar" >
+		{/* <i className="fas fa-caret-square-right caret-right" style={{fontSize:"25px"}} ></i> */}
 			<div className="sidebar-wrapper">
-
 				<ul className="menu-list">
 					<li className="menu-list-item">
 						<Link className='text-link' to="/">
@@ -55,15 +55,11 @@ function Sidebar() {
 					</li>
 				</ul>
 
-
 				{/* <button className="sidebar-btn">Show More</button> */}
 				<hr />
 
-
-
-
 				<div className="friend-list">
-					<h2 className="heading"><span className="follower-following-counter"><i class="fas fa-users" style={{fontSize:"25px"}}></i> My Followings  ({followings.length})</span></h2>
+					<h2 className="heading"><span className="follower-following-counter"><i className="fas fa-users" style={{fontSize:"25px"}}></i> My Followings  ({followings.length})</span></h2>
 					{followings.length !== 0 ?
 						followings.slice(0, 5).map((followingId) => <CloseFriend key={followingId} userId={followingId} className="friend-list-item" />)
 						: 'Currently no followings'
@@ -72,10 +68,8 @@ function Sidebar() {
 						<button className="show-all" >Show All</button>
 					</Link>
 				</div>
-
-
-			</div>
-		</div>
+			</div> 
+		</div> 
 	)
 }
 

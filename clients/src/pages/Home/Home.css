@@ -1,4 +1,13 @@
 .hero-container{
-	display: flex;
-
+	display: flex;  
+}
+.caret-right{
+	position: sticky;
+	top: 50vh;
+	z-index: 5;
+}  	
+.showSidebar{
+	
+}
+.hideSidebar{ 
 }

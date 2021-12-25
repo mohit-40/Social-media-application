@@ -61,4 +61,5 @@
 }
 .profile .profile-right .profile-right-bottom {
   display: flex;
+  flex-wrap: wrap-reverse;
 }/*# sourceMappingURL=Profile.css.map */

@@ -25,7 +25,7 @@ function PostCommentItem({c , deleteComment}) {
 				<div className="postContainerItemText">
 					<b>{user?.name}</b> {c.text}
 				</div>
-				{currentUserId === c.userId && <button onClick={()=>deleteComment(c._id)}  className="postCommentItemButton"><i class="fas fa-trash"></i>  delete</button>}
+				{currentUserId === c.userId && <button onClick={()=>deleteComment(c._id)}  className="postCommentItemButton"><i className="fas fa-trash"></i>  delete</button>}
 			</div>
 		</div>
 	)

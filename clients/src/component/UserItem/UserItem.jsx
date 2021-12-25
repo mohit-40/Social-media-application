@@ -78,9 +78,9 @@ function UserItem({ userId }) {
 					<div className="friendMenuItemLeft">
 						<div className="top"><b>{user?.name}</b></div>
 						<div className="bottom">
-							<div className="from info-item"><i class="fas fa-building"></i> {user?.from}</div>
-							<div className="work info-item"><i class="fas fa-briefcase"></i> {user?.work}</div>
-							<div className="work info-item"><i class="fas fa-university"></i> {user?.school}</div>
+							<div className="from info-item"><i className="fas fa-building"></i> {user?.from}</div>
+							<div className="work info-item"><i className="fas fa-briefcase"></i> {user?.work}</div>
+							<div className="work info-item"><i className="fas fa-university"></i> {user?.school}</div>
 						</div>
 					</div>
 					<div className="friendMenuItemRight">
@@ -88,9 +88,9 @@ function UserItem({ userId }) {
 							userId !== currentUserId ?
 							<>
 								<button onClick={handleClick} className='friendMenuItemRightButton'>
-									{followed ?  <i class="fas fa-user-minus" >  UnFollow</i> :   <i class="fas fa-user-plus"> Follow</i> }
+									{followed ?  <i className="fas fa-user-minus" >  UnFollow</i> :   <i className="fas fa-user-plus"> Follow</i> }
 								</button>
-								<button className='friendMenuItemRightButton' onClick={()=>history.push(`/profile/${user?.username}`)}> <i class="fas fa-user-alt"></i> Profile</button>
+								<button className='friendMenuItemRightButton' onClick={()=>history.push(`/profile/${user?.username}`)}> <i className="fas fa-user-alt"></i> Profile</button>
 							</>
 								:
 								""

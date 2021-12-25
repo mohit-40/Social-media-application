@@ -10,6 +10,8 @@
 	z-index: 999;
 	.topbar-left{
 		flex: 3;
+		display: flex;
+		align-items: center;
 		.topbar-logo{
 			margin-left: 30px;
 			font-size: 24px;
@@ -18,7 +20,7 @@
 		}
 	}
 	.topbar-center{
-		flex: 5;
+		flex: 4;
 		height: 50px;
 		display: flex;
 		flex-direction: column;
@@ -73,10 +75,13 @@
 		.topbar-link-container{
 			.topbar-link{
 				color: white;
-				margin: 0 20px;
+				margin-left:15px;
 				font-size: 18px;
 				font-weight: 500;
 				cursor: pointer;
+				&:hover{
+					color: rgb(184, 223, 238);
+				}
 			}
 		}
 		.topbar-icon-container{
@@ -84,14 +89,15 @@
 			align-items: center;
 			justify-items: center;
 			.topbar-icon-item{
-				margin: 0 5px;
+				margin: 0 10px;
 				position: relative;
 				.topbar-icon{
 					color: white;
+					font-size: 25px;
+					cursor: pointer;
 					&:hover{
-						cursor: pointer;
 						color: rgb(184, 223, 238);
-						transform: scale(1.5);;
+						transform: scale(1.3);;
 					}
 				}
 				.topbar-icon-badge{
@@ -110,7 +116,6 @@
 					align-items: center;
 					justify-content: center;
 				}
-
 
 				.notificationList{
 					list-style: none;
@@ -149,6 +154,82 @@
 			&:hover{
 				cursor: pointer;
 			}
+		}
+	}
+}
+
+
+.navbar-menu{
+	display: none;
+	z-index: 5;
+}
+
+@media only screen and (max-width: 1100px) {
+	.navbar-menu-link-text{
+		display: none;
+	}
+	.topbar-right{
+		justify-content: center !important;
+	}
+	.topbar-logo{
+		margin-left: 5px !important;
+	}
+	.topbar-left{
+		flex: none !important; 
+	}
+} 
+@media only screen and (max-width: 654px) {
+	.topbar-center{
+		display: none !important;
+	}
+}
+@media only screen and (max-width: 382px) {
+	.navbar-menu-link-text{
+		display: inline;
+	}
+	// .topbar-center{
+	// 	display: block !important;
+	// }
+	
+	.navbar-menu{
+		display: block;
+	}
+	.topbar{
+		display: flex;
+		flex-direction: column;
+		background: black;
+		color: white;
+		position: relative;
+		.topbar-right{
+			display: flex;
+			flex-direction: column;
+			justify-content: start;
+			position: absolute;
+			justify-content: center !important;
+			background-color: black;
+			width: 100vw;
+			height: 80vh;
+			.topbar-link-container{
+				display: flex;
+				flex-direction: column; 
+				.text-link{
+					margin-bottom:20px;
+				}
+			}
+			.topbar-icon-container{
+				display: flex ; 
+				margin-bottom: 20px;
+			}
+		}
+		.topbar-right-hide{
+			transform: translateY(-100vh);
+			transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+			transition-duration: 5s;
+		}
+		.topbar-right-show{
+			transform: translateY(40vh);
+			transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+			transition-duration: 2s;
 		}
 	}
 }
