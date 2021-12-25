@@ -11,7 +11,7 @@ which db model is good for like=> { postId, like []} or {userId , postId }
 // like popout
 // style css
 // nodemailer
-register login and user detail
+// register login and user detail
 
 
 responsive

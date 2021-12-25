@@ -38,7 +38,7 @@ function Login() {
 						<button className="login-btn" type="submit" disabled={isLoading}>  
 						{isLoading ? ( <CircularProgress size="20px" /> ) : ( "Log In" )}
 						</button>
-						<span className="forget-password">Forget Password</span>
+						{/* <span className="forget-password">Forget Password</span> */}
 						<Link className='text-link' to="/register">
 							<button className="register-btn" type="submit" disabled={isLoading}>
 							{isLoading ? ( <CircularProgress size="20px" /> ) : ( "Sign Up" )}

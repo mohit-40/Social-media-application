@@ -66,7 +66,7 @@ function Sidebar() {
 					<h2 className="heading"><span className="follower-following-counter"><i class="fas fa-users" style={{fontSize:"25px"}}></i> My Followings  ({followings.length})</span></h2>
 					{followings.length !== 0 ?
 						followings.slice(0, 5).map((followingId) => <CloseFriend key={followingId} userId={followingId} className="friend-list-item" />)
-						: 'currently no followings'
+						: 'Currently no followings'
 					}
 					<Link className='text-link' to={{ pathname: `/friendPage`,  search:`type=Myfollowings` ,state: { usersId: followings } }} >
 						<button className="show-all" >Show All</button>

@@ -59,6 +59,9 @@
   font-weight: 500;
   cursor: pointer;
 }
+.login .login-wrapper .login-right .login-form button:hover {
+  background-color: #18570b;
+}
 .login .login-wrapper .login-right .login-form .login-btn {
   height: 50px;
   border-radius: 10px;
@@ -68,6 +71,9 @@
   font-size: 20px;
   font-weight: 500;
   cursor: pointer;
+}
+.login .login-wrapper .login-right .login-form .login-btn:hover {
+  background-color: #190b57;
 }
 .login .login-wrapper .login-right .login-form .forget-password {
   text-decoration: underline;
