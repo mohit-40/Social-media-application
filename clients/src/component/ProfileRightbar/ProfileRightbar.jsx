@@ -106,7 +106,7 @@ function ProfileRightbar({ user }) {
 						'No Following'
 					}
 				</div>
-				<Link className='text-link' to={{ pathname: `/friendPage`, state: { usersId: followings} }} >
+				<Link className='text-link' to={{ pathname: `/friendPage`, search:`type=followings?userName=${user?.name}` , state: { usersId: followings} }} >
 					<button className="show-all">Show All</button>
 				</Link>
 
@@ -119,7 +119,7 @@ function ProfileRightbar({ user }) {
 						'No Follower'
 					}
 				</div>
-				<Link className='text-link' to={{ pathname: `/friendPage`, state: { usersId: followers } }} >
+				<Link className='text-link' to={{ pathname: `/friendPage`, search:`type=followers?userName=${user?.name}` ,state: { usersId: followers } }} >
 					<button className="show-all">Show All</button>
 				</Link>
 

@@ -13,12 +13,15 @@ function FriendPage() {
 	const currentUserId = userState.currentUserId;
 	//fetched currentUser 
 	let location = useLocation();
+	console.log(location);
+	const type = location.search?.split("?")[1]?.split("=")[1];
+	const userName = location.search?.split("?")[2]?.split("=")[1]	;
 	const [displayUsers, setDisplayUsers] = useState([]) 
-
+	
 	useEffect(() => {
 		const fetchAllUser = async () => {
 			try {
-				if (location.state.all) {
+				if (type==="all") {
 					const res = await userRequest.get("/users/allUsers", { userId: currentUserId })
 					setDisplayUsers(res.data.map( u => {
 						if(u._id !== currentUserId) 
@@ -35,7 +38,7 @@ function FriendPage() {
 			}
 		}
 		fetchAllUser()
-	}, [currentUserId, location.state.usersId ,location.state.all])
+	}, [currentUserId, location.state?.usersId ,type ])
 
 
 	return (
@@ -43,7 +46,12 @@ function FriendPage() {
 			<Topbar />
 			<div className="friendMenuContainer">
 				<div className="friendMenuWrapper">
-					{ displayUsers?.map((userId) => <UserItem userId={userId} key= {userId} /> )}
+					<h2>{userName} {type}</h2>
+					{ 
+						displayUsers.length===0? "No one to show" : 
+						displayUsers?.map((userId) => <UserItem userId={userId} key= {userId} /> )
+					}
+
 				</div>
 			</div>
 

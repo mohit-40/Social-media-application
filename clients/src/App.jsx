@@ -34,7 +34,7 @@ function App() {
           <Route path="/register" exact > {currentUserId? <Home /> : <Register />}</Route>
           <Route path="/chat" exact > {currentUserId? <Chat /> : <Register />}</Route>
           <Route path="/friendPage" exact > {currentUserId? <FriendPage /> : <Register />}</Route>
-          <Route path="/UpdateInfo" exact > {currentUserId? <UpdateInfo /> : <Register />}</Route>
+          <Route path="/updateInfo" exact > {currentUserId? <UpdateInfo /> : <Register />}</Route>
           <Route path="/error" exact > <Error/> </Route>
       </Switch>
     </Router>

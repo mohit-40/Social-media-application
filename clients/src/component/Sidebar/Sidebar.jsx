@@ -18,9 +18,13 @@ function Sidebar() {
 	const [loaded, setLoaded] = useState(false)
 	useEffect(() => {
 		const fetchFollowing = async () => {
-			const res = await userRequest.get("/users/followings/" + currentUserId)
-			dispatch(updateFollowing(res.data))
-			setLoaded(true)
+			try {
+				const res = await userRequest.get("/users/followings/" + currentUserId)
+				dispatch(updateFollowing(res.data))
+				setLoaded(true)
+			} catch(error) {
+				console.log(error.message);
+			}
 		}
 		fetchFollowing()
 	}, [currentUserId,dispatch]);
@@ -44,7 +48,7 @@ function Sidebar() {
 						</Link>
 					</li>
 					<li className="menu-list-item">
-						<Link className='text-link' to={{ pathname: `/friendPage`, state: { usersId: [], all: true } }} >
+						<Link className='text-link' to= "/friendPage?type=all" >
 							<PersonAdd className="menu-list-icon" />
 							<span className="menu-list-text">Find Friend</span>
 						</Link>
@@ -64,8 +68,8 @@ function Sidebar() {
 						followings.slice(0, 5).map((followingId) => <CloseFriend key={followingId} userId={followingId} className="friend-list-item" />)
 						: 'currently no followings'
 					}
-					<Link className='text-link' to={{ pathname: `/friendPage`, state: { usersId: followings } }} >
-						<button className="show-all">Show All</button>
+					<Link className='text-link' to={{ pathname: `/friendPage`,  search:`type=Myfollowings` ,state: { usersId: followings } }} >
+						<button className="show-all" >Show All</button>
 					</Link>
 				</div>
 

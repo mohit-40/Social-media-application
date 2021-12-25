@@ -3,10 +3,13 @@ import "./Register.css"
 import axios from "axios"
 import { useHistory } from "react-router";
 import {Link} from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { register } from '../../redux/User/userRegisterAction';
 
 
 function Register() {
 	
+	const dispatch = useDispatch();
 	const history=useHistory();
 	const username = useRef()
 	const email = useRef("")
@@ -34,7 +37,7 @@ function Register() {
 				password:password.current.value
 			}		
 			try {
-				const res = await axios.post("/auth/register",user);
+				await dispatch(register(user)) 
 				history.push("/updateInfo");
 			} catch(error) {
 				setError(error.message);

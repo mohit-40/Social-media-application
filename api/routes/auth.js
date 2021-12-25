@@ -9,6 +9,7 @@ const {gernateAccessToken ,gernateRefreshToken, verifyTokenAndAuthorization } =r
 //register
 router.post("/register", async(req,res)=>{
 	try{
+		console.log(req.body)
 		const originalPassword=req.body.password;
 		const salt = await bcrypt.genSalt(saltRounds);
 		const hashPassword = await bcrypt.hash(req.body.password, salt);
@@ -19,10 +20,15 @@ router.post("/register", async(req,res)=>{
 			email:req.body.email,
 			password: hashPassword
 		})
-
 		const user = await newUser.save();
-		res.status(200).json("user registered");
+		
+		//gernate jwt
+		const accessToken=gernateAccessToken(user)
+		const refreshToken=gernateRefreshToken(user)
+		await User.findOneAndUpdate({email:req.body.email} , { $push:{ refreshTokenArray: refreshToken } } , {new :true} )
+		const  {password, refreshTokenArray ,...others } = user._doc;   
 
+		res.status(200).json({...others, accessToken ,refreshToken });
 	}catch(err){
 		res.status(404).json(err);
 	}

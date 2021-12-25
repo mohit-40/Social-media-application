@@ -9,6 +9,7 @@ import { userRequest } from '../../requestMethod';
 
 
 function UpdateInfo() {
+	const followings = useSelector(state => state.following.usersId)
 	const userState = useSelector(state => state.user)
 	const currentUserId = userState.currentUserId;
 	const [currentUser, setCurrentUser]= useState(null);
@@ -52,9 +53,9 @@ function UpdateInfo() {
 		console.log(body)
 		try {
 			const res =await userRequest.put("/users/"+currentUserId,body);
-			setUpdated(true)
-			console.log(res)
-			history.push("/profile/"+currentUser?.username)
+			setUpdated(true) 
+			followings.length>0 ? history.push("/profile/"+currentUser?.username) :history.push("/friendPage?type=all") 
+
 		} catch (error) {
 			console.log(error)
 		}
