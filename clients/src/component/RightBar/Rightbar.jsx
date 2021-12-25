@@ -39,7 +39,7 @@ function Rightbar() {
 					</div>
 					<hr />
 					<div className="rightbar-bottom">
-						<span className="heading">Online Friend</span>
+						<span className="heading"><i class="fas fa-globe-americas"></i> Online Friend</span>
 						<ul className="online-friend-list">
 							{
 								onlineFriend.length === 0 ? "No Friend Online Currently 😞"

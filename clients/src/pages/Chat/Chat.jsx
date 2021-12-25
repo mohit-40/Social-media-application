@@ -123,10 +123,10 @@ function Chat() {
 			setMessages([...messages, res.data]);
 			socket?.emit("sendMessage", {
 				body: body,
-				receiverId: currConversation.members.find((member) => member != currentUserId),
+				receiverId: currConversation?.members.find((member) => member != currentUserId),
 			})
 			socket?.emit("sendNotification",{
-				receiverId: currConversation.members.find((member) => member != currentUserId),
+				receiverId: currConversation?.members.find((member) => member != currentUserId),
 				senderId: currentUserId,
 				text:"send you a message",
 				type:"message"
@@ -165,6 +165,7 @@ function Chat() {
 
 					<div className="chat-left">
 						<div className="chat-left-wrapper">
+							<i class="fas fa-search"> Search user here!!</i>
 							<input type="text" className="search-friend" placeholder="Search friend for Chat" onChange={(e) => { setChatSearch(e.target.value) }} />
 
 							{allUsers.filter((user) =>  followings.includes(user._id) && chatSearch !== "" && user.name && user.name.toLowerCase().includes(chatSearch.toLowerCase())).slice(0,5).map((user) => {
@@ -210,7 +211,7 @@ function Chat() {
 					</div>
 					<div className="chat-right">
 						<div className="chat-right-wrapper">
-							<h2 className="heading">Online Friend</h2>
+							<h2 className="heading"><i class="fas fa-globe-americas"></i> Online Friend</h2>
 							<ul className="online-friend-list">
 								{onlineFriend?.length===0? "No friend Online" : ''}
 								{onlineFriend?.map((userId) => (

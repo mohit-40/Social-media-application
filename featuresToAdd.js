@@ -17,7 +17,7 @@ which db model is good for like=> { postId, like []} or {userId , postId }
 responsive
 delete message and conversation
 delete user  (CHALLENGE = then have to delete from all following, follower, like , comment, message)
-
+delete img from firebase storage
 notification backend and notification style
 birthday section
 multiple images

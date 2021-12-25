@@ -14,11 +14,11 @@ const sendMail=async(email,otp)=>{
 		  },
 		}); 
 		let info = await transporter.sendMail({
-			from: "mohitagrawaldevv@gmail.com",  
+			from: "socialify@gmail.com",  
 			to: email,  
-			subject: "dekh tera baap aaya",
-			text: "hello" , 
-			html:	"<b>Hello world? </b>"+otp,
+			subject: "OTP to register on socialify",
+			text: "hello", 
+			html:	"<b>Welcome to socialify</b>. Your OTP is " +otp +".It is valid only for 30 second.",
 		  });
 
 		console.log("Message sent: %s", info.messageId);

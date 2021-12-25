@@ -1,0 +1,17 @@
+.profile-top-btn-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.profile-top-btn-container .profile-top-btn {
+  background: green;
+  color: white;
+  margin: 3px 3px;
+  padding: 5px 5px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+.profile-top-btn-container .profile-top-btn:hover {
+  background: #025802;
+}/*# sourceMappingURL=UpdateProfileBtn.css.map */
