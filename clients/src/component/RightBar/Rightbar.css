@@ -36,6 +36,7 @@
   display: block;
   font-size: 22px;
   font-weight: 700;
+  color: blue;
 }
 .rightbar .rightbar-wrapper .rightbar-bottom .online-friend-list {
   list-style: none;
@@ -54,15 +55,25 @@
   transition-duration: 1s;
 }
 
-.hero-container {
-  overflow-x: hidden;
-}
-
 .caret-rightbar {
   position: fixed;
   top: 50vh;
   right: 25px;
   z-index: 5;
+}
+
+.hero-container {
+  overflow-x: hidden;
+  height: 100vh;
+}
+.hero-container::-webkit-scrollbar {
+  width: 5px;
+}
+.hero-container::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+.hero-container::-webkit-scrollbar-thumb {
+  background-color: #b3b3b3;
 }
 
 @media only screen and (max-width: 600px) {

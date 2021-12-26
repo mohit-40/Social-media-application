@@ -194,7 +194,7 @@
 	.topbar{
 		display: flex;
 		flex-direction: column;
-		background: black;
+		background: rgb(38, 76, 202);
 		color: white;
 		position: sticky;
 		.topbar-right{
@@ -203,7 +203,7 @@
 			justify-content: start;
 			position: absolute;
 			justify-content: center !important;
-			background-color: black;
+			background-color: rgb(38, 76, 202);
 			width: 100vw;
 			height: 80vh;
 			.topbar-link-container{
@@ -221,12 +221,12 @@
 		.topbar-right-hide{
 			transform: translateY(-100vh);
 			transition: cubic-bezier(0.075, 0.82, 0.165, 1);
-			transition-duration: 2s;
+			transition-duration: 1s;
 		}
 		.topbar-right-show{
 			transform: translateY(40vh);
 			transition: cubic-bezier(0.075, 0.82, 0.165, 1);
-			transition-duration: 2s;
+			transition-duration: 1s;
 		}
 	}
 }

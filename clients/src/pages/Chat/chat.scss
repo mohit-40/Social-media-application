@@ -154,9 +154,6 @@
 	//display:none donot give transition effect so postion absoulute but the sticky also => fixed
 } 
 
-.messenger{
-	overflow-x: hidden;
-}
 .caret-chat-rightbar{
 	position: fixed;
 	top: 50vh;
@@ -194,6 +191,10 @@
 	top: 50vh;
 	z-index: 5;
 } 
+.messenger{
+	overflow-x: hidden;
+	height: 93vh;
+}
 
 @media only screen and (max-width: 600px) {
 	.chat-left{
@@ -205,6 +206,6 @@
 		z-index: 3;
 	}
 	.chat-right{
-		z-index:4; //
+		z-index:4;	
 	}
   }

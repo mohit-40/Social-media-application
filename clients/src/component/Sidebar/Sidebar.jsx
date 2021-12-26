@@ -33,7 +33,7 @@ function Sidebar() {
 	return loaded && (
 
 		<>
-			{showSidebar ? <i className="fas fa-caret-square-right caret-right caret-sidebar" style={{ fontSize: "25px" }} onClick={() => setShowSidebar(!showSidebar)}></i>:<i className="fas fa-caret-square-right caret-right caret-sidebar" style={{ fontSize: "25px" }} onClick={() => setShowSidebar(!showSidebar)}></i>} 	
+			{showSidebar ? <i className="fas fa-caret-square-left caret-left caret-sidebar" style={{ fontSize: "25px" }} onClick={() => setShowSidebar(!showSidebar)}></i>:<i className="fas fa-caret-square-right caret-right caret-sidebar" style={{ fontSize: "25px" }} onClick={() => setShowSidebar(!showSidebar)}></i>} 	
 			<div className={showSidebar ? "sidebar showSidebar" : "sidebar hideSidebar"} >
 				<div className="sidebar-wrapper">
 					<ul className="menu-list">

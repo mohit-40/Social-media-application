@@ -156,10 +156,6 @@
   transition-duration: 1s;
 }
 
-.messenger {
-  overflow-x: hidden;
-}
-
 .caret-chat-rightbar {
   position: fixed;
   top: 50vh;
@@ -193,6 +189,11 @@
   position: fixed;
   top: 50vh;
   z-index: 5;
+}
+
+.messenger {
+  overflow-x: hidden;
+  height: 93vh;
 }
 
 @media only screen and (max-width: 600px) {
