@@ -212,7 +212,7 @@
   .topbar .topbar-right-hide {
     transform: translateY(-100vh);
     transition: cubic-bezier(0.075, 0.82, 0.165, 1);
-    transition-duration: 1s;
+    transition-duration: 2s;
   }
   .topbar .topbar-right-show {
     transform: translateY(40vh);

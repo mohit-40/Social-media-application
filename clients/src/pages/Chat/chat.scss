@@ -69,10 +69,15 @@
 					form{
 						
 						position: relative;
+						display: flex;
+						align-items: center;
+						flex-wrap: wrap;
 						textarea{
 							resize: none;
 							width: 85%;
 							max-height: 20vh;
+							width: 500px;
+							max-width: 500px;
 							outline: none;
 							border-radius: 20px;
 							padding: 20px;
@@ -84,10 +89,8 @@
 							bottom: 0;
 							right :0;
 						}	
-						.send-btn{
-							position: absolute;
-							bottom: 50%;
-							right: 0;
+						.send-btn{  
+							height: 50px;
 							margin-left: 10px;
 							cursor: pointer;
 							padding: 8px;
@@ -137,3 +140,71 @@
 		display: none;
 	}
  }
+
+// chat rightbar  swipe
+.showChatRightbar{
+	transform: translateX(0);
+	transition:cubic-bezier(0.19, 1, 0.22, 1);
+	transition-duration: 1s;
+}
+.hideChatRightbar{
+	transform: translateX(200%);
+	transition:cubic-bezier(0.19, 1, 0.22, 1);
+	transition-duration: 1s;
+	//display:none donot give transition effect so postion absoulute but the sticky also => fixed
+} 
+
+.messenger{
+	overflow-x: hidden;
+}
+.caret-chat-rightbar{
+	position: fixed;
+	top: 50vh;
+	right: 25px;
+	z-index: 5;
+} 
+
+@media only screen and (max-width: 600px) {
+	.chat-right{
+		position:fixed;  
+		right: 0;
+		background: white;
+		height: 100vh;
+		width: 100%;
+		z-index: 4;
+	}
+}
+
+
+
+// chat sidebar  swipe
+.showChatSidebar{
+	transform: translateX(0);
+	transition:cubic-bezier(0.19, 1, 0.22, 1);
+	transition-duration: 1s;
+}
+.hideChatSidebar{
+	transform: translateX(-200%);
+	transition:cubic-bezier(0.19, 1, 0.22, 1);
+	transition-duration: 1s;
+	//display:none donot give transition effect so postion absoulute but the sticky also => fixed
+} 
+.caret-chat-sidebar{
+	position: fixed;
+	top: 50vh;
+	z-index: 5;
+} 
+
+@media only screen and (max-width: 600px) {
+	.chat-left{
+		position:fixed;  
+		left: 0;
+		background: white;
+		height: 100vh;
+		width: 100%;
+		z-index: 3;
+	}
+	.chat-right{
+		z-index:4; //
+	}
+  }

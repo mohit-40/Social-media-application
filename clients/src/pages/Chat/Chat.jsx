@@ -156,14 +156,17 @@ function Chat() {
 		scrollRef.current?.scrollIntoView({ behavior: "smooth" });
 	}, [messages]);
 
+	const [showChatRightbar , setShowChatRightbar] = useState(false)
+	const [showChatSidebar , setShowChatSidebar] = useState(false)
+
 	return (
 
 		<>
 			<Topbar />
 			<div className="messenger">
 				<div className="messenger-wrapper">
-
-					<div className="chat-left">
+				{showChatSidebar ? <i className="fas fa-caret-square-right caret-right caret-chat-sidebar" style={{ fontSize: "25px" }} onClick={() => setShowChatSidebar(!showChatSidebar)}></i>:<i className="fas fa-caret-square-left caret-left caret-chat-sidebar" style={{ fontSize: "25px" }} onClick={() => setShowChatSidebar(!showChatSidebar)}></i>}
+					<div className={showChatSidebar ? "chat-left showChatSidebar" : "chat-left hideChatSidebar"}>
 						<div className="chat-left-wrapper">
 							<i class="fas fa-search"> Search user here!!</i>
 							<input type="text" className="search-friend" placeholder="Search friend for Chat" onChange={(e) => { setChatSearch(e.target.value) }} />
@@ -209,7 +212,8 @@ function Chat() {
 							<div className="no-chat-selected">Search friend and Select Conversation To Start the Chat</div>
 						}
 					</div>
-					<div className="chat-right">
+					{showChatRightbar ? <i className="fas fa-caret-square-right caret-right caret-chat-rightbar" style={{ fontSize: "25px" }} onClick={() => setShowChatRightbar(!showChatRightbar)}></i>:<i className="fas fa-caret-square-left caret-left caret-chat-rightbar" style={{ fontSize: "25px" }} onClick={() => setShowChatRightbar(!showChatRightbar)}></i>}
+					<div className={showChatRightbar ? "chat-right showChatRightbar" : "chat-right hideChatRightbar"}>
 						<div className="chat-right-wrapper">
 							<h2 className="heading"><i class="fas fa-globe-americas"></i> Online Friend</h2>
 							<ul className="online-friend-list">
@@ -230,3 +234,6 @@ function Chat() {
 }
 
 export default Chat
+
+
+

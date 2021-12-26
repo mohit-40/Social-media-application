@@ -6,8 +6,7 @@
 	overflow-y: scroll;
 	position: sticky;
 	top: 50px;
-	max-width: 304px;
-
+	max-width: 304px; 
 	&::-webkit-scrollbar {width: 5px;}
 	&::-webkit-scrollbar-track {background-color: #f1f1f1;}
 	&::-webkit-scrollbar-thumb {background-color: rgb(179, 179, 179);}
@@ -64,3 +63,32 @@
 		}
 	}
 }
+
+
+.showSidebar{
+	transform: translateX(0);
+	transition:cubic-bezier(0.19, 1, 0.22, 1);
+	transition-duration: 1s;
+}
+.hideSidebar{
+	transform: translateX(-100%);
+	transition:cubic-bezier(0.19, 1, 0.22, 1);
+	transition-duration: 1s;
+	//display:none donot give transition effect so postion absoulute but the sticky also => fixed
+} 
+.caret-sidebar{
+	position: fixed;
+	top: 50vh;
+	z-index: 5;
+} 
+
+@media only screen and (max-width: 600px) {
+	.sidebar{
+		position:fixed;  
+		left: 0;
+		background: white;
+		height: 100vh;
+		width: 100%;
+		z-index: 4;
+	}
+  }

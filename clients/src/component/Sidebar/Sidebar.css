@@ -58,4 +58,32 @@
   text-align: center;
   margin: 10px;
   color: blue;
+}
+.showSidebar {
+  transform: translateX(0);
+  transition: cubic-bezier(0.19, 1, 0.22, 1);
+  transition-duration: 1s;
+}
+
+.hideSidebar {
+  transform: translateX(-100%);
+  transition: cubic-bezier(0.19, 1, 0.22, 1);
+  transition-duration: 1s;
+}
+
+.caret-sidebar {
+  position: fixed;
+  top: 50vh;
+  z-index: 5;
+}
+
+@media only screen and (max-width: 600px) {
+  .sidebar {
+    position: fixed;
+    left: 0;
+    background: white;
+    height: 100vh;
+    width: 100%;
+    z-index: 4;
+  }
 }/*# sourceMappingURL=Sidebar.css.map */

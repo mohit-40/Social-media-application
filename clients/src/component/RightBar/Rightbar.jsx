@@ -22,11 +22,12 @@ function Rightbar() {
 			setOnlineFriend(followings?.filter((fid) => users.some((u) => u.userId === fid)))
 		})
 	}, [currentUserId, followings, socket]);
-
+	const [showRightbar, setShowRightbar] = useState(false);
 
 	return (
 		<>
-			<div className="rightbar">
+			{showRightbar ? <i className="fas fa-caret-square-left caret-left caret-rightbar" style={{ fontSize: "25px" }} onClick={() => setShowRightbar(!showRightbar)}></i>:<i className="fas fa-caret-square-right caret-right caret-rightbar" style={{ fontSize: "25px" }} onClick={() => setShowRightbar(!showRightbar)}></i>}
+			<div className={showRightbar ? "rightbar showRightbar" : "rightbar hideRightbar"}>
 				<div className="rightbar-wrapper">
 					<div className="rightbar-top">
 						{/* <img src={PF+"gift.png"} alt="birthdayImg" className="birthday-img" /> */}
@@ -40,6 +41,7 @@ function Rightbar() {
 					<hr />
 					<div className="rightbar-bottom">
 						<span className="heading"><i class="fas fa-globe-americas"></i> Online Friend</span>
+
 						<ul className="online-friend-list">
 							{
 								onlineFriend.length === 0 ? "No Friend Online Currently 😞"

@@ -40,4 +40,39 @@
 .rightbar .rightbar-wrapper .rightbar-bottom .online-friend-list {
   list-style: none;
   padding: 0%;
+}
+
+.showRightbar {
+  transform: translateX(0);
+  transition: cubic-bezier(0.19, 1, 0.22, 1);
+  transition-duration: 1s;
+}
+
+.hideRightbar {
+  transform: translateX(100%);
+  transition: cubic-bezier(0.19, 1, 0.22, 1);
+  transition-duration: 1s;
+}
+
+.hero-container {
+  overflow-x: hidden;
+}
+
+.caret-rightbar {
+  position: fixed;
+  top: 50vh;
+  right: 25px;
+  z-index: 5;
+}
+
+@media only screen and (max-width: 600px) {
+  .rightbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    background: white;
+    height: 100vh;
+    width: 100%;
+    z-index: 4;
+  }
 }/*# sourceMappingURL=Rightbar.css.map */
