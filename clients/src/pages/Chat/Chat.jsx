@@ -170,7 +170,7 @@ function Chat() {
 
 							{allUsers.filter((user) =>  followings.includes(user._id) && chatSearch !== "" && user.name && user.name.toLowerCase().includes(chatSearch.toLowerCase())).slice(0,5).map((user) => {
 								return (
-									<div key={user?._id} onClick={() => handleClick(user._id)} className="search-result-item" >{user.name}</div>
+									<div key={user?._id} onClick={() => handleClick(user._id)} className="search-result-item" >{user.name} </div>
 								)
 							})
 							}
@@ -201,7 +201,7 @@ function Chat() {
 									<form className="box" onSubmit={handleSend}>
 										<textarea onChange={(e) => setNewMessage(e.target.value)} name="" id="message" cols="30" rows="3" placeholder="Write something here ...." value={newMessage} />
 										<Refresh className="sending-process" />
-										<button type="submit" className="send-btn">Send</button>
+										<button type="submit" className="send-btn"><i class="fas fa-paper-plane"></i>Send</button>
 									</form>
 								</div>
 							</div>

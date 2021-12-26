@@ -71,7 +71,7 @@
 						position: relative;
 						textarea{
 							resize: none;
-							width: 90%;
+							width: 85%;
 							max-height: 20vh;
 							outline: none;
 							border-radius: 20px;
@@ -94,6 +94,7 @@
 							color: white;
 							background-color: rgb(17, 128, 219);
 							border: none;
+							border-radius: 10px;
 						}
 					}
 				}	
@@ -106,7 +107,11 @@
 			&::-webkit-scrollbar {width: 5px;}
 			&::-webkit-scrollbar-track {background-color: #f1f1f1;}
 			&::-webkit-scrollbar-thumb {background-color: rgb(179, 179, 179);}
-			
+			.heading{
+				color: rgb(5, 24, 201);
+				font-size: 25px;
+				font-family: cursive;
+			}
 			.chat-right-wrapper {
 				padding: 10px;
 				li{

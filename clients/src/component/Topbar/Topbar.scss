@@ -172,10 +172,7 @@
 		justify-content: center !important;
 	}
 	.topbar-logo{
-		margin-left: 5px !important;
-	}
-	.topbar-left{
-		flex: none !important; 
+		margin: 0 10px !important;
 	}
 } 
 @media only screen and (max-width: 654px) {
@@ -183,7 +180,7 @@
 		display: none !important;
 	}
 }
-@media only screen and (max-width: 382px) {
+@media only screen and (max-width: 430px) {
 	.navbar-menu-link-text{
 		display: inline;
 	}
@@ -199,7 +196,7 @@
 		flex-direction: column;
 		background: black;
 		color: white;
-		position: relative;
+		position: sticky;
 		.topbar-right{
 			display: flex;
 			flex-direction: column;
