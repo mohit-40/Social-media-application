@@ -26,7 +26,7 @@ function Rightbar() {
 
 	return (
 		<>
-			{showRightbar ? <i className="fas fa-caret-square-left caret-left caret-rightbar" style={{ fontSize: "25px" }} onClick={() => setShowRightbar(!showRightbar)}></i>:<i className="fas fa-caret-square-right caret-right caret-rightbar" style={{ fontSize: "25px" }} onClick={() => setShowRightbar(!showRightbar)}></i>}
+			{showRightbar ? <i className="fas fa-caret-square-right caret-right caret-rightbar" style={{ fontSize: "25px" }} onClick={() => setShowRightbar(!showRightbar)}></i>:<i className="fas fa-caret-square-left caret-left caret-rightbar" style={{ fontSize: "25px" }} onClick={() => setShowRightbar(!showRightbar)}></i>}
 			<div className={showRightbar ? "rightbar showRightbar" : "rightbar hideRightbar"}>
 				<div className="rightbar-wrapper">
 					<div className="rightbar-top">
