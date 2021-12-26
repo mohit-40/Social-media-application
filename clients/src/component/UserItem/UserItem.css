@@ -4,6 +4,7 @@
   background-color: #d7d7ff;
   margin: 5px 0px;
   display: flex;
+  flex-wrap: wrap;
 }
 .friendMenuItem .friendMenuItemImgContainer {
   height: 120px;
