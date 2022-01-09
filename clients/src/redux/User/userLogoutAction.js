@@ -20,9 +20,9 @@ export const logout=(userId )=>{
 			await userRequest.post(`/auth/logout/${userId}`,{refreshToken : refreshToken});
 			localStorage.removeItem("accessToken")
 			localStorage.removeItem("refreshToken")
-			
-			// dispatch(clearRedux())
 			dispatch(logoutSuccess());
+			// dispatch(clearRedux())
+			
 		} catch (error) {
 			dispatch(logoutFail());
 		}

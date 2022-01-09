@@ -60,7 +60,7 @@ function Share({ posts, setPosts }) {
 			try {
 				const fileName = Date.now() + file.name
 				const uploadTask = storage.ref(`${currentUser?.username}/posts/${fileName}`).put(file);
-				await uploadTask.on("state_changed",
+				uploadTask.on("state_changed",
 					snapshot => {
 						const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
 						setProgress(progress);
