@@ -14,7 +14,7 @@ import { useEffect } from 'react';
 import { setSocket } from './redux/exportAllAction';
 
 function App() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const userState = useSelector(state => state.user)
   const currentUserId = userState.currentUserId;
   useEffect(()=>{
