@@ -156,8 +156,14 @@ function Chat() {
 		scrollRef.current?.scrollIntoView({ behavior: "smooth" });
 	}, [messages]);
 
-	const [showChatRightbar , setShowChatRightbar] = useState(false)
-	const [showChatSidebar , setShowChatSidebar] = useState(false)
+	const [showChatRightbar , setShowChatRightbar] = useState(true)
+	const [showChatSidebar , setShowChatSidebar] = useState(true)
+	useEffect(()=>{
+		if(window.innerWidth <= 600){
+			setShowChatSidebar(false);
+			setShowChatRightbar(false);
+		}
+	},[])
 
 	return (
 

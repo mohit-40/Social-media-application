@@ -25,7 +25,12 @@ function Rightbar() {
 			setOnlineFriend(followings?.filter((fid) => users.some((u) => u.userId === fid)))
 		})
 	}, [currentUserId, followings, socket]);
-	const [showRightbar, setShowRightbar] = useState(false);
+	const [showRightbar, setShowRightbar] = useState(true);
+	useEffect(()=>{
+		if(window.innerWidth <= 600){
+			setShowRightbar(false);
+		}
+	},[])
 
 	return (
 		<>

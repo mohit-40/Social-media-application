@@ -28,7 +28,12 @@ function Sidebar() {
 		}
 		fetchFollowing()
 	}, [currentUserId, dispatch]);
-	const [showSidebar, setShowSidebar] = useState(false);
+	const [showSidebar, setShowSidebar] = useState(true);
+	useEffect(()=>{
+		if(window.innerWidth <= 600){
+			setShowSidebar(false);
+		}
+	},[])
 
 	return loaded && (
 
