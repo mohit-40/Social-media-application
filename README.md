@@ -1,3 +1,3 @@
 # Socialfy
-
-https://socialifyapp.herokuapp.com/
+social media web application 
+url  link = https://socialifyapp.herokuapp.com/
