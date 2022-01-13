@@ -35,6 +35,7 @@ app.use("/api/comment",commentRoute);
 app.use("/api/otp",otpRoute);
 //!/* ----------------------------- setting static ----------------------------- */
 if(process.env.NODE_ENV ==="production"){
+	const path = require("path");
 	app.use(express.static(path.join(__dirname, "/<front end app folder name>/build")));
 	
 	app.get('*', (req, res) => {
