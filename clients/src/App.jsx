@@ -19,7 +19,7 @@ function App() {
   const currentUserId = userState.currentUserId;
   useEffect(()=>{
     if(currentUserId){
-      const socket = io("http://localhost:8900");
+      const socket = io("https://socialifyappsocket.herokuapp.com/");
       socket?.emit("addUser",currentUserId);
       dispatch(setSocket(socket));
     }
