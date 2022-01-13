@@ -2,7 +2,8 @@
   "name": "client",
   "version": "0.1.0",
   "engines": {
-    "node": "14.x"
+    "node": "14.17.3",
+    "yarn":"1.22.15"
   },
   "private": true,
   "dependencies": {

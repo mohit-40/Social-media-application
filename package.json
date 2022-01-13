@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "engines": {
-    "node": "14.x"
+    "node": "14.17.3",
+    "yarn":"1.22.15"
   },
   "main": "index.js",
   "scripts": {
