@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { io } from 'socket.io-client';
 import { useEffect } from 'react';
 import { setSocket } from './redux/exportAllAction';
+import "./App.css"
 
 function App() {
   const dispatch = useDispatch();
