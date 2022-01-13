@@ -2,7 +2,7 @@
 
 import axios from "axios";
 import { store } from "./redux/store";
-import jwtDecode from 'jwt-decode' 
+import jwtDecode from 'jwt-decode'  
 
 
 const BASE_URL = "https://socialifyapp.herokuapp.com/api/";
@@ -16,7 +16,7 @@ const refreshToken = async () => {
 		const REFRESH_TOKEN = localStorage.getItem("refreshToken");
 		const state = store.getState();
 		const currentUserId = state.user.currentUserId;
-		const res = await axios.post("/auth/refresh/" + currentUserId, { refreshToken: REFRESH_TOKEN });
+		const res = await publicRequest.post("/auth/refresh/" + currentUserId, { refreshToken: REFRESH_TOKEN });
 		localStorage.setItem("accessToken", res.data.accessToken)
 		console.log("accesstoken updated")
 		return res.data;
