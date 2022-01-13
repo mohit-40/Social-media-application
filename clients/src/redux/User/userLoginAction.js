@@ -1,5 +1,5 @@
-import { LOGIN_FAIL, LOGIN_START, LOGIN_SUCCESS } from "./userType";
-import axios from "axios"
+import { LOGIN_FAIL, LOGIN_START, LOGIN_SUCCESS } from "./userType"; 
+import { publicRequest } from '../../requestMethod';
 
 export const loginStart=()=>({
 	type:LOGIN_START
@@ -18,7 +18,7 @@ export const login=(email, password)=>{
 	return async(dispatch)=>{
 		await dispatch(loginStart());
 		try {
-			const res= await axios.post("/auth/login",{ email: email , password: password});
+			const res= await publicRequest.post("/auth/login",{ email: email , password: password});
 			const user =res.data;  
 			localStorage.setItem("accessToken",user.accessToken);
 			localStorage.setItem("refreshToken",user.refreshToken);

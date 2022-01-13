@@ -1,5 +1,5 @@
-import { REGISTER_FAIL, REGISTER_START, REGISTER_SUCCESS } from "./userType";
-import axios from "axios"
+import { REGISTER_FAIL, REGISTER_START, REGISTER_SUCCESS } from "./userType"; 
+import { publicRequest } from "../../requestMethod";
 
 export const registerStart=()=>({
 	type:REGISTER_START
@@ -18,7 +18,7 @@ export const register=(userDetail)=>{
 	return async(dispatch)=>{
 		await dispatch(registerStart());
 		try {
-			const res= await axios.post("/auth/register",userDetail);
+			const res= await publicRequest.post("/auth/register",userDetail);
 			const user =res.data;  
 			localStorage.setItem("accessToken",user.accessToken);
 			localStorage.setItem("refreshToken",user.refreshToken);

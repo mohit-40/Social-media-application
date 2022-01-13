@@ -1,10 +1,10 @@
 import React, { useRef, useState  } from 'react'
-import "./Register.css"
-import axios from "axios"
+import "./Register.css" 
 import { useHistory } from "react-router";
 import {Link} from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { register } from '../../redux/User/userRegisterAction';
+import { publicRequest } from '../../requestMethod';
 
 
 function Register() {
@@ -49,7 +49,7 @@ function Register() {
 	const handleSendOtp=async()=>{
 		try {
 			//send otp to email
-			const res=await axios.get("/otp/gernate/"+email.current.value);
+			const res=await publicRequest.get("/otp/gernate/"+email.current.value);
 			console.log(res.data)
 			setOtpSend(true);
 			const myInterval = setInterval(() => {
@@ -68,7 +68,7 @@ function Register() {
 	const handleVerifyOtp=async()=>{
 		try {
 			console.log({email: email.current.value , otp : otp.current.value});
-			const res =await axios.post("/otp/verify",{email: email.current.value , otp : otp.current.value})
+			const res =await publicRequest.post("/otp/verify",{email: email.current.value , otp : otp.current.value})
 			setError(res.data);
 			setOtpVerified(true);
 		} catch(error) {
