@@ -33,6 +33,14 @@ app.use("/api/conversations",conversationRoute);
 app.use("/api/messages",messageRoute);
 app.use("/api/comment",commentRoute);
 app.use("/api/otp",otpRoute);
+//!/* ----------------------------- setting static ----------------------------- */
+if(process.env.NODE_ENV ==="production"){
+	app.use(express.static(path.join(__dirname, "/<front end app folder name>/build")));
+	
+	app.get('*', (req, res) => {
+		res.sendFile(path.join(__dirname, '/<front end app folder name>/build', 'index.html'));
+	});
+}
 
 //! /* --------------------------------- listen server --------------------------------- */
 app.listen(port,()=>{
