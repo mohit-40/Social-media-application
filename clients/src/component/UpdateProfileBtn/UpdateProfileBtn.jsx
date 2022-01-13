@@ -24,7 +24,7 @@ function UpdateProfileBtn({userId}) {
 				setUser(res.data); 
 			}
 			catch (error) {
-				history.push("/error"); 
+				console.log(error.message); 
 			}
 		}
 		fetchUser();
@@ -50,8 +50,7 @@ function UpdateProfileBtn({userId}) {
 					)
 				}
 				catch (error) {
-					console.log(error.message)
-					history.push("/error")
+					console.log(error.message) 
 				}
 			}
 			else if (profilePic) {
@@ -68,8 +67,7 @@ function UpdateProfileBtn({userId}) {
 					)
 				}
 				catch (error) {
-					console.log(error.message)
-					history.push("/error")
+					console.log(error.message) 
 				}
 			}
 		}

@@ -36,7 +36,7 @@ function App() {
     <Router>
       <Switch>
           <Route path="/" exact > {currentUserId? <Home /> : <Login />}</Route>
-          <Route path="/profile/:username" exact > <Profile /> </Route>
+          <Route path="/profile/:username" exact > {currentUserId? <Profile /> : <Login /> }  </Route>
           <Route path="/login" exact >{currentUserId? <Home /> : <Login /> }</Route>
           <Route path="/register" exact > {currentUserId? <Home /> : <Register />}</Route>
           <Route path="/chat" exact > {currentUserId? <Chat /> : <Register />}</Route>

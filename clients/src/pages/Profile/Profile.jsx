@@ -29,8 +29,7 @@ function Profile() {
 				setUser(res.data);
 				setLoaded(true)
 			}
-			catch (error) {
-				history.push("/error");
+			catch (error) { 
 				setLoaded(true)
 			}
 		}

@@ -85,8 +85,7 @@ function Share({ posts, setPosts }) {
 				)
 			}
 			catch (error) {
-				console.log(error.message)
-				// history.push("/error")
+				console.log(error.message) 
 			}
 		}
 		else {
@@ -102,8 +101,7 @@ function Share({ posts, setPosts }) {
 					setMakePost(false);
 				}, 1000);
 			} catch (error) {
-				console.log(error.message)
-				// history.push("/error")
+				console.log(error.message) 
 			}
 		}
 
