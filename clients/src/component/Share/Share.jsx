@@ -8,7 +8,10 @@ import { userRequest } from '../../requestMethod';
 
 
 function Share({ posts, setPosts }) {
-	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+	let PF = process.env.REACT_APP_PUBLIC_FOLDER;
+	if(process.env.NODE_ENV=="production"){
+		PF=process.env.REACT_APP_PUBLIC_FOLDER_DEPLOY
+	}
 	//fetching currentuser
 	const userState = useSelector(state => state.user)
 	const currentUserId = userState.currentUserId;

@@ -15,7 +15,10 @@ function UserItem({ userId }) {
 	const currentUserId = userState.currentUserId;
 	//fetched currentUser
 
-	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+	let PF = process.env.REACT_APP_PUBLIC_FOLDER;
+	if(process.env.NODE_ENV=="production"){
+		PF=process.env.REACT_APP_PUBLIC_FOLDER_DEPLOY
+	}
 	const dispatch = useDispatch();
 	const followings = useSelector(state => state.following.usersId);
 	//updateFollowing

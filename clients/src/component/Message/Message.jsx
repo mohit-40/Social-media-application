@@ -5,7 +5,10 @@ import { format } from "timeago.js"
 import { userRequest } from '../../requestMethod'
 
 function Message({message,own}) {
-	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+	let PF = process.env.REACT_APP_PUBLIC_FOLDER;
+	if(process.env.NODE_ENV=="production"){
+		PF=process.env.REACT_APP_PUBLIC_FOLDER_DEPLOY
+	}
 	const [user, setUser] = useState();
 
 	useEffect(()=>{

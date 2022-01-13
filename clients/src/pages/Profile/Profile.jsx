@@ -11,7 +11,10 @@ import { useSelector } from 'react-redux'
 import { userRequest } from '../../requestMethod';
 
 function Profile() {
-	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+	let PF = process.env.REACT_APP_PUBLIC_FOLDER;
+	if(process.env.NODE_ENV=="production"){
+		PF=process.env.REACT_APP_PUBLIC_FOLDER_DEPLOY
+	}
 	const history = useHistory();
 	const params = useParams();
 	const username = params.username;

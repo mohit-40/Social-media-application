@@ -10,7 +10,10 @@ function Conversation({ conversation }) {
 	// fetched currentUser
 
 	const [user, setUser] = useState()
-	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+	let PF = process.env.REACT_APP_PUBLIC_FOLDER;
+	if(process.env.NODE_ENV=="production"){
+		PF=process.env.REACT_APP_PUBLIC_FOLDER_DEPLOY
+	}
 
 	// friend of conversation With
 	useEffect(() => {

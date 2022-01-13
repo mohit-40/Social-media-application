@@ -6,7 +6,10 @@ import "./CloseFriend.css"
 
 
 function CloseFriend({ userId , className}) {
-	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+	let PF = process.env.REACT_APP_PUBLIC_FOLDER;
+	if(process.env.NODE_ENV=="production"){
+		PF=process.env.REACT_APP_PUBLIC_FOLDER_DEPLOY
+	}
 	const [user, setUser] = useState();
 	useEffect(() => {
 		const fetchUser = async () => {

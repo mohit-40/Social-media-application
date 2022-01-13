@@ -8,7 +8,10 @@ import { userRequest } from '../../requestMethod';
 import NotificationListItem from '../notificationItem/NotificationListItem';
 
 function Topbar() {
-	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+	let PF = process.env.REACT_APP_PUBLIC_FOLDER;
+	if(process.env.NODE_ENV=="production"){
+		PF=process.env.REACT_APP_PUBLIC_FOLDER_DEPLOY
+	}
 	//fetching reduxState
 	const dispatch = useDispatch();
 	const socket = useSelector(state => state.socket.socket);

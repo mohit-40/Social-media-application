@@ -15,7 +15,10 @@ function Post({post , posts ,setPosts}) {
 	const socket= useSelector(state => state.socket.socket)
 	// fetched currentUser
 	
-	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+	let PF = process.env.REACT_APP_PUBLIC_FOLDER;
+	if(process.env.NODE_ENV=="production"){
+		PF=process.env.REACT_APP_PUBLIC_FOLDER_DEPLOY
+	}
 	const [user, setUser] = useState({});
 
 	const [like, setLike] = useState(post.like);

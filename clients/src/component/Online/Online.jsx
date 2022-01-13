@@ -4,7 +4,10 @@ import "./Online.css"
 import { userRequest } from '../../requestMethod';
 
 function Online({ userId, setCurrConversation }) {
-	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+	let PF = process.env.REACT_APP_PUBLIC_FOLDER;
+	if(process.env.NODE_ENV=="production"){
+		PF=process.env.REACT_APP_PUBLIC_FOLDER_DEPLOY
+	}
 	const [user, setUser] = useState()
 	const currentUserId = useSelector(state => state.user.currentUserId)
 	// fetch user 
