@@ -12,7 +12,7 @@ function Rightbar() {
 	//fetched reduxState
 
 	let PF = process.env.REACT_APP_PUBLIC_FOLDER;
-	if(process.env.NODE_ENV=="production"){
+	if(process.env.NODE_ENV==="production"){
 		PF=process.env.REACT_APP_PUBLIC_FOLDER_DEPLOY
 	}
 	const [onlineFriend, setOnlineFriend] = useState([]);

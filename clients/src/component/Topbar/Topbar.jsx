@@ -9,7 +9,7 @@ import NotificationListItem from '../notificationItem/NotificationListItem';
 
 function Topbar() {
 	let PF = process.env.REACT_APP_PUBLIC_FOLDER;
-	if(process.env.NODE_ENV=="production"){
+	if(process.env.NODE_ENV==="production"){
 		PF=process.env.REACT_APP_PUBLIC_FOLDER_DEPLOY
 	}
 	//fetching reduxState
