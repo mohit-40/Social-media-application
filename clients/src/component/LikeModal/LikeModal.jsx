@@ -20,7 +20,7 @@ function likeModal(props) {
 		  <ul className="likeModalList">
 		  	{
 				props.likes.map((l)=>
-					<LikeModalListItem userId={l} />
+					<LikeModalListItem userId={l} key={l}/>
 				)
 			}
 		  </ul>
