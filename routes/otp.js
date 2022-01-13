@@ -14,13 +14,12 @@ router.get("/gernate/:email" , async(req,res) =>{
 
 
 		//saving in db
-		const newOtp = await new Otp({email: req.params.email , otp: OTP })
-		await newOtp.save();
+		const newOtp = await new Otp({email: req.params.email , otp: OTP }).save();
 
 		//sending to email using nodemailer
 		const functionRes= await sendMail(req.params.email , OTP);
-		if(functionRes.status===true) { res.status(200).json(functionRes.link) }
-		else{ res.status(400).json(functionRes.error) }
+		if(functionRes.status===true) { res.status(200).json(functionRes) }
+		else{ res.status(400).json(functionRes) }
     }
 	catch(error) {
 		res.status(400).json(error.message);

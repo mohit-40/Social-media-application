@@ -168,7 +168,7 @@ function Chat() {
 				{showChatSidebar ? <i className="fas fa-caret-square-right caret-right caret-chat-sidebar" style={{ fontSize: "25px" }} onClick={() => setShowChatSidebar(!showChatSidebar)}></i>:<i className="fas fa-caret-square-left caret-left caret-chat-sidebar" style={{ fontSize: "25px" }} onClick={() => setShowChatSidebar(!showChatSidebar)}></i>}
 					<div className={showChatSidebar ? "chat-left showChatSidebar" : "chat-left hideChatSidebar"}>
 						<div className="chat-left-wrapper">
-							<i class="fas fa-search"> Search user here!!</i>
+							<i className="fas fa-search"> Search user here!!</i>
 							<input type="text" className="search-friend" placeholder="Search friend for Chat" onChange={(e) => { setChatSearch(e.target.value) }} />
 
 							{allUsers.filter((user) =>  followings.includes(user._id) && chatSearch !== "" && user.name && user.name.toLowerCase().includes(chatSearch.toLowerCase())).slice(0,5).map((user) => {
@@ -204,7 +204,7 @@ function Chat() {
 									<form className="box" onSubmit={handleSend}>
 										<textarea onChange={(e) => setNewMessage(e.target.value)} name="" id="message" cols="30" rows="3" placeholder="Write something here ...." value={newMessage} />
 										<Refresh className="sending-process" />
-										<button type="submit" className="send-btn"><i class="fas fa-paper-plane"></i>Send</button>
+										<button type="submit" className="send-btn"><i className="fas fa-paper-plane"></i>Send</button>
 									</form>
 								</div>
 							</div>
@@ -215,7 +215,7 @@ function Chat() {
 					{showChatRightbar ? <i className="fas fa-caret-square-right caret-right caret-chat-rightbar" style={{ fontSize: "25px" }} onClick={() => setShowChatRightbar(!showChatRightbar)}></i>:<i className="fas fa-caret-square-left caret-left caret-chat-rightbar" style={{ fontSize: "25px" }} onClick={() => setShowChatRightbar(!showChatRightbar)}></i>}
 					<div className={showChatRightbar ? "chat-right showChatRightbar" : "chat-right hideChatRightbar"}>
 						<div className="chat-right-wrapper">
-							<h2 className="heading"><i class="fas fa-globe-americas"></i> Online Friend</h2>
+							<h2 className="heading"><i className="fas fa-globe-americas"></i> Online Friend</h2>
 							<ul className="online-friend-list">
 								{onlineFriend?.length===0? "No friend Online" : ''}
 								{onlineFriend?.map((userId) => (

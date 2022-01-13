@@ -66,7 +66,7 @@ function Topbar() {
 				<Link className='text-link' to="/"><span className="topbar-logo"><i className="fas fa-chess-pawn"></i> Socialify</span></Link>
 			</div>
 			<span className="closebar navbar-menu">
-				{showMenu ? <i class="fas fa-window-close" style={{ fontSize: "25px" }} onClick={() => setShowMenu(!showMenu)}></i> : <i class="fas fa-bars" onClick={() => setShowMenu(!showMenu)} style={{ fontSize: "25px" }}> </i>}
+				{showMenu ? <i className="fas fa-window-close" style={{ fontSize: "25px" }} onClick={() => setShowMenu(!showMenu)}></i> : <i className="fas fa-bars" onClick={() => setShowMenu(!showMenu)} style={{ fontSize: "25px" }}> </i>}
 			</span>
 
 			<div className="topbar-center">
