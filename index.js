@@ -36,10 +36,10 @@ app.use("/api/otp",otpRoute);
 //!/* ----------------------------- setting static ----------------------------- */
 if(process.env.NODE_ENV ==="production"){
 	const path = require("path");
-	app.use(express.static(path.join(__dirname, "/<front end app folder name>/build")));
+	app.use(express.static(path.join(__dirname, "/clients/build")));
 	
 	app.get('*', (req, res) => {
-		res.sendFile(path.join(__dirname, '/<front end app folder name>/build', 'index.html'));
+		res.sendFile(path.join(__dirname, '/clients/build', 'index.html'));
 	});
 }
 

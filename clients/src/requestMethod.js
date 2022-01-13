@@ -5,7 +5,7 @@ import { store } from "./redux/store";
 import jwtDecode from 'jwt-decode' 
 
 
-const BASE_URL = "https://socialifyapp.herokuapp.com/api/";  
+const BASE_URL = "https://socialifyapp.herokuapp.com/api/";
 export const publicRequest = axios.create({ baseURL: BASE_URL })
 export const userRequest = axios.create({ baseURL: BASE_URL })
 
