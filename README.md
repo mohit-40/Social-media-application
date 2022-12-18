@@ -7,7 +7,7 @@ Technology Used: HTML, CSS, JavaScript, React.js, Node.js, MongoDB, Redux, JWT, 
 
 Deployed  link = https://socialifyapp.herokuapp.com/
 
-Here are the few photo of the application: 
+Here are the few photo of the application in mobile view: 
 ![S1](https://user-images.githubusercontent.com/66094890/208282679-5d612bdb-98ab-4080-ba27-94ad87b456f8.jpeg)
 ![S2](https://user-images.githubusercontent.com/66094890/208282695-134b44e4-a810-409b-b9af-be24836ba5f9.jpeg)
 ![S3](https://user-images.githubusercontent.com/66094890/208282697-5cfa893e-2451-425a-b034-ff60b5170866.jpeg)
