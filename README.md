@@ -1,4 +1,4 @@
-# Socialfy
+# Socialify
 social media web application
 
 Build a full-stack web application using MERN stack and styled using CSS. Used Redux for state management.       
